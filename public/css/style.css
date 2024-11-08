@@ -28,64 +28,76 @@ img {
 	background-image: url(../images/bg-box.png);
 	background-repeat: no-repeat;
 }
-/*------------------------------ HEADER ------------------------------*/
+/* ------------------------------ HEADER ------------------------------ */
 #header {
-	margin-bottom: 20px;
-	padding-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
 }
+
+/* New container for logo and navigation */
+#header-container {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Space between logo and navigation */
+    max-width: 1000px;
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 0 0; /* Add some horizontal padding if needed */
+}
+
 /** Logo **/
 #logo {
-	float: left;
-	margin-bottom: 20px;
-	margin-left: 49px;
+    flex: 0 0 auto; /* Keep the logo in place on the left */
+    margin-bottom: 0; /* Remove bottom margin */
+    margin-left: 0; /* Remove left margin to align it properly */
 }
+
 /** Navigation **/
 #navigation {
-	background: url(../images/bg-navigation.png) no-repeat;
-	clear: both;
-	height: 50px;
-	width: 860px;
-	margin: 0 auto;
-	padding: 1px;
+    background: url(../images/bg-navigation.png) no-repeat center center; /* Use the original gradient image */
+    height: 50px;
+    padding: 0; /* Remove padding */
+    flex: 0 0 auto; /* Let the container fit only the size of the content */
+    display: flex; /* Use flexbox for horizontal layout */
+    justify-content: flex-end; /* Align the navigation items to the right */
 }
+
 #navigation ul {
-	display: inline-block;
-	width: 860px;
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    display: flex; /* Use flexbox to align list items horizontally */
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
+
 #navigation li {
-	float: left;
-	background-position: 0 -118px;
-	background-repeat: no-repeat;
-	height: 49px;
-	width: 122px;
-	margin: 0;
-	padding-left: 1px;
-	text-align: center;
+    margin: 0 10px; /* Add space between items */
+    padding: 0;
+    text-align: center;
+    background: none; /* Remove any background to avoid gray boxes */
 }
-#navigation li:first-child {
-	background: none;
-	margin-left: 0;
-	padding-left: 0;
-}
+
 #navigation li a {
-	color: #fff;
-	display: block;
-	font: bold 14px/48px Arial, Helvetica, sans-serif;
-	height: 49px;
-	text-decoration: none;
-	text-transform: uppercase;
+    color: #fff;
+    font: bold 14px/48px Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    text-transform: none;
+    padding: 5px 10px; /* Add padding for better clickable area */
+    background: transparent; /* Ensure no background color on links */
+    transition: color 0.1s ease-in-out; /* Smooth transition effect for color change */
 }
+
+/* Remove any hover box and change only the text color */
 #navigation li a:hover {
-	background-position: 0 -59px;
-	color: #6d6157;
+    background: none !important; /* Forcefully remove any background on hover */
+    color: #e4e1bd; /* Change text color on hover */
 }
+
+/* Remove background from selected or active state */
 #navigation li.selected a {
-	background-position: 0 0;
-	color: #e4e1bd;
+    background: none; /* Ensure no background is applied */
+    color: #e4e1bd;
 }
+
+
 /*------------------------------ CONTENTS ------------------------------*/
 #contents {
 	display: inline-block;
@@ -461,7 +473,7 @@ hr {
 	line-height: 48px;
 	margin: -38px 0 20px;
 	padding-top: 42px;
-	text-transform: uppercase;
+	text-transform: none;
 }
 #footer > div {
 	background-color: #ac9e94;
