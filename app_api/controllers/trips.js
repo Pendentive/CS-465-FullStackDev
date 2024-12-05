@@ -82,8 +82,8 @@ const tripsAddTrip = async(req, res) => {
 // and JSON message to the requesting client
 const tripsUpdateTrip = async (req, res) => {
     // Uncomment for debugging
-    console.log(req.params);
-    console.log(req.body);
+    // console.log(req.params);
+    // console.log(req.body);
     const q = await Model
         .findOneAndUpdate(
             {'code': req.params.tripCode },
@@ -104,7 +104,8 @@ const tripsUpdateTrip = async (req, res) => {
         return res
             .status(400)
             .json(err);
-    } else { // Return resulting updated trip
+    } 
+    else { // Return resulting updated trip
         return res
             .status(201)
             .json(q);
@@ -114,11 +115,36 @@ const tripsUpdateTrip = async (req, res) => {
     // on the console
     // console.log(q);
 };
+
+// DELETE: /trips/:tripCode - Delete an existing Trip
+// Regardless of outcome, response must include HTML status code
+// and JSON message to the requesting client
+const tripsDeleteTrip = async (req, res) => {
+    const tripCode = req.params.tripCode;
+
+    const q = await Model.findOneAndDelete({ 'code': tripCode }).exec();
+
+    if (!q) { // No trip found with the given code
+        return res
+            .status(404)
+            .json({err});
+    }
+    else { // Successfully deleted the trip
+        return res
+            .status(200)
+            .json(q);
+    }
+
+    // Uncomment the following line to show results of operation
+    // on the console
+    // console.log(q);
+}
     
 
 module.exports = {
     tripsList,
     tripsFindByCode,
     tripsAddTrip,
-    tripsUpdateTrip
+    tripsUpdateTrip,
+    tripsDeleteTrip,
 };
