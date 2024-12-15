@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>{{title}}</title>
     <link rel='stylesheet' href='/css/style.css' />
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
   </head>
   <body>
     <div id="background">
@@ -12,6 +11,11 @@
         {{> header }}
         {{{body}}}
         {{> footer }}
+
+        {{> login_modal }} 
+        {{> signup_modal }}
+
+        <script src="/javascripts/controllers/authController.js"></script>
       </div>
     </div>
   </body>

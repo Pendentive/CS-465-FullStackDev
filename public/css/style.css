@@ -34,6 +34,16 @@ img {
 	background-image: url(../images/bg-box.png);
 	background-repeat: no-repeat;
 }
+.nav-icon {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+	margin-right: 2px;
+	background-repeat: no-repeat;
+	fill: currentColor; /* Use the text color by default */
+}
+
 /* ------------------------------ HEADER ------------------------------ */
 #header {
     margin-bottom: 20px;
@@ -560,4 +570,132 @@ hr {
 }
 #connect a.googleplus:hover {
 	background-position: 0 -197px;
+}
+/*------------------------------ Modal ------------------------------*/
+.modal {
+	display: none; /* Hidden by default; shown via JS */
+	position: fixed;
+	z-index: 9999; /* Ensure it sits on top of all other elements */
+	left: 0;
+	top: 0;
+	width: 100vw; /* Full width */
+	height: 100vh; /* Full height */
+	background-color: rgba(0,0,0,0.5); /* Black w/ opacity for overlay effect */
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-content {
+	background: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	width: 400px;
+	max-width: 90%;
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+	position: relative;
+}
+
+.modal-content h2 {
+	margin-top: 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 1em;
+}
+
+.terms-row {
+  margin-bottom: 15px;
+  font-size: 0.9em;
+}
+
+.terms-row a {
+  color: #2c9688;
+  text-decoration: none;
+}
+
+.password-requirements {
+  font-size: 0.9em;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.password-requirements ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-primary {
+	background: #316e66;
+	color: #fff;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.btn-primary:hover {
+	background: #28534f;
+}
+
+.links a {
+	margin-left: 10px;
+	color: #316e66;
+	text-decoration: none;
+}
+
+.links a:hover {
+	text-decoration: underline;
+}
+
+
+.close-modal {
+	background: transparent;
+	border: none;
+	font-size: 18px;
+	color: #333;
+	cursor: pointer;
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	}
+
+.close-modal:hover {
+	color: #000;
+}
+
+.tooltip-trigger {
+	position: relative;
+	cursor: help;
+	margin-left: 5px;
+	font-weight: bold;
+}
+
+.tooltip-content {
+	display: none;
+	position: absolute;
+	left: 20px;
+	top: -5px;
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 10px;
+	width: 200px;
+	font-size: 0.9em;
+	z-index: 10000;
+}
+
+.tooltip-trigger:hover .tooltip-content {
+	display: block;
 }

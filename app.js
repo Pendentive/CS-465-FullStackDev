@@ -11,7 +11,6 @@ var passport = require('passport');
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
 var travelRouter = require('./app_server/routes/travel');
-var loginRouter = require('./app_server/routes/login');
 var adminRouter = require('./app_server/routes/admin');
 var checkoutRouter = require('./app_server/routes/checkout');
 var newsRouter = require('./app_server/routes/news');
@@ -61,7 +60,6 @@ app.use('/api', (req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
-app.use('/login', loginRouter);
 app.use('/admin', adminRouter);
 app.use('/checkout', checkoutRouter);
 app.use('/news', newsRouter);
