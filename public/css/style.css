@@ -1,12 +1,18 @@
-/* Website template by freewebsitetemplates.com */
-body {
-	background: #ffb744 url(../images/bg-body.jpg) repeat left bottom;
-	font-family: "Times New Roman", Times, serif;
+html, body {
+	background: #ffb744 url('../images/bg-body.jpg') repeat center top; /* Anchor to the top-left of the content */
+	font-family: "Arial", "Helvetica", sans-serif;
 	margin: 0;
-}
+	padding: 0;
+	min-height: 100%; /* Ensure it spans the viewport height */
+	min-height: 100%; /* Full height of viewport or content */
+	min-width: 100%; /* Ensure it spans the full content width */
+	overflow-x: visible; /* Allow horizontal scrolling */
+  }
+
 #background {
-	background: url(../images/bg-pattern.jpg) repeat-x center top;
-	min-height: 1318px;
+	background: url('../images/bg-pattern.jpg') repeat-x center top; /* Center pattern horizontally */
+	min-height: 1318px; /* Keep this height */
+	width: 100%;
 }
 #page {
 	width: 960px;
