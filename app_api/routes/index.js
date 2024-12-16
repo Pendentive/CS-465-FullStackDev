@@ -65,6 +65,7 @@ router
 
 // GET Method routes tripFindByCode - requires parameter
 // PUT Method routes tripUpdateTrip - requires parameter
+// DELETE Method routes tripDeleteTrip - requires parameter
 router
     .route('/trips/:tripCode')
     .get(tripsController.tripsFindByCode)
