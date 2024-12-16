@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
-    {{{body}}}
+    <div id="background">
+      <div id="page">
+        {{> header }}
+        {{{body}}}
+        {{> footer }}
+
+        {{> login_modal }} 
+        {{> signup_modal }}
+
+        <script src="/javascripts/controllers/authController.js"></script>
+      </div>
+    </div>
   </body>
 </html>

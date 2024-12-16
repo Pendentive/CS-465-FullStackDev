@@ -3,13 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var handlebars = require('hbs');
+var exphbs = require('express-handlebars');
+//var handlebars = require('hbs');
+var passport = require('passport');
 
 // Define routers
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
 var travelRouter = require('./app_server/routes/travel');
-var loginRouter = require('./app_server/routes/login');
 var adminRouter = require('./app_server/routes/admin');
 var checkoutRouter = require('./app_server/routes/checkout');
 var newsRouter = require('./app_server/routes/news');
@@ -18,23 +19,28 @@ var apiRouter = require('./app_api/routes/index');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'app_server', 'views'));
-app.set('view engine', 'hbs');
-
-// Register handlebars partials (https://www.npmjs.com/package/hbs)
-handlebars.registerPartials(__dirname + '/app_server/views/partials');
-
-// Wire in authentication module
-var passport = require('passport');
-require('./app_api/config/passport');
-
-// Bring in the database
-require('./app_api/models/db');
-
 // Bring in our environment
 require('dotenv').config();
 
+// Bring in the database
+require('./app_api/models/db');
+require('./app_api/config/passport'); // authentication for db and user
+
+/// View engine setup
+app.engine(
+  'hbs',
+  exphbs.engine({
+    extname: '.hbs',
+    defaultLayout: 'layout', // Specify the default layout
+    layoutsDir: path.join(__dirname, 'app_server', 'views', 'layouts'),
+    partialsDir: path.join(__dirname, 'app_server', 'views', 'partials'),
+  })
+);
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'app_server', 'views'));
+
+
+// Middleware setup
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -54,7 +60,6 @@ app.use('/api', (req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
-app.use('/login', loginRouter);
 app.use('/admin', adminRouter);
 app.use('/checkout', checkoutRouter);
 app.use('/news', newsRouter);
