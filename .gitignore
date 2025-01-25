@@ -62,8 +62,8 @@ typings/
 
 # Filter out VScode Working Files
 .vscode/*
-!.vscode/settings.json
+#!.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
-!.vscode/extensions.json
+#!.vscode/extensions.json
 *.code-workspace
