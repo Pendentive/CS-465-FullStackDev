@@ -46,6 +46,8 @@ function authenticateJWT(req, res, next) {
 // Import controllers for routing
 const tripsController = require('../controllers/trips');
 const authController = require('../controllers/authentication');
+const imagesController = require('../controllers/images');
+const galleriesController = require('../controllers/galleries');
 
 // POST method route login
 router
@@ -71,5 +73,21 @@ router
     .get(tripsController.tripsFindByCode)
     .put(authenticateJWT, tripsController.tripsUpdateTrip)
     .delete(authenticateJWT, tripsController.tripsDeleteTrip);
+
+router
+    .route('/images')
+    .get(imagesController.getAllImages) 
+
+router
+    .route('/images/:id')
+    .get(imagesController.getImageById) 
+
+router
+    .route('/galleries')
+    .get(galleriesController.getAllGalleries) 
+
+router
+    .route('/galleries/:id')
+    .get(galleriesController.getGalleryById) 
 
 module.exports = router;

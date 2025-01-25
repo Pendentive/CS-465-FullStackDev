@@ -1,0 +1,15 @@
+<div class="gallery-grid">
+    {{#each images}}
+    <div class="gallery-item">
+        <img src="{{this.path}}" 
+             alt="{{this.alt}}"
+             loading="lazy">
+        <div class="overlay">
+            <h3>{{this.title}}</h3>
+            {{#if this.description}}
+                <p>{{this.description}}</p>
+            {{/if}}
+        </div>
+    </div>
+    {{/each}}
+</div>

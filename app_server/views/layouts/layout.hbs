@@ -8,12 +8,9 @@
   <body>
     <div id="background">
       <div id="page">
-        {{> header }}
+        {{> common/header }}
         {{{body}}}
-        {{> footer }}
-
-        {{> login_modal }} 
-        {{> signup_modal }}
+        {{> common/footer }}
 
         <script src="/javascripts/controllers/authController.js"></script>
       </div>

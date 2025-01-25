@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>{{title}} - Photography Portfolio</title>
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
+  <body>
+    <div id="portfolio-background">
+      <div id="portfolio-page">
+        {{> common/header }}
+        
+        {{!-- Portfolio specific content --}}
+        <div class="portfolio-content">
+            {{{body}}}
+        </div>
+
+        {{> common/footer }}
+
+        <script src="/javascripts/controllers/authController.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

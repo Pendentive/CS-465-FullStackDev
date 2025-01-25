@@ -11,11 +11,8 @@ var passport = require('passport');
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
 var travelRouter = require('./app_server/routes/travel');
-var adminRouter = require('./app_server/routes/admin');
-var checkoutRouter = require('./app_server/routes/checkout');
-var newsRouter = require('./app_server/routes/news');
-var reservationsRouter = require('./app_server/routes/reservations'); 
 var apiRouter = require('./app_api/routes/index');
+var portfolioRouter = require('./app_server/routes/portfolio');
 
 var app = express();
 
@@ -60,11 +57,8 @@ app.use('/api', (req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
-app.use('/admin', adminRouter);
-app.use('/checkout', checkoutRouter);
-app.use('/news', newsRouter);
-app.use('/reservations', reservationsRouter);
 app.use('/api', apiRouter);
+app.use('/portfolio', portfolioRouter);
 
 // catch unauthorized error and create 401
 app.use((err, req, next) => {
