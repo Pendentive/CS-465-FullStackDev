@@ -1,0 +1,31 @@
+<mat-card class="fec-editor">
+    <mat-card-title>{{ data.title }}</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Images</mat-label>
+          <input matInput formControlName="images">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Padding</mat-label>
+          <input matInput type="number" formControlName="padding">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Width</mat-label>
+          <input matInput type="number" formControlName="width">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Height</mat-label>
+          <input matInput type="number" formControlName="height">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
