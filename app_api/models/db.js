@@ -64,9 +64,8 @@ process.on('SIGTERM', () => {
 connect();
 
 // Import Mongoose schema
-require('./travlr');
-require('./user');  // Ensure the User schema is registered
-require('./image');  // Ensure the Image schema is registered
-require('./gallery');  // Ensure the Gallery schema is registered
+require('./user');
+require('./image');  
+require('./gallery'); 
 
 module.exports = mongoose;

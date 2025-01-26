@@ -58,6 +58,21 @@ router
     .route('/register')
     .post(authController.register);
 
+// Define route for trips endpoint
+router
+    .route('/trips')
+    .get(tripsController.tripsList) // GET Method routes tripList
+    .post(authenticateJWT, tripsController.tripsAddTrip);    // POST Method Adds a Trip
+
+// GET Method routes tripFindByCode - requires parameter
+// PUT Method routes tripUpdateTrip - requires parameter
+// DELETE Method routes tripDeleteTrip - requires parameter
+router
+    .route('/trips/:tripCode')
+    .get(tripsController.tripsFindByCode)
+    .put(authenticateJWT, tripsController.tripsUpdateTrip)
+    .delete(authenticateJWT, tripsController.tripsDeleteTrip);
+
 router
     .route('/images')
     .get(imagesController.getAllImages) 
