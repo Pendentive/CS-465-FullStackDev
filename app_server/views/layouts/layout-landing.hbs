@@ -8,12 +8,30 @@
   <body>
     {{> common/header }}
     <div id="landing-background">
+
+      {{!-- Gallery hero vert partial --}}
+      {{> galleries/gallery-hero-vert 
+        images=galleryImages 
+        padding=galleryHeroVertPadding 
+        width=galleryHeroVertWidth 
+        height=galleryHeroVertHeight}}
+
       <div id="landing-page">
         {{!-- Landing page specific content --}}
         <div class="landing-content">
             {{{body}}}
         </div>
       </div>
+
+      {{!-- Vertical separator --}}
+      <div class="vertical-separator"></div>
+
+      {{!-- Gallery banner partial --}}
+      {{> galleries/gallery-banner 
+        images=galleryImages 
+        photoEdgeLength=galleryBannerPhotoEdgeLength 
+        barHeight=galleryBannerBarHeight}}
+
     </div>
 
     {{> common/footer }}

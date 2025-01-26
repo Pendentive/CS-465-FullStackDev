@@ -66,6 +66,6 @@ connect();
 // Import Mongoose schema
 require('./user');
 require('./image');  
-require('./gallery'); 
+require('./gallery-grid'); 
 
 module.exports = mongoose;

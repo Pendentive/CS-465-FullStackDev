@@ -1,3 +1,21 @@
 <div class="landing-page">
 
+    {{!-- Type intro partial --}}
+    {{> sections/type-intro 
+        title=typeIntro.title 
+        description=typeIntro.description 
+        leftPadding=typeIntro.leftPadding 
+        width=typeIntro.width 
+        height=typeIntro.height}}
+
+    {{!-- Repeater menu partial --}}
+    {{> sections/repeater-menu 
+        menuCards=menuCards 
+        photoHeight=photoHeight 
+        photoWidth=photoWidth 
+        photoPaddingX=photoPaddingX 
+        photoPaddingY=photoPaddingY 
+        menuCardPaddingX=menuCardPaddingX}}
+
 </div>
+

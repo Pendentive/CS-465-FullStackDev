@@ -78,7 +78,6 @@ img {
 }
 
 #navigation {
-    background: url(../images/bg-navigation.png) no-repeat center center;
     height: 50px;
     padding: 0;
     flex: 0 0 auto;
@@ -623,6 +622,7 @@ hr {
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	gap: 20px;
 	padding: 20px;
+	width: 100%;
 }
 .gallery-item {
 	position: relative;
@@ -670,15 +670,150 @@ hr {
 	text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
+/* ------------------------------ GALLERY HERO VERT ------------------------------ */
+.gallery-hero-vert {
+    overflow-x: auto;
+    white-space: nowrap;
+	width: 100%;
+}
+.gallery-hero-vert-container {
+    display: flex;
+    gap: var(--gallery-hero-vert-padding, 10px); /* Default padding */
+}
+.gallery-hero-vert-item {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* ------------------------------ TYPE INTRO ------------------------------ */
+.type-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    margin: 20px auto;
+	width: 100%;
+}
+.type-intro-left {
+    flex: 1;
+    text-align: left;
+    padding: 20px;
+}
+.type-intro-left h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #ff8c00;
+}
+.type-intro-right {
+    flex: 1;
+    text-align: left;
+    padding: 20px;
+}
+.type-intro-right p {
+    margin: 0;
+    word-wrap: break-word;
+    color: white; 
+}
+
+/* ------------------------------ GALLERY BANNER ------------------------------ */
+/* Gallery Banner Component */
+.gallery-banner {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    position: relative;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+.gallery-banner-bar {
+    width: 100%;
+    background-color: #ff8c00; /* Orange bar color */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.gallery-banner-container {
+    display: flex;
+    margin-top: var(--gallery-banner-bar-height, 4px); /* Default bar height */
+    padding-left: 0; /* Align container to the left */
+    width: 100%; 
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+.gallery-banner-item {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* ------------------------------ REPEATER MENU ----------------------------- */
+
+.repeater-menu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* ------------------------------ MENU CARD ----------------------------- */
+
+.menu-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: transparent;
+}
+
+.menu-card-photo {
+    margin-bottom: 10px;
+}
+
+.menu-card-title h3 {
+    color: #ff8c00;
+    margin: 10px 0;
+}
+
+.menu-card-button .btn {
+    border: 1px solid #ff8c00;
+    color: #ff8c00;
+    background-color: transparent;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+	border-radius: 10px;
+}
+
+.menu-card-button .btn:hover {
+    color: transparent;
+    background-color: #ff8c00;
+}
+
+/* ------------------------------ LANDING LAYOUT ----------------------------- */
+#landing-background {
+	min-height: 100vh;
+    width: 100%;
+}
+#landing-page {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+.vertical-separator {
+    width: 100%; 
+    height: 150px; 
+}
+
+
 /* ------------------------------ PORTFOLIO LAYOUT ------------------------------ */
 #portfolio-background {
 	min-height: 100vh;
+	width: 100%;
 }
 #portfolio-page {
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 0 20px;
 }
-.portfolio-content {
-	margin: 40px 0;
-}
+
+
+

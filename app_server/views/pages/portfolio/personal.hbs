@@ -1,6 +1,14 @@
 <div class="portfolio-page">
-    <h1>{{title}}</h1>
     
+    {{!-- Type intro partial --}}
+    {{> sections/type-intro 
+        title=typeIntro.title 
+        description=typeIntro.description 
+        leftPadding=typeIntro.leftPadding 
+        width=typeIntro.width 
+        height=typeIntro.height}}
+
     {{!-- Gallery grid partial --}}
     {{> galleries/gallery-grid images=galleryImages}}
+    
 </div>

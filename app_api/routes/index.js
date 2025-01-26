@@ -46,7 +46,11 @@ function authenticateJWT(req, res, next) {
 // Import controllers for routing
 const authController = require('../controllers/authentication');
 const imagesController = require('../controllers/images');
-const galleriesController = require('../controllers/galleries');
+const galleryGridController = require('../controllers/gallery-grid');
+const galleryHeroVertController = require('../controllers/gallery-hero-vert');
+const typeIntroController = require('../controllers/type-intro');
+const galleryBannerController = require('../controllers/gallery-banner');
+const repeaterMenuController = require('../controllers/repeater-menu');
 
 // POST method route login
 router
@@ -58,20 +62,58 @@ router
     .route('/register')
     .post(authController.register);
 
+// Define routes for images endpoint
 router
     .route('/images')
-    .get(imagesController.getAllImages) 
+    .get(imagesController.getAllImages);
 
 router
     .route('/images/:id')
-    .get(imagesController.getImageById) 
+    .get(imagesController.getImageById);
+
+// Define routes for gallery-grid endpoint
+router
+    .route('/gallery-grid')
+    .get(galleryGridController.getAllGalleryGrid);
 
 router
-    .route('/galleries')
-    .get(galleriesController.getAllGalleries) 
+    .route('/gallery-grid/:id')
+    .get(galleryGridController.getGalleryGridById);
+
+// Define routes for gallery-hero-vert endpoint
+router
+    .route('/gallery-hero-vert')
+    .get(galleryHeroVertController.getAllGalleryHeroVert);
 
 router
-    .route('/galleries/:id')
-    .get(galleriesController.getGalleryById) 
+    .route('/gallery-hero-vert/:id')
+    .get(galleryHeroVertController.getGalleryHeroVertById);
+
+// Define routes for type-intro endpoint
+router
+    .route('/type-intro')
+    .get(typeIntroController.getAllTypeIntro);
+
+router
+    .route('/type-intro/:id')
+    .get(typeIntroController.getTypeIntroById);
+
+// Define routes for gallery-banner endpoint
+router
+    .route('/gallery-banner')
+    .get(galleryBannerController.getAllGalleryBanner);
+
+router
+    .route('/gallery-banner/:id')
+    .get(galleryBannerController.getGalleryBannerById);
+
+// Define routes for repeater-menu endpoint
+router
+    .route('/repeater-menu')
+    .get(repeaterMenuController.getAllRepeaterMenu);
+
+router
+    .route('/repeater-menu/:id')
+    .get(repeaterMenuController.getRepeaterMenuById);
 
 module.exports = router;
