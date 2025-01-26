@@ -584,12 +584,6 @@ hr {
     border-radius: 1px;
     margin: 0 20px;
 }
-#connect {
-	float: right;
-	display: inline-block;
-	line-height: 26px;
-	margin: 12px 0 0;
-}
 #connect a {
 	background: url(../images/icons.png) no-repeat;
 	display: inline-block;
