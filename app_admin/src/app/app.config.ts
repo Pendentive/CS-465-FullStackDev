@@ -4,12 +4,17 @@ import { provideHttpClient, withJsonpSupport, withInterceptorsFromDi } from '@an
 
 import { routes } from './app.routes';
 import { authInterceptProvider } from './shared/utils/jwt.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { importProvidersFrom } from '@angular/core';
+import { MaterialModule } from './material/material.module';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
     provideHttpClient(withJsonpSupport(), withInterceptorsFromDi()),
-    authInterceptProvider,
+    authInterceptProvider, 
+    provideAnimationsAsync(),
+    importProvidersFrom(MaterialModule),
   ],
 };
