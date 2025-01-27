@@ -96,7 +96,8 @@ router
 
 router
     .route('/type-intro/:id')
-    .get(typeIntroController.getTypeIntroById);
+    .get(typeIntroController.getTypeIntroById)
+    .put(authenticateJWT, typeIntroController.updateTypeIntro);
 
 // Define routes for gallery-banner endpoint
 router

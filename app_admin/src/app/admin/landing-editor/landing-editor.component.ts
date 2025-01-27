@@ -1,40 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
-import { GalleryHeroVert } from '../../interfaces/gallery-hero-vert';
+import { AuthenticationService } from '../../services/authentication.service';
 import { TypeIntro } from '../../interfaces/type-intro';
-import { GalleryBanner } from '../../interfaces/gallery-banner';
-import { RepeaterMenu } from '../../interfaces/repeater-menu';
+import { TypeIntroEditorComponent } from '../type-intro-editor/type-intro-editor.component';
 
 @Component({
   selector: 'app-landing-editor',
   standalone: true,
+  imports: [
+    CommonModule,
+    TypeIntroEditorComponent
+  ],
   templateUrl: './landing-editor.component.html',
   styleUrl: './landing-editor.component.css'
 })
 export class LandingEditorComponent implements OnInit {
-  heroVertData!: GalleryHeroVert;
   typeIntroData!: TypeIntro;
-  repeaterMenuData!: RepeaterMenu;
-  galleryBannerData!: GalleryBanner;
+  isLoggedIn = false;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private authService: AuthenticationService) {}
 
   ngOnInit(): void {
-    this.loadData();
+    this.isLoggedIn = this.authService.isLoggedIn();
+    if (this.isLoggedIn) {
+      this.loadData();
+    }
   }
 
   loadData(): void {
-    this.apiService.getGalleryHeroVerts().subscribe((data) => {
-      this.heroVertData = data[0];
-    });
     this.apiService.getTypeIntros().subscribe((data) => {
       this.typeIntroData = data[0];
-    });
-    this.apiService.getRepeaterMenus().subscribe((data) => {
-      this.repeaterMenuData = data[0];
-    });
-    this.apiService.getGalleryBanners().subscribe((data) => {
-      this.galleryBannerData = data[0];
     });
   }
 }

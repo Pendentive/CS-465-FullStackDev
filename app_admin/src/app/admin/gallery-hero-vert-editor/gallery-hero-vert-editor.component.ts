@@ -1,10 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { GalleryHeroVert } from '../../interfaces/gallery-hero-vert';
 
 @Component({
   selector: 'app-gallery-hero-vert-editor',
   standalone: true,
+  imports: [
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './gallery-hero-vert-editor.component.html',
   styleUrl: './gallery-hero-vert-editor.component.css'
 })

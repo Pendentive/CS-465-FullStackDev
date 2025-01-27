@@ -24,20 +24,15 @@ const portfolioPersonal = async function(req, res, next) {
         const galleryBanners = await galleryBannerResponse.json();
         const typeIntros = await typeIntroResponse.json();
 
-        let message = null;
-        if (!(galleryGrids instanceof Array)) {
-            message = 'API lookup error';
-            galleryGrids = [];
-        } else {
-            if (!galleryGrids.length) {
-                message = 'No galleries exist in our database!';
-            }
-        }
+       let message = null; // TODO: INCLUDE TESTING FOR MESSAGE
+
 
         const galleryGridData = galleryGrids[0]; // Assuming you want the first gallery grid
         const galleryHeroVertData = galleryHeroVerts[0]; // Assuming you want the first gallery hero vert
         const galleryBannerData = galleryBanners[0]; // Assuming you want the first gallery banner
         const typeIntroData = typeIntros[0]; // Assuming you want the first type intro
+
+
 
         res.render('pages/portfolio/personal', {
             layout: 'layout-portfolio',

@@ -23,7 +23,21 @@ const getTypeIntroById = async (req, res) => {
     }
 };
 
+// UPDATE type-intro
+const updateTypeIntro = async (req, res) => {
+    try {
+        const typeIntro = await TypeIntro.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!typeIntro) {
+            return res.status(404).json({ message: 'TypeIntro not found' });
+        }
+        res.status(200).json(typeIntro);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
 module.exports = {
     getAllTypeIntro,
-    getTypeIntroById
+    getTypeIntroById,
+    updateTypeIntro
 };

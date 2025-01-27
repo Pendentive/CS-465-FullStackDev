@@ -1,8 +1,8 @@
-const galleriesEndpoint = 'http://localhost:3000/api/galleries';
 const galleryHeroVertEndpoint = 'http://localhost:3000/api/gallery-hero-vert';
 const galleryBannerEndpoint = 'http://localhost:3000/api/gallery-banner';
 const repeaterMenuEndpoint = 'http://localhost:3000/api/repeater-menu';
 const typeIntroEndpoint = 'http://localhost:3000/api/type-intro';
+const galleryGridEndpoint = 'http://localhost:3000/api/gallery-grid';
 const options = {
     method: 'GET',
     headers: {
@@ -13,40 +13,32 @@ const options = {
 /* GET landing page */
 const landingPage = async function(req, res, next) {
     try {
-        const [galleriesResponse, galleryHeroVertResponse, galleryBannerResponse, repeaterMenuResponse, typeIntroResponse] = await Promise.all([
-            fetch(galleriesEndpoint, options),
+        const [galleryHeroVertResponse, galleryBannerResponse, repeaterMenuResponse, typeIntroResponse, galleryGridResponse] = await Promise.all([
             fetch(galleryHeroVertEndpoint, options),
             fetch(galleryBannerEndpoint, options),
             fetch(repeaterMenuEndpoint, options),
-            fetch(typeIntroEndpoint, options)
+            fetch(typeIntroEndpoint, options),
+            fetch(galleryGridEndpoint, options)
         ]);
 
-        const galleries = await galleriesResponse.json();
         const galleryHeroVerts = await galleryHeroVertResponse.json();
         const galleryBanners = await galleryBannerResponse.json();
         const repeaterMenus = await repeaterMenuResponse.json();
         const typeIntros = await typeIntroResponse.json();
+        const galleryGrids = await galleryGridResponse.json();
 
-        let message = null;
-        if (!(galleries instanceof Array)) {
-            message = 'API lookup error';
-            galleries = [];
-        } else {
-            if (!galleries.length) {
-                message = 'No galleries exist in our database!';
-            }
-        }
-
-        const galleryData = galleries[0]; // Assuming you want the first gallery
         const galleryHeroVertData = galleryHeroVerts[0]; // Assuming you want the first gallery hero vert
         const galleryBannerData = galleryBanners[0]; // Assuming you want the first gallery banner
         const repeaterMenuData = repeaterMenus[0]; // Assuming you want the first repeater menu
         const typeIntroData = typeIntros[0]; // Assuming you want the first type intro
+        const galleryGridData = galleryGrids[0]; // Assuming you want the first gallery grid
+
+        let message = null; // Initialize the message variable
 
         res.render('pages/common/landing', {
             layout: 'layout-landing',
             title: 'Welcome to Studio Custer',
-            galleryImages: galleryData.images,
+            galleryHeroVertImages: galleryHeroVertData.images,
             galleryHeroVertPadding: galleryHeroVertData.padding,
             galleryHeroVertWidth: galleryHeroVertData.width,
             galleryHeroVertHeight: galleryHeroVertData.height,
@@ -65,7 +57,7 @@ const landingPage = async function(req, res, next) {
                 width: typeIntroData.width,
                 height: typeIntroData.height
             },
-            message
+            message // Pass the message variable to the view
         });
     } catch (err) {
         console.error('Landing Page Error:', err);

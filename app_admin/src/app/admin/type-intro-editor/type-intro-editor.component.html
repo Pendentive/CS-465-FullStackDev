@@ -1,7 +1,7 @@
 <mat-card class="fec-editor">
     <mat-card-title>{{ data.title }}</mat-card-title>
     <mat-card-content>
-      <form [formGroup]="form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <mat-label>Title</mat-label>
           <input matInput formControlName="title">
@@ -22,6 +22,7 @@
           <mat-label>Height</mat-label>
           <input matInput type="number" formControlName="height">
         </mat-form-field>
+        <button mat-button type="submit">Save</button>
       </form>
     </mat-card-content>
   </mat-card>
