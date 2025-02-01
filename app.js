@@ -17,7 +17,7 @@ var app = express();
 require('dotenv').config();
 
 // Bring in the database
-require('./app_api/models/db');
+require('./app_api/config/db');
 require('./app_api/config/passport'); // authentication for db and user
 
 /// View engine setup

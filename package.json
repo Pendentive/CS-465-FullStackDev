@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "seed": "node ./app_api/models/seed.js"
+    "seed": "node ./app_api/scripts/seed.js",
+    "generate-interfaces": "node ./app_api/scripts/generate-interfaces.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -21,5 +22,8 @@
     "node-fetch": "^3.3.2",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "mongoose-tsgen": "^9.5.1"
   }
 }

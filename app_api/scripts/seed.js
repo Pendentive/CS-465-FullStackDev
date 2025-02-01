@@ -1,10 +1,10 @@
-const Mongoose = require('./db');
-const Image = require('./image');
-const GalleryGrid = require('./gallery-grid');
-const GalleryHeroVert = require('./gallery-hero-vert');
-const GalleryBanner = require('./gallery-banner');
-const RepeaterMenu = require('./repeater-menu');
-const TypeIntro = require('./type-intro');
+const Mongoose = require('../config/db');
+const Image = require('../models/image');
+const GalleryGrid = require('../models/gallery-grid');
+const GalleryHeroVert = require('../models/gallery-hero-vert');
+const GalleryBanner = require('../models/gallery-banner');
+const RepeaterMenu = require('../models/repeater-menu');
+const TypeIntro = require('../models/type-intro');
 const fs = require('fs');
 const path = require('path');
 
