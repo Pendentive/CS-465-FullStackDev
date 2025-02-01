@@ -1,8 +1,7 @@
 const galleryHeroVertEndpoint = 'http://localhost:3000/api/gallery-hero-vert';
-const galleryBannerEndpoint = 'http://localhost:3000/api/gallery-banner';
-const repeaterMenuEndpoint = 'http://localhost:3000/api/repeater-menu';
 const typeIntroEndpoint = 'http://localhost:3000/api/type-intro';
-const galleryGridEndpoint = 'http://localhost:3000/api/gallery-grid';
+const repeaterMenuEndpoint = 'http://localhost:3000/api/repeater-menu';
+const galleryBannerEndpoint = 'http://localhost:3000/api/gallery-banner';
 const options = {
     method: 'GET',
     headers: {
@@ -13,25 +12,22 @@ const options = {
 /* GET landing page */
 const landingPage = async function(req, res, next) {
     try {
-        const [galleryHeroVertResponse, galleryBannerResponse, repeaterMenuResponse, typeIntroResponse, galleryGridResponse] = await Promise.all([
+        const [galleryHeroVertResponse, typeIntroResponse, repeaterMenuResponse, galleryBannerResponse] = await Promise.all([
             fetch(galleryHeroVertEndpoint, options),
-            fetch(galleryBannerEndpoint, options),
-            fetch(repeaterMenuEndpoint, options),
             fetch(typeIntroEndpoint, options),
-            fetch(galleryGridEndpoint, options)
+            fetch(repeaterMenuEndpoint, options),
+            fetch(galleryBannerEndpoint, options)
         ]);
 
         const galleryHeroVerts = await galleryHeroVertResponse.json();
-        const galleryBanners = await galleryBannerResponse.json();
-        const repeaterMenus = await repeaterMenuResponse.json();
         const typeIntros = await typeIntroResponse.json();
-        const galleryGrids = await galleryGridResponse.json();
+        const repeaterMenus = await repeaterMenuResponse.json();
+        const galleryBanners = await galleryBannerResponse.json();
 
         const galleryHeroVertData = galleryHeroVerts[0]; // Assuming you want the first gallery hero vert
-        const galleryBannerData = galleryBanners[0]; // Assuming you want the first gallery banner
-        const repeaterMenuData = repeaterMenus[0]; // Assuming you want the first repeater menu
         const typeIntroData = typeIntros[0]; // Assuming you want the first type intro
-        const galleryGridData = galleryGrids[0]; // Assuming you want the first gallery grid
+        const repeaterMenuData = repeaterMenus[0]; // Assuming you want the first repeater menu
+        const galleryBannerData = galleryBanners[0]; // Assuming you want the first gallery banner
 
         let message = null; // Initialize the message variable
 
@@ -42,14 +38,6 @@ const landingPage = async function(req, res, next) {
             galleryHeroVertPadding: galleryHeroVertData.padding,
             galleryHeroVertWidth: galleryHeroVertData.width,
             galleryHeroVertHeight: galleryHeroVertData.height,
-            galleryBannerPhotoEdgeLength: galleryBannerData.photoEdgeLength,
-            galleryBannerBarHeight: galleryBannerData.barHeight,
-            menuCards: repeaterMenuData.menuCards,
-            photoHeight: repeaterMenuData.photoHeight,
-            photoWidth: repeaterMenuData.photoWidth,
-            photoPaddingX: repeaterMenuData.photoPaddingX,
-            photoPaddingY: repeaterMenuData.photoPaddingY,
-            menuCardPaddingX: repeaterMenuData.menuCardPaddingX,
             typeIntro: {
                 title: typeIntroData.title,
                 description: typeIntroData.description,
@@ -57,6 +45,15 @@ const landingPage = async function(req, res, next) {
                 width: typeIntroData.width,
                 height: typeIntroData.height
             },
+            menuCards: repeaterMenuData.menuCards,
+            photoHeight: repeaterMenuData.photoHeight,
+            photoWidth: repeaterMenuData.photoWidth,
+            photoPaddingX: repeaterMenuData.photoPaddingX,
+            photoPaddingY: repeaterMenuData.photoPaddingY,
+            menuCardPaddingX: repeaterMenuData.menuCardPaddingX,
+            galleryBannerImages: galleryBannerData.images,
+            galleryBannerPhotoEdgeLength: galleryBannerData.photoEdgeLength,
+            galleryBannerBarHeight: galleryBannerData.barHeight,
             message // Pass the message variable to the view
         });
     } catch (err) {
