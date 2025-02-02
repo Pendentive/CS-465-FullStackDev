@@ -132,6 +132,12 @@ router
 
 router
     .route('/pages/identifier/:identifier')
-    .get(pageController.getPageByIdentifier);
+    .get(pageController.getPageByIdentifier)
+    .put(authenticateJWT, pageController.updatePageByIdentifier);
+
+// Define routes for updating a specific component
+router
+    .route('/components/:componentType/:componentId')
+    .put(authenticateJWT, pageController.updateComponent);
 
 module.exports = router;

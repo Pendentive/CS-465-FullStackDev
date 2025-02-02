@@ -1,4 +1,5 @@
 const Page = require('../models/page');
+const TypeIntro = require('../models/type-intro');
 
 // GET all pages
 const getAllPages = async (req, res) => {
@@ -12,7 +13,7 @@ const getAllPages = async (req, res) => {
 
 // GET page by ID
 const getPageById = async (req, res) => {
-    const userRole = req.user?.role || 'viewer'; // Assume user role is available in req.user
+    const userRole = req.user?.role || 'admin'; // TODO: FIX when rba is implemented
 
     let populateOptions;
     if (userRole === 'admin') {
@@ -47,7 +48,7 @@ const getPageById = async (req, res) => {
 
 // GET page by identifier
 const getPageByIdentifier = async (req, res) => {
-    const userRole = req.user?.role || 'viewer'; // Assume user role is available in req.user
+    const userRole = req.user?.role || 'admin'; // TODO: FIX when rba is implemented
 
     let populateOptions;
     if (userRole === 'admin') {
@@ -100,6 +101,47 @@ const updatePage = async (req, res) => {
         }
         res.status(200).json(page);
     } catch (err) {
+        console.error('Error updating page:', err); // Add this line to log the error
+        res.status(400).json({ message: err.message });
+    }
+};
+
+// UPDATE a page by identifier
+const updatePageByIdentifier = async (req, res) => {
+    try {
+        const page = await Page.findOneAndUpdate({ identifier: req.params.identifier }, req.body, { new: true });
+        if (!page) {
+            return res.status(404).json({ message: 'Page not found' });
+        }
+        res.status(200).json(page);
+    } catch (err) {
+        console.error('Error updating page by identifier:', err); 
+        res.status(400).json({ message: err.message });
+    }
+};
+
+// UPDATE a specific component
+const updateComponent = async (req, res) => {
+    const { componentId, componentType } = req.params;
+    let ComponentModel;
+
+    switch (componentType) {
+        case 'TypeIntro':
+            ComponentModel = TypeIntro;
+            break;
+        // Add other component types here
+        default:
+            return res.status(400).json({ message: 'Invalid component type' });
+    }
+
+    try {
+        const component = await ComponentModel.findByIdAndUpdate(componentId, req.body, { new: true });
+        if (!component) {
+            return res.status(404).json({ message: 'Component not found' });
+        }
+        res.status(200).json(component);
+    } catch (err) {
+        console.error('Error updating component:', err);
         res.status(400).json({ message: err.message });
     }
 };
@@ -123,5 +165,7 @@ module.exports = {
     getPageByIdentifier,
     createPage,
     updatePage,
+    updatePageByIdentifier,
+    updateComponent,
     deletePage
 };

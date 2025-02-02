@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Page } from '../interfaces/page';
 import { GalleryHeroVert } from '../interfaces/gallery-hero-vert';
 import { TypeIntro } from '../interfaces/type-intro';
 import { GalleryGrid } from '../interfaces/gallery-grid';
 import { GalleryBanner } from '../interfaces/gallery-banner';
 import { RepeaterMenu } from '../interfaces/repeater-menu';
 import { Image } from '../interfaces/image';
-import { Page } from '../interfaces/page';
 import { User } from '../interfaces/user';
 import { AuthResponse } from '../interfaces/authresponse';
 
@@ -71,12 +71,24 @@ export class ApiService {
     return this.http.get<Page>(`${this.apiUrl}/pages/${id}`);
   }
 
+  getPageByIdentifier(identifier: string): Observable<Page> {
+    return this.http.get<Page>(`${this.apiUrl}/pages/identifier/${identifier}`);
+  }
+
   createPage(page: Page): Observable<Page> {
     return this.http.post<Page>(`${this.apiUrl}/pages`, page);
   }
 
   updatePage(id: string, page: Page): Observable<Page> {
     return this.http.put<Page>(`${this.apiUrl}/pages/${id}`, page);
+  }
+
+  updatePageByIdentifier(identifier: string, page: Page): Observable<Page> {
+    return this.http.put<Page>(`${this.apiUrl}/pages/identifier/${identifier}`, page);
+  }
+
+  updateComponent(componentType: string, componentId: string, component: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/components/${componentType}/${componentId}`, component);
   }
 
   deletePage(id: string): Observable<void> {

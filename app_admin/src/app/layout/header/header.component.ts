@@ -9,9 +9,11 @@ import { AuthenticationService } from '../../services/authentication.service';
   standalone: true,
   imports: [MatToolbarModule, MatButtonModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  username: string = 'Current User'; // Replace with actual username
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
