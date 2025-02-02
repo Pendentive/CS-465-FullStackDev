@@ -1,64 +1,48 @@
-const galleryHeroVertEndpoint = 'http://localhost:3000/api/gallery-hero-vert';
-const typeIntroEndpoint = 'http://localhost:3000/api/type-intro';
-const repeaterMenuEndpoint = 'http://localhost:3000/api/repeater-menu';
-const galleryBannerEndpoint = 'http://localhost:3000/api/gallery-banner';
-const options = {
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-    }
-};
+const pageService = require('../services/pageService');
+
+const landingPageIdentifier = 'personal-photography-page'; // Select page file
 
 /* GET landing page */
 const landingPage = async function(req, res, next) {
     try {
-        const [galleryHeroVertResponse, typeIntroResponse, repeaterMenuResponse, galleryBannerResponse] = await Promise.all([
-            fetch(galleryHeroVertEndpoint, options),
-            fetch(typeIntroEndpoint, options),
-            fetch(repeaterMenuEndpoint, options),
-            fetch(galleryBannerEndpoint, options)
-        ]);
+        const page = await pageService.getPageData(landingPageIdentifier);
 
-        const galleryHeroVerts = await galleryHeroVertResponse.json();
-        const typeIntros = await typeIntroResponse.json();
-        const repeaterMenus = await repeaterMenuResponse.json();
-        const galleryBanners = await galleryBannerResponse.json();
+        if (!page) {
+            return res.status(404).render('pages/common/error', { message: 'Page not found', error: { status: 404 } });
+        }
 
-        const galleryHeroVertData = galleryHeroVerts[0]; // Assuming you want the first gallery hero vert
-        const typeIntroData = typeIntros[0]; // Assuming you want the first type intro
-        const repeaterMenuData = repeaterMenus[0]; // Assuming you want the first repeater menu
-        const galleryBannerData = galleryBanners[0]; // Assuming you want the first gallery banner
-
-        let message = null; // Initialize the message variable
+        const components = page.components.reduce((acc, component) => {
+            switch (component.kind) {
+                case 'GalleryHeroVert':
+                    acc.galleryHeroVert = component;
+                    break;
+                case 'TypeIntro':
+                    acc.typeIntro = component;
+                    break;
+                case 'RepeaterMenu':
+                    acc.repeaterMenu = component;
+                    break;
+                case 'GalleryBanner':
+                    acc.galleryBanner = component;
+                    break;
+                case 'GalleryGrid':
+                    acc.galleryGrid = component;
+                    break;
+                default:
+                    break;
+            }
+            return acc;
+        }, {});
 
         res.render('pages/common/landing', {
             layout: 'layout-landing',
-            title: 'Welcome to Studio Custer',
-            galleryHeroVertImages: galleryHeroVertData.images,
-            galleryHeroVertPadding: galleryHeroVertData.padding,
-            galleryHeroVertWidth: galleryHeroVertData.width,
-            galleryHeroVertHeight: galleryHeroVertData.height,
-            typeIntro: {
-                title: typeIntroData.title,
-                description: typeIntroData.description,
-                leftPadding: typeIntroData.leftPadding,
-                width: typeIntroData.width,
-                height: typeIntroData.height
-            },
-            menuCards: repeaterMenuData.menuCards,
-            photoHeight: repeaterMenuData.photoHeight,
-            photoWidth: repeaterMenuData.photoWidth,
-            photoPaddingX: repeaterMenuData.photoPaddingX,
-            photoPaddingY: repeaterMenuData.photoPaddingY,
-            menuCardPaddingX: repeaterMenuData.menuCardPaddingX,
-            galleryBannerImages: galleryBannerData.images,
-            galleryBannerPhotoEdgeLength: galleryBannerData.photoEdgeLength,
-            galleryBannerBarHeight: galleryBannerData.barHeight,
-            message // Pass the message variable to the view
+            title: page.title,
+            description: page.description,
+            ...components
         });
     } catch (err) {
         console.error('Landing Page Error:', err);
-        res.status(500).send(err.message);
+        res.status(500).render('pages/common/error', { message: 'Internal Server Error', error: { status: 500 } });
     }
 };
 

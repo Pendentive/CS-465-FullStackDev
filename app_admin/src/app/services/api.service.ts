@@ -7,6 +7,7 @@ import { GalleryGrid } from '../interfaces/gallery-grid';
 import { GalleryBanner } from '../interfaces/gallery-banner';
 import { RepeaterMenu } from '../interfaces/repeater-menu';
 import { Image } from '../interfaces/image';
+import { Page } from '../interfaces/page';
 import { User } from '../interfaces/user';
 import { AuthResponse } from '../interfaces/authresponse';
 
@@ -45,10 +46,6 @@ export class ApiService {
     return this.http.get<TypeIntro[]>(`${this.apiUrl}/type-intro`);
   }
 
-  updateTypeIntro(typeIntro: TypeIntro): Observable<TypeIntro> {
-    return this.http.put<TypeIntro>(`${this.apiUrl}/type-intro/${typeIntro._id}`, typeIntro);
-  }
-
   getGalleryGrids(): Observable<GalleryGrid[]> {
     return this.http.get<GalleryGrid[]>(`${this.apiUrl}/gallery-grid`);
   }
@@ -63,5 +60,26 @@ export class ApiService {
 
   getImages(): Observable<Image[]> {
     return this.http.get<Image[]>(`${this.apiUrl}/images`);
+  }
+
+  // Page fetching methods
+  getPages(): Observable<Page[]> {
+    return this.http.get<Page[]>(`${this.apiUrl}/pages`);
+  }
+
+  getPage(id: string): Observable<Page> {
+    return this.http.get<Page>(`${this.apiUrl}/pages/${id}`);
+  }
+
+  createPage(page: Page): Observable<Page> {
+    return this.http.post<Page>(`${this.apiUrl}/pages`, page);
+  }
+
+  updatePage(id: string, page: Page): Observable<Page> {
+    return this.http.put<Page>(`${this.apiUrl}/pages/${id}`, page);
+  }
+
+  deletePage(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/pages/${id}`);
   }
 }

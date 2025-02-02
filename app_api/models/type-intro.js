@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const BaseModel = require('./base');
 
 const typeIntroSchema = new mongoose.Schema({
     title: { 
@@ -10,7 +11,6 @@ const typeIntroSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 50 // Default left padding value
-        
     },
     width: {
         type: Number,
@@ -24,4 +24,4 @@ const typeIntroSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('TypeIntro', typeIntroSchema);
+module.exports = BaseModel.discriminator('TypeIntro', typeIntroSchema);

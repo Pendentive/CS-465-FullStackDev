@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Image = require('./image');
+const BaseModel = require('./base');
 
 const galleryGridSchema = new mongoose.Schema({
     title: { 
@@ -13,4 +13,4 @@ const galleryGridSchema = new mongoose.Schema({
     }]
 });
 
-module.exports = mongoose.model('GalleryGrid', galleryGridSchema);
+module.exports = BaseModel.discriminator('GalleryGrid', galleryGridSchema);

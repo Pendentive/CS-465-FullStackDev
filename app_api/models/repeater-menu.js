@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const BaseModel = require('./base');
 const Image = require('./image');
 
 const menuCardSchema = new mongoose.Schema({
@@ -41,4 +42,4 @@ const repeaterMenuSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('RepeaterMenu', repeaterMenuSchema);
+module.exports = BaseModel.discriminator('RepeaterMenu', repeaterMenuSchema);

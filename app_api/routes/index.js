@@ -51,6 +51,7 @@ const galleryHeroVertController = require('../controllers/gallery-hero-vert');
 const typeIntroController = require('../controllers/type-intro');
 const galleryBannerController = require('../controllers/gallery-banner');
 const repeaterMenuController = require('../controllers/repeater-menu');
+const pageController = require('../controllers/page');
 
 // POST method route login
 router
@@ -116,5 +117,21 @@ router
 router
     .route('/repeater-menu/:id')
     .get(repeaterMenuController.getRepeaterMenuById);
+
+// Define routes for page endpoint
+router
+    .route('/pages')
+    .get(pageController.getAllPages)
+    .post(authenticateJWT, pageController.createPage);
+
+router
+    .route('/pages/:id')
+    .get(pageController.getPageById)
+    .put(authenticateJWT, pageController.updatePage)
+    .delete(authenticateJWT, pageController.deletePage);
+
+router
+    .route('/pages/identifier/:identifier')
+    .get(pageController.getPageByIdentifier);
 
 module.exports = router;

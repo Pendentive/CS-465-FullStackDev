@@ -1,12 +1,7 @@
 const mongoose = require('mongoose');
-const Image = require('./image');
+const BaseModel = require('./base');
 
 const galleryBannerSchema = new mongoose.Schema({
-    title: { 
-        type: String, 
-        required: true 
-    },
-    description: String,
     images: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Image'
@@ -21,4 +16,4 @@ const galleryBannerSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('GalleryBanner', galleryBannerSchema);
+module.exports = BaseModel.discriminator('GalleryBanner', galleryBannerSchema);
