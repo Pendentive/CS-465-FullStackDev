@@ -1,6 +1,6 @@
 const pageService = require('../services/pageService');
 
-const personalPageIdentifier = 'personal-photography-page'; // Set page
+const personalPageIdentifier = 'page-portfolio-personal'; // Set page
 
 /* GET personal portfolio page */
 const portfolioPersonal = async function(req, res, next) {

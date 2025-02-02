@@ -1,6 +1,6 @@
 const pageService = require('../services/pageService');
 
-const landingPageIdentifier = 'personal-photography-page'; // Set Page
+const landingPageIdentifier = 'page-landing'; // Set Page
 
 /* GET landing page */
 const landingPage = async function(req, res, next) {
