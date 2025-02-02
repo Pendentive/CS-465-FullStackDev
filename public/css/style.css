@@ -44,10 +44,12 @@ img {
 
 /* ------------------------------ HEADER ------------------------------ */
 #header {
-    margin-bottom: 20px;
     padding-top: 20px;
     background-color: #000000;
     width: 100%;
+	position: relative; /* Create a stacking context */
+	z-index: 1;
+	box-shadow: 0 10px 7px -7px rgba(0, 0, 0, 0.4);
 }
 
 #header-container {
@@ -672,17 +674,15 @@ hr {
 
 /* ------------------------------ GALLERY HERO VERT ------------------------------ */
 .gallery-hero-vert {
-    overflow-x: auto;
-    white-space: nowrap;
-	width: 100%;
+    display: flex;
+    overflow-x: clip;
+    justify-content: center;  /* Center the inner container horizontally */
 }
 .gallery-hero-vert-container {
     display: flex;
-    gap: var(--gallery-hero-vert-padding, 10px); /* Default padding */
 }
 .gallery-hero-vert-item {
-    display: inline-block;
-    vertical-align: top;
+    flex: 0 0 auto;
 }
 
 /* ------------------------------ TYPE INTRO ------------------------------ */
@@ -718,32 +718,24 @@ hr {
 /* ------------------------------ GALLERY BANNER ------------------------------ */
 /* Gallery Banner Component */
 .gallery-banner {
+    display: flex;
+	flex-direction: column;
     width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-    position: relative;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    overflow-x: clip;
+    align-items: center; /* May cause performance issues */
 }
 
 .gallery-banner-bar {
     width: 100%;
     background-color: #ff8c00; /* Orange bar color */
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 .gallery-banner-container {
     display: flex;
-    margin-top: var(--gallery-banner-bar-height, 4px); /* Default bar height */
-    padding-left: 0; /* Align container to the left */
-    width: 100%; 
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
 
 .gallery-banner-item {
-    display: inline-block;
-    vertical-align: top;
+    flex: 0 0 auto; /* Ensure content fits within container */
 }
 
 /* ------------------------------ REPEATER MENU ----------------------------- */

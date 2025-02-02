@@ -20,4 +20,5 @@ export interface MenuCard {
   title: string;
   image: Image;
   route: string;
+  buttonTitle: string;
 }

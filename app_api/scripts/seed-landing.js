@@ -37,9 +37,9 @@ const seedLandingPage = async () => {
             title: 'Hero Vertical Gallery',
             description: 'Collection of vertical photographs',
             images: createdImages.slice(0, 6).map(img => img._id),
-            padding: 8,
-            width: 250,
-            height: 700,
+            padding: 10,
+            width: 450,
+            height: 950,
             identifier: 'gallery-hero-vert-landing',
             tags: ['hero', 'vertical']
         });
@@ -56,10 +56,14 @@ const seedLandingPage = async () => {
         });
 
         // Create repeater-menu with menu-cards
+        const menuCardTitles = ['Personal', 'Commercial', 'Full Service', 'About'];
+        const menuCardButtonTitles = ['Gallery', 'Gallery', 'Gallery', 'About Us'];
+        const menuCardRoutes = ['/personal', '/commercial', '/full-service', '/about']; // Set routes
         const menuCards = createdImages.slice(6, 10).map((image, index) => ({
-            title: `Menu Card ${index + 1}`,
+            title: menuCardTitles[index], // Set titles
             image: image._id,
-            route: `/menu-card-${index + 1}`
+            route: menuCardRoutes[index], // Set routes
+            buttonTitle: menuCardButtonTitles[index] // Set button titles
         }));
 
         const repeaterMenu = await RepeaterMenu.create({

@@ -15,6 +15,10 @@ const menuCardSchema = new mongoose.Schema({
     route: {
         type: String,
         required: true
+    },
+    buttonTitle: {
+        type: String,
+        required: true
     }
 });
 

@@ -10,14 +10,14 @@ mongoose.connect(dbURI);
 
 const clearDatabase = async () => {
     try {
-        console.log('Connecting to the database...'); // Add logging
+        console.log('Connecting to the database...');
         await mongoose.connection.once('open', async () => {
-            console.log('Connected to MongoDB'); // Add logging
+            console.log('Connected to MongoDB');
 
-            console.log('Clearing all page data'); // Add logging
+            console.log('Clearing all page data'); 
             // Clear all data related to the FECs, including pages and baseModel
             await clearData(['pages', 'baseModel']);
-            console.log('Page data cleared successfully');
+            console.log('Page and basemodel data cleared successfully');
 
             mongoose.disconnect();
         });

@@ -1,7 +1,7 @@
 <div class="gallery-hero-vert" style="height: {{height}}px;">
-    <div class="gallery-hero-vert-container" style="padding: {{padding}}px;">
+    <div class="gallery-hero-vert-container">
         {{#each images}}
-        <div class="gallery-hero-vert-item" style="width: {{../width}}px; height: {{../height}}px;">
+        <div class="gallery-hero-vert-item" style="width: {{../width}}px; height: {{../height}}px; padding: 0 {{../padding}}px;">
             <img src="{{this.path}}" alt="{{this.alt}}" style="height: 100%; width: 100%; object-fit: cover;">
         </div>
         {{/each}}

@@ -37,9 +37,9 @@ const seedPersonalPortfolioPage = async () => {
             title: 'Hero Vertical Gallery',
             description: 'Collection of vertical photographs',
             images: createdImages.slice(0, 4).map(img => img._id),
-            padding: 8,
-            width: 250,
-            height: 700,
+            padding: 10,
+            width: 600,
+            height: 800,
             identifier: 'gallery-hero-vert-personal',
             tags: ['hero', 'vertical']
         });
