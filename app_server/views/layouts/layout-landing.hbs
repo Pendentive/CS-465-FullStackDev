@@ -7,37 +7,8 @@
   </head>
   <body>
     {{> common/header }}
-    <div id="landing-background">
 
-      {{!-- Gallery hero vert partial --}}
-      {{#if galleryHeroVert}}
-      {{> galleries/gallery-hero-vert 
-          images=galleryHeroVert.images 
-          padding=galleryHeroVert.padding 
-          width=galleryHeroVert.width 
-          height=galleryHeroVert.height}}
-      {{/if}}
-
-      <div id="landing-page">
-        {{!-- Landing page specific content --}}
-        <div class="landing-content">
-            {{{body}}}
-        </div>
-      </div>
-
-      {{!-- Vertical separator --}}
-      <div class="vertical-separator"></div>
-
-      {{!-- Gallery banner partial --}}
-      {{#if galleryBanner}}
-      {{> galleries/gallery-banner 
-          images=galleryBanner.images 
-          photoEdgeLength=galleryBanner.photoEdgeLength 
-          barHeight=galleryBanner.barHeight}}
-      {{/if}}
-
-
-    </div>
+    {{{body}}}
 
     {{> common/footer }}
   </body>

@@ -7,32 +7,8 @@
   </head>
   <body>
     {{> common/header }}
-    <div id="portfolio-background">
-
-      {{!-- Gallery hero vert partial --}}
-      {{> galleries/gallery-hero-vert 
-        images=galleryHeroVertImages 
-        padding=galleryHeroVertPadding 
-        width=galleryHeroVertWidth 
-        height=galleryHeroVertHeight}}
     
-      <div id="portfolio-page">
-        {{!-- Portfolio specific content --}}
-        <div class="portfolio-content">
-            {{{body}}}
-        </div>
-      </div>
-
-      {{!-- Vertical separator --}}
-      <div class="vertical-separator"></div>
-
-      {{!-- Gallery banner partial --}}
-      {{> galleries/gallery-banner 
-        images=galleryBannerImages  
-        photoEdgeLength=galleryBannerPhotoEdgeLength 
-        barHeight=galleryBannerBarHeight}}
-      
-    </div>
+    {{{body}}}
 
     {{> common/footer }}
   </body>

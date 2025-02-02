@@ -1,25 +1,56 @@
-<div class="landing-page">
-    
-    {{!-- Type intro partial --}}
-    {{#if typeIntro}}
-    {{> sections/type-intro 
-        title=typeIntro.title 
-        description=typeIntro.description 
-        leftPadding=typeIntro.leftPadding 
-        width=typeIntro.width 
-        height=typeIntro.height}}
+<div id="landing-background">
+
+    {{!-- Gallery hero vert partial --}}
+    {{#if galleryHeroVert}}
+    {{> galleries/gallery-hero-vert 
+        images=galleryHeroVert.images 
+        padding=galleryHeroVert.padding 
+        width=galleryHeroVert.width 
+        height=galleryHeroVert.height}}
     {{/if}}
 
-    {{!-- Repeater menu partial --}}
-    {{#if repeaterMenu}}
-    {{> sections/repeater-menu 
-        menuCards=repeaterMenu.menuCards 
-        photoHeight=repeaterMenu.photoHeight 
-        photoWidth=repeaterMenu.photoWidth 
-        photoPaddingX=repeaterMenu.photoPaddingX 
-        photoPaddingY=repeaterMenu.photoPaddingY 
-        menuCardPaddingX=repeaterMenu.menuCardPaddingX}}
+    <div id="landing-page">
+
+        {{!-- Landing page specific content --}}
+        <div class="landing-content">
+            <div class="landing-page">
+                
+                {{!-- Type intro partial --}}
+                {{#if typeIntro}}
+                {{> sections/type-intro 
+                    title=typeIntro.title 
+                    description=typeIntro.description 
+                    leftPadding=typeIntro.leftPadding 
+                    width=typeIntro.width 
+                    height=typeIntro.height}}
+                {{/if}}
+
+                {{!-- Repeater menu partial --}}
+                {{#if repeaterMenu}}
+                {{> sections/repeater-menu 
+                    menuCards=repeaterMenu.menuCards 
+                    photoHeight=repeaterMenu.photoHeight 
+                    photoWidth=repeaterMenu.photoWidth 
+                    photoPaddingX=repeaterMenu.photoPaddingX 
+                    photoPaddingY=repeaterMenu.photoPaddingY 
+                    menuCardPaddingX=repeaterMenu.menuCardPaddingX}}
+                {{/if}}
+
+            </div>
+            
+        </div>
+    </div>
+
+    {{!-- Vertical separator --}}
+    <div class="vertical-separator"></div>
+
+    {{!-- Gallery banner partial --}}
+    {{#if galleryBanner}}
+    {{> galleries/gallery-banner 
+        images=galleryBanner.images 
+        photoEdgeLength=galleryBanner.photoEdgeLength 
+        barHeight=galleryBanner.barHeight}}
     {{/if}}
+
 
 </div>
-

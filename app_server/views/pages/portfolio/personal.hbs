@@ -1,14 +1,41 @@
-<div class="portfolio-page">
-    
-    {{!-- Type intro partial --}}
-    {{> sections/type-intro 
-        title=typeIntro.title 
-        description=typeIntro.description 
-        leftPadding=typeIntro.leftPadding 
-        width=typeIntro.width 
-        height=typeIntro.height}}
+<div id="portfolio-background">
 
-    {{!-- Gallery grid partial --}}
-    {{> galleries/gallery-grid images=galleryGridImages}}
+    {{!-- Gallery hero vert partial --}}
+    {{> galleries/gallery-hero-vert 
+    images=galleryHeroVertImages 
+    padding=galleryHeroVertPadding 
+    width=galleryHeroVertWidth 
+    height=galleryHeroVertHeight}}
     
+    <div id="portfolio-page">
+
+        {{!-- Portfolio specific content --}}
+        <div class="portfolio-content">
+            <div class="portfolio-page">
+    
+                {{!-- Type intro partial --}}
+                {{> sections/type-intro 
+                    title=typeIntro.title 
+                    description=typeIntro.description 
+                    leftPadding=typeIntro.leftPadding 
+                    width=typeIntro.width 
+                    height=typeIntro.height}}
+
+                {{!-- Gallery grid partial --}}
+                {{> galleries/gallery-grid images=galleryGridImages}}
+                
+            </div>
+
+        </div>
+    </div>
+
+    {{!-- Vertical separator --}}
+    <div class="vertical-separator"></div>
+
+    {{!-- Gallery banner partial --}}
+    {{> galleries/gallery-banner 
+    images=galleryBannerImages  
+    photoEdgeLength=galleryBannerPhotoEdgeLength 
+    barHeight=galleryBannerBarHeight}}
+      
 </div>
