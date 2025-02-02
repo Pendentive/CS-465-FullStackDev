@@ -14,6 +14,33 @@ const getPageData = async (identifier) => {
     }
 };
 
+const processPageComponents = (page) => {
+    const components = page.components.reduce((acc, component) => {
+        switch (component.kind) {
+            case 'GalleryHeroVert':
+                acc.galleryHeroVert = component;
+                break;
+            case 'TypeIntro':
+                acc.typeIntro = component;
+                break;
+            case 'RepeaterMenu':
+                acc.repeaterMenu = component;
+                break;
+            case 'GalleryBanner':
+                acc.galleryBanner = component;
+                break;
+            case 'GalleryGrid':
+                acc.galleryGrid = component;
+                break;
+            default:
+                break;
+        }
+        return acc;
+    }, {});
+    return components;
+};
+
 module.exports = {
-    getPageData
+    getPageData,
+    processPageComponents
 };

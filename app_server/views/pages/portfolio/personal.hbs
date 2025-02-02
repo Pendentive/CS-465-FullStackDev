@@ -1,11 +1,13 @@
 <div id="portfolio-background">
 
     {{!-- Gallery hero vert partial --}}
+    {{#if galleryHeroVert}}
     {{> galleries/gallery-hero-vert 
-    images=galleryHeroVertImages 
-    padding=galleryHeroVertPadding 
-    width=galleryHeroVertWidth 
-    height=galleryHeroVertHeight}}
+        images=galleryHeroVert.images 
+        padding=galleryHeroVert.padding 
+        width=galleryHeroVert.width 
+        height=galleryHeroVert.height}}
+    {{/if}}
     
     <div id="portfolio-page">
 
@@ -14,15 +16,19 @@
             <div class="portfolio-page">
     
                 {{!-- Type intro partial --}}
+                {{#if typeIntro}}
                 {{> sections/type-intro 
                     title=typeIntro.title 
                     description=typeIntro.description 
                     leftPadding=typeIntro.leftPadding 
                     width=typeIntro.width 
                     height=typeIntro.height}}
+                {{/if}}
 
                 {{!-- Gallery grid partial --}}
-                {{> galleries/gallery-grid images=galleryGridImages}}
+                {{#if galleryGrid}}
+                {{> galleries/gallery-grid images=galleryGrid.images}}
+                {{/if}}
                 
             </div>
 
@@ -32,10 +38,11 @@
     {{!-- Vertical separator --}}
     <div class="vertical-separator"></div>
 
-    {{!-- Gallery banner partial --}}
+    {{#if galleryBanner}}
     {{> galleries/gallery-banner 
-    images=galleryBannerImages  
-    photoEdgeLength=galleryBannerPhotoEdgeLength 
-    barHeight=galleryBannerBarHeight}}
+        images=galleryBanner.images 
+        photoEdgeLength=galleryBanner.photoEdgeLength 
+        barHeight=galleryBanner.barHeight}}
+    {{/if}}
       
 </div>

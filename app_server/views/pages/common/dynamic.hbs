@@ -18,6 +18,11 @@
         height=typeIntro.height}}
     {{/if}}
 
+    {{!-- Gallery grid partial --}}
+    {{#if galleryGrid}}
+    {{> galleries/gallery-grid images=galleryGrid.images}}
+    {{/if}}
+
     {{!-- Repeater menu partial --}}
     {{#if repeaterMenu}}
     {{> sections/repeater-menu 
@@ -37,8 +42,4 @@
         barHeight=galleryBanner.barHeight}}
     {{/if}}
 
-    {{!-- Gallery grid partial --}}
-    {{#if galleryGrid}}
-    {{> galleries/gallery-grid images=galleryGrid.images}}
-    {{/if}}
 </div>

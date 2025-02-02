@@ -1,6 +1,6 @@
 const pageService = require('../services/pageService');
 
-const landingPageIdentifier = 'personal-photography-page'; // Select page file
+const landingPageIdentifier = 'personal-photography-page'; // Set Page
 
 /* GET landing page */
 const landingPage = async function(req, res, next) {
@@ -11,28 +11,7 @@ const landingPage = async function(req, res, next) {
             return res.status(404).render('pages/common/error', { message: 'Page not found', error: { status: 404 } });
         }
 
-        const components = page.components.reduce((acc, component) => {
-            switch (component.kind) {
-                case 'GalleryHeroVert':
-                    acc.galleryHeroVert = component;
-                    break;
-                case 'TypeIntro':
-                    acc.typeIntro = component;
-                    break;
-                case 'RepeaterMenu':
-                    acc.repeaterMenu = component;
-                    break;
-                case 'GalleryBanner':
-                    acc.galleryBanner = component;
-                    break;
-                case 'GalleryGrid':
-                    acc.galleryGrid = component;
-                    break;
-                default:
-                    break;
-            }
-            return acc;
-        }, {});
+        const components = pageService.processPageComponents(page);
 
         res.render('pages/common/landing', {
             layout: 'layout-landing',

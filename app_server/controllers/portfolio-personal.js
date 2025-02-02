@@ -1,59 +1,27 @@
-const galleryHeroVertEndpoint = 'http://localhost:3000/api/gallery-hero-vert';
-const typeIntroEndpoint = 'http://localhost:3000/api/type-intro';
-const galleryGridEndpoint = 'http://localhost:3000/api/gallery-grid';
-const galleryBannerEndpoint = 'http://localhost:3000/api/gallery-banner';
-const options = {
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-    }
-};
+const pageService = require('../services/pageService');
 
-/* GET portfolio view */
+const personalPageIdentifier = 'personal-photography-page'; // Set page
+
+/* GET personal portfolio page */
 const portfolioPersonal = async function(req, res, next) {
     try {
-        const [galleryHeroVertResponse, typeIntroResponse, galleryGridResponse, galleryBannerResponse] = await Promise.all([
-            fetch(galleryHeroVertEndpoint, options),
-            fetch(typeIntroEndpoint, options),
-            fetch(galleryGridEndpoint, options),
-            fetch(galleryBannerEndpoint, options)
-        ]);
+        const page = await pageService.getPageData(personalPageIdentifier);
 
-        const galleryHeroVerts = await galleryHeroVertResponse.json();
-        const typeIntros = await typeIntroResponse.json();
-        const galleryGrids = await galleryGridResponse.json();
-        const galleryBanners = await galleryBannerResponse.json();
+        if (!page) {
+            return res.status(404).render('pages/common/error', { message: 'Page not found', error: { status: 404 } });
+        }
 
-        const galleryHeroVertData = galleryHeroVerts[0]; // Assuming you want the first gallery hero vert
-        const typeIntroData = typeIntros[0]; // Assuming you want the first type intro
-        const galleryGridData = galleryGrids[0]; // Assuming you want the first gallery grid
-        const galleryBannerData = galleryBanners[0]; // Assuming you want the first gallery banner
-
-        let message = null; // Initialize the message variable
+        const components = pageService.processPageComponents(page);
 
         res.render('pages/portfolio/personal', {
             layout: 'layout-portfolio',
-            title: 'Personal Photography',
-            galleryHeroVertImages: galleryHeroVertData.images,
-            galleryHeroVertPadding: galleryHeroVertData.padding,
-            galleryHeroVertWidth: galleryHeroVertData.width,
-            galleryHeroVertHeight: galleryHeroVertData.height,
-            typeIntro: {
-                title: typeIntroData.title,
-                description: typeIntroData.description,
-                leftPadding: typeIntroData.leftPadding,
-                width: typeIntroData.width,
-                height: typeIntroData.height
-            },
-            galleryGridImages: galleryGridData.images,
-            galleryBannerImages: galleryBannerData.images,
-            galleryBannerPhotoEdgeLength: galleryBannerData.photoEdgeLength,
-            galleryBannerBarHeight: galleryBannerData.barHeight,
-            message // Pass the message variable to the view
+            title: page.title,
+            description: page.description,
+            ...components
         });
     } catch (err) {
-        console.error('Portfolio Error:', err);
-        res.status(500).send(err.message);
+        console.error('Portfolio Personal Page Error:', err);
+        res.status(500).render('pages/common/error', { message: 'Internal Server Error', error: { status: 500 } });
     }
 };
 
