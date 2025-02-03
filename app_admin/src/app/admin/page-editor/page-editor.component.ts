@@ -79,11 +79,15 @@ export class PageEditorComponent implements OnInit {
 
   onSubmit(): void {
     if (this.pageForm.valid) {
+      const formValue = this.pageForm.value;
       const updatedPage = {
-        ...this.pageForm.value,
-        components: this.pageForm.value.components.map((component: any) => component.data)
+        ...formValue,
+        components: formValue.components.map((component: any) => ({
+          kind: component.kind, 
+          data: component.data 
+        }))
       };
-
+  
       this.apiService.updatePageByIdentifier(`page-${this.pageId}`, updatedPage).subscribe({
         next: () => {
           console.log('Page updated successfully');
