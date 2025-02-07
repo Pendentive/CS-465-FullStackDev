@@ -1,12 +1,19 @@
-import { Routes } from '@angular/router';
-import { AddTripComponent } from './add-trip/add-trip.component';
-import { TripListingComponent } from './trip-listing/trip-listing.component';
-import { EditTripComponent } from './edit-trip/edit-trip.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { PageEditorComponent } from './admin/page-editor/page-editor.component';
 import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
-    { path: 'add-trip', component: AddTripComponent },
-    { path: 'edit-trip', component: EditTripComponent },
-    { path: 'login', component: LoginComponent },
-    { path: '', component: TripListingComponent, pathMatch: 'full' }
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: DashboardComponent, children: [
+    { path: 'pages/:id', component: PageEditorComponent }
+  ]},
+  { path: '', redirectTo: '/admin', pathMatch: 'full' }
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

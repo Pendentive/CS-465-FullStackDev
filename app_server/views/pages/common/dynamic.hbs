@@ -1,0 +1,45 @@
+<div class="landing-page">
+    {{!-- Gallery hero vert partial --}}
+    {{#if galleryHeroVert}}
+    {{> galleries/gallery-hero-vert 
+        images=galleryHeroVert.images 
+        padding=galleryHeroVert.padding 
+        width=galleryHeroVert.width 
+        height=galleryHeroVert.height}}
+    {{/if}}
+
+    {{!-- Type intro partial --}}
+    {{#if typeIntro}}
+    {{> sections/type-intro 
+        title=typeIntro.title 
+        description=typeIntro.description 
+        leftPadding=typeIntro.leftPadding 
+        width=typeIntro.width 
+        height=typeIntro.height}}
+    {{/if}}
+
+    {{!-- Gallery grid partial --}}
+    {{#if galleryGrid}}
+    {{> galleries/gallery-grid images=galleryGrid.images}}
+    {{/if}}
+
+    {{!-- Repeater menu partial --}}
+    {{#if repeaterMenu}}
+    {{> sections/repeater-menu 
+        menuCards=repeaterMenu.menuCards 
+        photoHeight=repeaterMenu.photoHeight 
+        photoWidth=repeaterMenu.photoWidth 
+        photoPaddingX=repeaterMenu.photoPaddingX 
+        photoPaddingY=repeaterMenu.photoPaddingY 
+        menuCardPaddingX=repeaterMenu.menuCardPaddingX}}
+    {{/if}}
+
+    {{!-- Gallery banner partial --}}
+    {{#if galleryBanner}}
+    {{> galleries/gallery-banner 
+        images=galleryBanner.images 
+        photoEdgeLength=galleryBanner.photoEdgeLength 
+        barHeight=galleryBanner.barHeight}}
+    {{/if}}
+
+</div>

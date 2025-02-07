@@ -1,0 +1,13 @@
+<div class="repeater-menu" style="padding: 0 {{menuCardPaddingX}}px;">
+    {{#each menuCards}}
+    {{> sections/menu-card 
+        title=this.title 
+        image=this.image 
+        route=this.route 
+        photoHeight=../photoHeight 
+        photoWidth=../photoWidth 
+        photoPaddingX=../photoPaddingX 
+        photoPaddingY=../photoPaddingY
+        buttonTitle=this.buttonTitle}}
+    {{/each}}
+</div>

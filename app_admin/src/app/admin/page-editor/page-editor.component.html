@@ -1,0 +1,26 @@
+<div class="page-editor">
+    <h2>Edit Page</h2>
+    <form [formGroup]="pageForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" formControlName="title" class="form-control" />
+        </div>
+        <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+        </div>
+        <div formArrayName="components">
+            <div *ngFor="let component of components.controls; let i = index" [formGroupName]="i">
+                <ng-container [ngSwitch]="component.get('kind')?.value">
+                    <ng-container *ngIf="component.get('data')">
+                        <app-edit-text-intro
+                            *ngSwitchCase="'TypeIntro'"
+                            [formGroup]="asFormGroup(component.get('data'))">
+                        </app-edit-text-intro>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>

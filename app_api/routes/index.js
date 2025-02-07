@@ -44,8 +44,14 @@ function authenticateJWT(req, res, next) {
 }
 
 // Import controllers for routing
-const tripsController = require('../controllers/trips');
 const authController = require('../controllers/authentication');
+const imagesController = require('../controllers/images');
+const galleryGridController = require('../controllers/gallery-grid');
+const galleryHeroVertController = require('../controllers/gallery-hero-vert');
+const typeIntroController = require('../controllers/type-intro');
+const galleryBannerController = require('../controllers/gallery-banner');
+const repeaterMenuController = require('../controllers/repeater-menu');
+const pageController = require('../controllers/page');
 
 // POST method route login
 router
@@ -57,19 +63,81 @@ router
     .route('/register')
     .post(authController.register);
 
-// Define route for trips endpoint
+// Define routes for images endpoint
 router
-    .route('/trips')
-    .get(tripsController.tripsList) // GET Method routes tripList
-    .post(authenticateJWT, tripsController.tripsAddTrip);    // POST Method Adds a Trip
+    .route('/images')
+    .get(imagesController.getAllImages);
 
-// GET Method routes tripFindByCode - requires parameter
-// PUT Method routes tripUpdateTrip - requires parameter
-// DELETE Method routes tripDeleteTrip - requires parameter
 router
-    .route('/trips/:tripCode')
-    .get(tripsController.tripsFindByCode)
-    .put(authenticateJWT, tripsController.tripsUpdateTrip)
-    .delete(authenticateJWT, tripsController.tripsDeleteTrip);
+    .route('/images/:id')
+    .get(imagesController.getImageById);
+
+// Define routes for gallery-grid endpoint
+router
+    .route('/gallery-grid')
+    .get(galleryGridController.getAllGalleryGrid);
+
+router
+    .route('/gallery-grid/:id')
+    .get(galleryGridController.getGalleryGridById);
+
+// Define routes for gallery-hero-vert endpoint
+router
+    .route('/gallery-hero-vert')
+    .get(galleryHeroVertController.getAllGalleryHeroVert);
+
+router
+    .route('/gallery-hero-vert/:id')
+    .get(galleryHeroVertController.getGalleryHeroVertById);
+
+// Define routes for type-intro endpoint
+router
+    .route('/type-intro')
+    .get(typeIntroController.getAllTypeIntro);
+
+router
+    .route('/type-intro/:id')
+    .get(typeIntroController.getTypeIntroById)
+    .put(authenticateJWT, typeIntroController.updateTypeIntro);
+
+// Define routes for gallery-banner endpoint
+router
+    .route('/gallery-banner')
+    .get(galleryBannerController.getAllGalleryBanner);
+
+router
+    .route('/gallery-banner/:id')
+    .get(galleryBannerController.getGalleryBannerById);
+
+// Define routes for repeater-menu endpoint
+router
+    .route('/repeater-menu')
+    .get(repeaterMenuController.getAllRepeaterMenu);
+
+router
+    .route('/repeater-menu/:id')
+    .get(repeaterMenuController.getRepeaterMenuById);
+
+// Define routes for page endpoint
+router
+    .route('/pages')
+    .get(pageController.getAllPages)
+    .post(authenticateJWT, pageController.createPage);
+
+router
+    .route('/pages/:id')
+    .get(pageController.getPageById)
+    .put(authenticateJWT, pageController.updatePage)
+    .delete(authenticateJWT, pageController.deletePage);
+
+router
+    .route('/pages/identifier/:identifier')
+    .get(pageController.getPageByIdentifier)
+    .put(authenticateJWT, pageController.updatePageByIdentifier);
+
+// Define routes for updating a specific component
+router
+    .route('/components/:componentType/:componentId')
+    .put(authenticateJWT, pageController.updateComponent);
 
 module.exports = router;

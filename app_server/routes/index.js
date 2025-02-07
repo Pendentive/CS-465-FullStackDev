@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
-//const ctrlMain = require('../controllers/main');
-const ctrlTravel = require('../controllers/travel');
+const express = require('express');
+const router = express.Router();
+const landingPageController = require('../controllers/landing-page');
 
-/* GET home page. */
-router.get('/', ctrlTravel.travel);
+/* GET home page */
+router.get('/', landingPageController.landingPage);
 
 module.exports = router;

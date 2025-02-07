@@ -4,18 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var exphbs = require('express-handlebars');
-//var handlebars = require('hbs');
 var passport = require('passport');
 
 // Define routers
 var indexRouter = require('./app_server/routes/index');
-var usersRouter = require('./app_server/routes/users');
-var travelRouter = require('./app_server/routes/travel');
-var adminRouter = require('./app_server/routes/admin');
-var checkoutRouter = require('./app_server/routes/checkout');
-var newsRouter = require('./app_server/routes/news');
-var reservationsRouter = require('./app_server/routes/reservations'); 
 var apiRouter = require('./app_api/routes/index');
+var portfolioPersonalRouter = require('./app_server/routes/portfolio-personal');
 
 var app = express();
 
@@ -23,7 +17,7 @@ var app = express();
 require('dotenv').config();
 
 // Bring in the database
-require('./app_api/models/db');
+require('./app_api/config/db');
 require('./app_api/config/passport'); // authentication for db and user
 
 /// View engine setup
@@ -31,7 +25,7 @@ app.engine(
   'hbs',
   exphbs.engine({
     extname: '.hbs',
-    defaultLayout: 'layout', // Specify the default layout
+    defaultLayout: 'layout-portfolio', // Specify the default layout
     layoutsDir: path.join(__dirname, 'app_server', 'views', 'layouts'),
     partialsDir: path.join(__dirname, 'app_server', 'views', 'partials'),
   })
@@ -58,13 +52,8 @@ app.use('/api', (req, res, next) => {
 
 // Wire routes to controllers
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/travel', travelRouter);
-app.use('/admin', adminRouter);
-app.use('/checkout', checkoutRouter);
-app.use('/news', newsRouter);
-app.use('/reservations', reservationsRouter);
 app.use('/api', apiRouter);
+app.use('/personal', portfolioPersonalRouter);
 
 // catch unauthorized error and create 401
 app.use((err, req, next) => {
@@ -88,7 +77,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('pages/common/error');
 });
 
 module.exports = app;
