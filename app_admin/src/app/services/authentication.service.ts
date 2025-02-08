@@ -17,11 +17,11 @@ export class AuthenticationService {
   ) { }
 
   public getToken(): string {
-    return this.storage.getItem('travlr-token') ?? '';
+    return this.storage.getItem('mean-token') ?? '';
   }
 
   public saveToken(token: string): void {
-    this.storage.setItem('travlr-token', token);
+    this.storage.setItem('mean-token', token);
   }
 
   public login(user: User, passwd: string): Observable<AuthResponse> {
@@ -41,7 +41,7 @@ export class AuthenticationService {
   }
 
   public logout(): void {
-    this.storage.removeItem('travlr-token');
+    this.storage.removeItem('mean-token');
   }
 
   public isLoggedIn(): boolean {

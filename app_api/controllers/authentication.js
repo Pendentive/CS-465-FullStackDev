@@ -1,70 +1,95 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
-const register = async(req, res) => {
-    // Validate message to insure that all parameters are present
-    if (!req.body.name || !req.body.email || !req.body.password) {
-        return res
-            .status(400)
-            .json({"message": "All fields required"});
-    }
-
-    const user = new User( {
-
-        name: req.body.name,                // Set Username
-        email: req.body.email,              // Set email address
-        password: ''                        // Start with empty password
-        });
-    user.setPassword(req.body.password);    // Set user password 
-    const q = await user.save();
-
-    if (!q) {
-        // DB returned no data 
-        return res
-            .status(400)
-            .json(err);
-    }
-    else {
-        // Return new user token
-        const token = user.generateJwt();
-        return res 
-            .status(200)
-            .json(token);
-    }
+const sendJSONresponse = (res, status, content) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.status(status);
+  res.json(content);
 };
 
-const login = (req, res) => {
-    // Validate message to ensure that email and password are present
-    if (!req.body.email || !req.body.password) {
-        return res
-            .status(400)
-            .json({"message": "All fields required"});
-    }
+module.exports.register = (req, res) => {
+  if (!req.body.name || !req.body.email || !req.body.password) {
+    sendJSONresponse(res, 400, {
+      "message": "All fields required"
+    });
+    return;
+  }
 
-    // Delegate authentication to passport module
-    passport.authenticate('local', (err, user, info) => {
-        if (err) {
-            // Error in Authentication Process
-            return res 
-                .status(404)
-                .json(err);
-        }
-        if (user) {
-            const token = user.generateJwt();
-            res
-                .status(200)
-                .json({token});
-        }
-        else { // Auth failed return error
-            res
-                .status(401)
-                .json(info);
-        }
-    }) (req, res);
+  const user = new User();
+
+  user.name = req.body.name;
+  user.email = req.body.email;
+
+  user.setPassword(req.body.password);
+
+  user.save(err => {
+    if (err) {
+      sendJSONresponse(res, 404, err);
+    } else {
+      const token = user.generateJwt();
+      sendJSONresponse(res, 200, { "token": token });
+    }
+  });
 };
 
-module.exports = {
-    register,
-    login
+module.exports.login = (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    sendJSONresponse(res, 400, {
+      "message": "All fields required"
+    });
+    return;
+  }
+
+  passport.authenticate('local', (err, user, info) => {
+    let token;
+
+    if (err) {
+      sendJSONresponse(res, 404, err);
+      return;
+    }
+
+    if (user) {
+      token = user.generateJwt();
+      sendJSONresponse(res, 200, { "token": token });
+    } else {
+      sendJSONresponse(res, 401, info);
+    }
+  })(req, res);
+};
+
+module.exports.getServiceToken = async (req, res) => {
+  const serviceAccountEmail = process.env.EXPRESS_FRONTEND_EMAIL;
+  const serviceAccountPassword = process.env.EXPRESS_FRONTEND_PASSWORD;
+
+  if (!req.body.email || !req.body.password) {
+    sendJSONresponse(res, 400, {
+      "message": "All fields required"
+    });
+    return;
+  }
+
+  if (req.body.email === serviceAccountEmail && req.body.password === serviceAccountPassword) {
+    try {
+      // Find the service account user
+      const user = await User.findOne({ email: serviceAccountEmail });
+
+      if (!user) {
+        sendJSONresponse(res, 404, { "message": "Service account not found" });
+        return;
+      }
+
+      // Generate a JWT token for the service account
+      const token = user.generateJwt();
+      sendJSONresponse(res, 200, { "token": token });
+    } catch (err) {
+      console.error('Error finding service account:', err);
+      sendJSONresponse(res, 500, { "message": "Error finding service account" });
+    }
+  } else {
+    sendJSONresponse(res, 401, { "message": "Invalid credentials" });
+  }
 };

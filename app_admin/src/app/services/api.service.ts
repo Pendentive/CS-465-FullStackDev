@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Page } from '../interfaces/page';
 import { GalleryHeroVert } from '../interfaces/gallery-hero-vert';
@@ -15,7 +15,7 @@ import { AuthResponse } from '../interfaces/authresponse';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = '/api';  // Your API base URL
 
   constructor(private http: HttpClient) { }
 
@@ -34,64 +34,89 @@ export class ApiService {
       email: user.email,
       password: passwd
     };
-    return this.http.post<AuthResponse>(`${this.apiUrl}/${endpoint}`, formData);
+    return this.post<AuthResponse>(endpoint, formData);
   }
 
   // Data fetching methods
   getGalleryHeroVerts(): Observable<GalleryHeroVert[]> {
-    return this.http.get<GalleryHeroVert[]>(`${this.apiUrl}/gallery-hero-vert`);
+    return this.get<GalleryHeroVert[]>('gallery-hero-vert');
   }
 
   getTypeIntros(): Observable<TypeIntro[]> {
-    return this.http.get<TypeIntro[]>(`${this.apiUrl}/type-intro`);
+    return this.get<TypeIntro[]>('type-intro');
   }
 
   getGalleryGrids(): Observable<GalleryGrid[]> {
-    return this.http.get<GalleryGrid[]>(`${this.apiUrl}/gallery-grid`);
+    return this.get<GalleryGrid[]>('gallery-grid');
   }
 
   getGalleryBanners(): Observable<GalleryBanner[]> {
-    return this.http.get<GalleryBanner[]>(`${this.apiUrl}/gallery-banner`);
+    return this.get<GalleryBanner[]>('gallery-banner');
   }
 
   getRepeaterMenus(): Observable<RepeaterMenu[]> {
-    return this.http.get<RepeaterMenu[]>(`${this.apiUrl}/repeater-menu`);
+    return this.get<RepeaterMenu[]>('repeater-menu');
   }
 
   getImages(): Observable<Image[]> {
-    return this.http.get<Image[]>(`${this.apiUrl}/images`);
+    return this.get<Image[]>('images');
   }
 
   // Page fetching methods
   getPages(): Observable<Page[]> {
-    return this.http.get<Page[]>(`${this.apiUrl}/pages`);
+    return this.get<Page[]>('pages');
   }
 
   getPage(id: string): Observable<Page> {
-    return this.http.get<Page>(`${this.apiUrl}/pages/${id}`);
+    return this.get<Page>(`pages/${id}`);
   }
 
   getPageByIdentifier(identifier: string): Observable<Page> {
-    return this.http.get<Page>(`${this.apiUrl}/pages/identifier/${identifier}`);
+    return this.get<Page>(`pages/identifier/${identifier}`);
   }
 
   createPage(page: Page): Observable<Page> {
-    return this.http.post<Page>(`${this.apiUrl}/pages`, page);
+    return this.post<Page>('pages', page);
   }
 
   updatePage(id: string, page: Page): Observable<Page> {
-    return this.http.put<Page>(`${this.apiUrl}/pages/${id}`, page);
+    return this.put<Page>(`pages/${id}`, page);
   }
 
   updatePageByIdentifier(identifier: string, page: Page): Observable<Page> {
-    return this.http.put<Page>(`${this.apiUrl}/pages/identifier/${identifier}`, page);
+    return this.put<Page>(`pages/identifier/${identifier}`, page);
   }
 
   updateComponent(componentType: string, componentId: string, component: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/components/${componentType}/${componentId}`, component);
+    return this.put<any>(`components/${componentType}/${componentId}`, component);
   }
 
   deletePage(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/pages/${id}`);
+    return this.delete<void>(`pages/${id}`);
+  }
+
+  get<T>(endpoint: string): Observable<T> {
+    return this.http.get<T>(`${this.apiUrl}/${endpoint}`, this.getHeaders());
+  }
+
+  post<T>(endpoint: string, data: any): Observable<T> {
+    return this.http.post<T>(`${this.apiUrl}/${endpoint}`, data, this.getHeaders());
+  }
+
+  put<T>(endpoint: string, data: any): Observable<T> {
+    return this.http.put<T>(`${this.apiUrl}/${endpoint}`, data, this.getHeaders());
+  }
+
+  delete<T>(endpoint: string): Observable<T> {
+    return this.http.delete<T>(`${this.apiUrl}/${endpoint}`, this.getHeaders());
+  }
+
+  private getHeaders(): { headers: HttpHeaders } {
+    const token = localStorage.getItem('mean-token'); // Or however you store your token
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return { headers: headers };
   }
 }

@@ -1,43 +1,43 @@
-const apiUrl = 'http://localhost:3000/api/pages';
+const axios = require('axios');
+
+const apiUrl = 'http://localhost:3000/api';
+
+const getAuthHeader = () => {
+    // Logic to retrieve the token from cookies or local storage
+    const token = process.env.EXPRESS_FRONTEND_TOKEN;
+    return token ? `Bearer ${token}` : null;
+};
 
 const getPageData = async (identifier) => {
+    const authHeader = getAuthHeader();
+    const config = authHeader ? { headers: { 'Authorization': authHeader } } : {};
+
     try {
-        const response = await fetch(`${apiUrl}/identifier/${identifier}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch page data');
-        }
-        const page = await response.json();
-        return page;
-    } catch (err) {
-        console.error('Error fetching page data:', err);
-        throw err;
+        const response = await axios.get(`${apiUrl}/pages/identifier/${identifier}`, config);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching page data:', error);
+        throw error;
     }
 };
 
-const processPageComponents = (page) => {
-    const components = page.components.reduce((acc, component) => {
-        switch (component.kind) {
-            case 'GalleryHeroVert':
-                acc.galleryHeroVert = component;
-                break;
-            case 'TypeIntro':
-                acc.typeIntro = component;
-                break;
-            case 'RepeaterMenu':
-                acc.repeaterMenu = component;
-                break;
-            case 'GalleryBanner':
-                acc.galleryBanner = component;
-                break;
-            case 'GalleryGrid':
-                acc.galleryGrid = component;
-                break;
-            default:
-                break;
+const processPageComponents = async (page) => {
+    const componentsData = {};
+
+    for (let i = 0; i < page.components.length; i++) {
+        const component = page.components[i];
+        const authHeader = getAuthHeader();
+        const config = authHeader ? { headers: { 'Authorization': authHeader } } : {};
+
+        try {
+            const response = await axios.get(`${apiUrl}/components/${component.kind}/${component._id}`, config);
+            componentsData[component.kind] = response.data;
+        } catch (error) {
+            componentsData[component.kind] = null; // or handle the error as needed
         }
-        return acc;
-    }, {});
-    return components;
+    }
+
+    return componentsData;
 };
 
 module.exports = {

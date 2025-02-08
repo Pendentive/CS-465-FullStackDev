@@ -56,7 +56,7 @@ const getPageByIdentifier = async (req, res) => {
             path: 'components',
             populate: {
                 path: 'images menuCards.image',
-                model: 'Image'
+                model: 'Image',
             }
         };
     } else {
@@ -72,6 +72,7 @@ const getPageByIdentifier = async (req, res) => {
 
     try {
         const page = await Page.findOne({ identifier: req.params.identifier }).populate(populateOptions);
+        console.log('Populated page data:', page); // Add this line
         if (!page) {
             return res.status(404).json({ message: 'Page not found' });
         }
@@ -95,65 +96,44 @@ const createPage = async (req, res) => {
 // UPDATE a page
 const updatePage = async (req, res) => {
     try {
-        const page = await Page.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!page) {
-            return res.status(404).json({ message: 'Page not found' });
-        }
-        res.status(200).json(page);
+        const updatedPage = await Page.updateOne({ identifier: req.params.identifier }, req.body);
+        res.status(200).json(updatedPage);
     } catch (err) {
-        console.error('Error updating page:', err); // Add this line to log the error
-        res.status(400).json({ message: err.message });
-    }
-};
-
-// UPDATE a page by identifier
-const updatePageByIdentifier = async (req, res) => {
-    try {
-        const page = await Page.findOneAndUpdate({ identifier: req.params.identifier }, req.body, { new: true });
-        if (!page) {
-            return res.status(404).json({ message: 'Page not found' });
-        }
-        res.status(200).json(page);
-    } catch (err) {
-        console.error('Error updating page by identifier:', err); 
-        res.status(400).json({ message: err.message });
-    }
-};
-
-// UPDATE a specific component
-const updateComponent = async (req, res) => {
-    const { componentId, componentType } = req.params;
-    let ComponentModel;
-
-    switch (componentType) {
-        case 'TypeIntro':
-            ComponentModel = TypeIntro;
-            break;
-        // Add other component types here
-        default:
-            return res.status(400).json({ message: 'Invalid component type' });
-    }
-
-    try {
-        const component = await ComponentModel.findByIdAndUpdate(componentId, req.body, { new: true });
-        if (!component) {
-            return res.status(404).json({ message: 'Component not found' });
-        }
-        res.status(200).json(component);
-    } catch (err) {
-        console.error('Error updating component:', err);
-        res.status(400).json({ message: err.message });
+        res.status(500).json({ message: err.message });
     }
 };
 
 // DELETE a page
 const deletePage = async (req, res) => {
     try {
-        const page = await Page.findByIdAndDelete(req.params.id);
-        if (!page) {
-            return res.status(404).json({ message: 'Page not found' });
+        await Page.deleteOne({ identifier: req.params.identifier });
+        res.status(200).json({ message: 'Page deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+// UPDATE a specific component
+const updateComponent = async (req, res) => {
+    const { componentType, componentId } = req.params;
+
+    try {
+        let component;
+
+        switch (componentType) {
+            case 'TypeIntro':
+                component = await TypeIntro.findByIdAndUpdate(componentId, req.body, { new: true });
+                break;
+            // Add cases for other component types as needed
+            default:
+                return res.status(400).json({ message: 'Invalid component type' });
         }
-        res.status(200).json({ message: 'Page deleted' });
+
+        if (!component) {
+            return res.status(404).json({ message: 'Component not found' });
+        }
+
+        res.status(200).json(component);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -165,7 +145,6 @@ module.exports = {
     getPageByIdentifier,
     createPage,
     updatePage,
-    updatePageByIdentifier,
-    updateComponent,
-    deletePage
+    deletePage,
+    updateComponent
 };

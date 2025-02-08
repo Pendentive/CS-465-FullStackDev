@@ -34,7 +34,7 @@ export class PageEditorComponent implements OnInit {
     });
 
     if (this.pageId) {
-      this.apiService.getPageByIdentifier(`page-${this.pageId}`).subscribe((page: Page) => {
+      this.apiService.get<Page>(`pages/identifier/${this.pageId}`).subscribe((page: Page) => {
         this.pageData = page;
         this.pageForm.patchValue({
           title: page.title,
@@ -83,12 +83,12 @@ export class PageEditorComponent implements OnInit {
       const updatedPage = {
         ...formValue,
         components: formValue.components.map((component: any) => ({
-          kind: component.kind, 
-          data: component.data 
+          kind: component.kind,
+          data: component.data
         }))
       };
-  
-      this.apiService.updatePageByIdentifier(`page-${this.pageId}`, updatedPage).subscribe({
+
+      this.apiService.updatePageByIdentifier(`pages/identifier/page-${this.pageId}`, updatedPage).subscribe({
         next: () => {
           console.log('Page updated successfully');
           this.router.navigate(['/admin']);

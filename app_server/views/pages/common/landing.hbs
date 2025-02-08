@@ -1,12 +1,12 @@
 <div id="landing-background">
 
     {{!-- Gallery hero vert partial --}}
-    {{#if galleryHeroVert}}
+    {{#if components.GalleryHeroVert}}
     {{> galleries/gallery-hero-vert 
-        images=galleryHeroVert.images 
-        padding=galleryHeroVert.padding 
-        width=galleryHeroVert.width 
-        height=galleryHeroVert.height}}
+        images=components.GalleryHeroVert.images 
+        padding=components.GalleryHeroVert.padding 
+        width=components.GalleryHeroVert.width 
+        height=components.GalleryHeroVert.height}}
     {{/if}}
 
     <div id="landing-page">
@@ -16,24 +16,24 @@
             <div class="landing-page">
                 
                 {{!-- Type intro partial --}}
-                {{#if typeIntro}}
+                {{#if components.TypeIntro}}
                 {{> sections/type-intro 
-                    title=typeIntro.title 
-                    description=typeIntro.description 
-                    leftPadding=typeIntro.leftPadding 
-                    width=typeIntro.width 
-                    height=typeIntro.height}}
+                    title=components.TypeIntro.title 
+                    description=components.TypeIntro.description 
+                    leftPadding=components.TypeIntro.leftPadding 
+                    width=components.TypeIntro.width 
+                    height=components.TypeIntro.height}}
                 {{/if}}
 
                 {{!-- Repeater menu partial --}}
-                {{#if repeaterMenu}}
+                {{#if components.RepeaterMenu}}
                 {{> sections/repeater-menu 
-                    menuCards=repeaterMenu.menuCards 
-                    photoHeight=repeaterMenu.photoHeight 
-                    photoWidth=repeaterMenu.photoWidth 
-                    photoPaddingX=repeaterMenu.photoPaddingX 
-                    photoPaddingY=repeaterMenu.photoPaddingY 
-                    menuCardPaddingX=repeaterMenu.menuCardPaddingX}}
+                    menuCards=components.RepeaterMenu.menuCards 
+                    photoHeight=components.RepeaterMenu.photoHeight 
+                    photoWidth=components.RepeaterMenu.photoWidth 
+                    photoPaddingX=components.RepeaterMenu.photoPaddingX 
+                    photoPaddingY=components.RepeaterMenu.photoPaddingY 
+                    menuCardPaddingX=components.RepeaterMenu.menuCardPaddingX}}
                 {{/if}}
 
             </div>
@@ -45,11 +45,11 @@
     <div class="vertical-separator"></div>
 
     {{!-- Gallery banner partial --}}
-    {{#if galleryBanner}}
+    {{#if components.GalleryBanner}}
     {{> galleries/gallery-banner 
-        images=galleryBanner.images 
-        photoEdgeLength=galleryBanner.photoEdgeLength 
-        barHeight=galleryBanner.barHeight}}
+        images=components.GalleryBanner.images 
+        photoEdgeLength=components.GalleryBanner.photoEdgeLength 
+        barHeight=components.GalleryBanner.barHeight}}
     {{/if}}
 
 

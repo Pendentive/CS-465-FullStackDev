@@ -38,8 +38,7 @@ userSchema.methods.generateJwt = function() {
         email: this.email,
         name: this.name,
     }
-    , process.env.JWT_SECRET,   // SECRET stored in .env file
-    { expiresIn: '1h'}); // Token expires an hour from creation
+    , process.env.JWT_SECRET);   // SECRET stored in .env file
 };
 
 const User = mongoose.model('users', userSchema);
