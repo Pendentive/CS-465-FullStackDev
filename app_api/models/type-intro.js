@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const BaseModel = require('./base');
 
 const typeIntroSchema = new mongoose.Schema({
-    title: { 
-        type: String, 
-        required: true 
-    },
-    description: String,
     leftPadding: {
         type: Number,
         required: true,
