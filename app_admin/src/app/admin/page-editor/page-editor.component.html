@@ -17,10 +17,12 @@
                             *ngSwitchCase="'TypeIntro'"
                             [formGroup]="asFormGroup(component.get('data'))">
                         </app-edit-text-intro>
+                        <!-- Add cases for other component types -->
                     </ng-container>
                 </ng-container>
             </div>
         </div>
+
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>

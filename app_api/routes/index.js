@@ -139,7 +139,8 @@ router
 router.route('/components/:componentType')
     .get(componentController.getAllComponents); 
 
-router.route('/components/:componentType/:id')
+router
+    .route('/components/:componentType/:id')
     .get(componentController.getComponentById) 
     .put(authenticateJWT, pageController.updateComponent); 
 

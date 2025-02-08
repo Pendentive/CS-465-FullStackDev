@@ -1,4 +1,3 @@
-// app_api/controllers/component.js
 const GalleryHeroVert = require('../models/gallery-hero-vert');
 const TypeIntro = require('../models/type-intro');
 const GalleryGrid = require('../models/gallery-grid');
