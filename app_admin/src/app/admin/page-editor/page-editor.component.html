@@ -1,6 +1,6 @@
 <div class="page-editor">
     <h2>Edit Page</h2>
-    <form [formGroup]="pageForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="pageForm">
         <div class="form-group">
         <label for="title">Title</label>
         <input id="title" formControlName="title" class="form-control" />
@@ -15,14 +15,13 @@
                     <ng-container *ngIf="component.get('data')">
                         <app-edit-text-intro
                             *ngSwitchCase="'TypeIntro'"
-                            [formGroup]="asFormGroup(component.get('data'))">
+                            [formGroup]="asFormGroup(component.get('data'))"
+                            [componentId]="component.get('data')?.get('_id')?.value">
                         </app-edit-text-intro>
                         <!-- Add cases for other component types -->
                     </ng-container>
                 </ng-container>
             </div>
         </div>
-
-        <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>

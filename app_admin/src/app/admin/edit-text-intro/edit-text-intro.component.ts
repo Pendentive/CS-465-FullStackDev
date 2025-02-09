@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ComponentService } from '../../services/component.service';
 
 @Component({
   selector: 'app-edit-text-intro',
@@ -10,10 +11,25 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./edit-text-intro.component.css']
 })
 export class EditTextIntroComponent implements OnInit {
-  // Explicitly declare the input property as public.
-  @Input() public formGroup!: FormGroup;
+  @Input() formGroup!: FormGroup;   // WAS PUBLIC
+  @Input() componentId!: string;
 
-  constructor() {}
+  constructor(private componentService: ComponentService) {}
 
   ngOnInit(): void {}
+
+  onSubmit(): void {
+    if (this.formGroup.valid) {  
+      this.componentService.updateTypeIntro(this.componentId, this.formGroup.value).subscribe({
+        next: () => {
+          console.log('TypeIntro component updated successfully');
+        },
+        error: (error) => {
+          console.error('Error updating TypeIntro component:', error);
+        }
+      });
+    }
+  }
 }
+
+// TODO: SOMETHING IS CITED ON PAGE

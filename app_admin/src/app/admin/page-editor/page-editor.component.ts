@@ -78,29 +78,4 @@ export class PageEditorComponent implements OnInit {
       }
     });
   }
-
-  onSubmit(): void {
-    if (this.pageForm.valid) {
-      const formValue = this.pageForm.value;
-      const updatedPage = {
-        ...formValue,
-        components: formValue.components.map((component: any) => ({
-          kind: component.kind,
-          data: component.data
-        }))
-      };
-
-      this.apiService.updatePageByIdentifier(`${this.pageId}`, updatedPage).subscribe({
-        next: () => {
-          console.log('Page updated successfully');
-          this.router.navigate(['/admin']);
-        },
-        error: (error) => {
-          console.error('Error updating page:', error);
-        }
-      });
-    } else {
-      console.log('Form is invalid');
-    }
-  }
 }
