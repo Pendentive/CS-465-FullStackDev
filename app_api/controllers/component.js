@@ -35,7 +35,6 @@ const getAllComponents = async (req, res) => {
 
 const getComponentById = async (req, res) => {
     const { componentType, id } = req.params;
-
     try {
         const ComponentModel = getComponentModel(componentType);
         let component;
@@ -62,7 +61,27 @@ const getComponentById = async (req, res) => {
     }
 };
 
+const updateComponent = async (req, res) => {
+    const { componentType, id } = req.params;
+
+    try {
+        const ComponentModel = getComponentModel(componentType);
+
+        const component = await ComponentModel.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+
+        if (!component) {
+            return res.status(404).json({ message: 'Component not found' });
+        }
+
+        res.status(200).json(component);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
 module.exports = {
     getAllComponents,
-    getComponentById
+    getComponentById,
+    updateComponent
 };

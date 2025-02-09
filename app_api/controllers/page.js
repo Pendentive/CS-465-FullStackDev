@@ -93,13 +93,39 @@ const createPage = async (req, res) => {
     }
 };
 
-// UPDATE a page
-const updatePage = async (req, res) => {
+// UPDATE a page by ID
+const updatePageById = async (req, res) => {
     try {
-        const updatedPage = await Page.updateOne({ identifier: req.params.identifier }, req.body);
-        res.status(200).json(updatedPage);
+        const page = await Page.findByIdAndUpdate(
+            req.params.id, 
+            req.body, 
+            { new: true, runValidators: true }
+        );
+        if (!page) {
+            return res.status(404).json({ message: 'Page not found' });
+        }
+        res.status(200).json(page);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        console.error('Error updating page by ID:', err);
+        res.status(400).json({ message: err.message });
+    }
+};
+
+// UPDATE a page by identifier
+const updatePageByIdentifier = async (req, res) => {
+    try {
+        const page = await Page.findOneAndUpdate(
+            { identifier: req.params.identifier }, 
+            req.body, 
+            { new: true}
+        );
+        if (!page) {
+            return res.status(404).json({ message: 'Page not found' });
+        }
+        res.status(200).json(page);
+    } catch (err) {
+        console.error('Error updating page by identifier:', err);
+        res.status(400).json({ message: err.message });
     }
 };
 
@@ -113,38 +139,12 @@ const deletePage = async (req, res) => {
     }
 };
 
-// UPDATE a specific component
-const updateComponent = async (req, res) => {
-    const { componentType, componentId } = req.params;
-
-    try {
-        let component;
-
-        switch (componentType) {
-            case 'TypeIntro':
-                component = await TypeIntro.findByIdAndUpdate(componentId, req.body, { new: true });
-                break;
-            // Add cases for other component types as needed
-            default:
-                return res.status(400).json({ message: 'Invalid component type' });
-        }
-
-        if (!component) {
-            return res.status(404).json({ message: 'Component not found' });
-        }
-
-        res.status(200).json(component);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-};
-
 module.exports = {
     getAllPages,
     getPageById,
     getPageByIdentifier,
     createPage,
-    updatePage,
+    updatePageById,
+    updatePageByIdentifier,
     deletePage,
-    updateComponent
 };

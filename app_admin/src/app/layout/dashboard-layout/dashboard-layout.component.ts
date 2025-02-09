@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { HeaderComponent } from '../../layout/header/header.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,9 +12,9 @@ import { HeaderComponent } from '../../layout/header/header.component';
     MatButtonModule,
     HeaderComponent
   ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  templateUrl: './dashboard-layout.component.html',
+  styleUrl: './dashboard-layout.component.css'
 })
-export class DashboardComponent {
+export class DashboardLayoutComponent {
 
 }

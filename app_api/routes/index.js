@@ -37,11 +37,6 @@ function authenticateJWT(req, res, next) {
 // Import controllers for routing
 const authController = require('../controllers/authentication');
 const imagesController = require('../controllers/images');
-const galleryGridController = require('../controllers/gallery-grid');
-const galleryHeroVertController = require('../controllers/gallery-hero-vert');
-const typeIntroController = require('../controllers/type-intro');
-const galleryBannerController = require('../controllers/gallery-banner');
-const repeaterMenuController = require('../controllers/repeater-menu');
 const pageController = require('../controllers/page');
 const componentController = require('../controllers/component');
 
@@ -69,52 +64,6 @@ router
     .route('/images/:id')
     .get(imagesController.getImageById);
 
-// Define routes for gallery-grid endpoint
-router
-    .route('/gallery-grid')
-    .get(galleryGridController.getAllGalleryGrid);
-
-router
-    .route('/gallery-grid/:id')
-    .get(galleryGridController.getGalleryGridById);
-
-// Define routes for gallery-hero-vert endpoint
-router
-    .route('/gallery-hero-vert')
-    .get(galleryHeroVertController.getAllGalleryHeroVert);
-
-router
-    .route('/gallery-hero-vert/:id')
-    .get(galleryHeroVertController.getGalleryHeroVertById);
-
-// Define routes for type-intro endpoint
-router
-    .route('/type-intro')
-    .get(typeIntroController.getAllTypeIntro);
-
-router
-    .route('/type-intro/:id')
-    .get(typeIntroController.getTypeIntroById)
-    .put(authenticateJWT, typeIntroController.updateTypeIntro);
-
-// Define routes for gallery-banner endpoint
-router
-    .route('/gallery-banner')
-    .get(galleryBannerController.getAllGalleryBanner);
-
-router
-    .route('/gallery-banner/:id')
-    .get(galleryBannerController.getGalleryBannerById);
-
-// Define routes for repeater-menu endpoint
-router
-    .route('/repeater-menu')
-    .get(repeaterMenuController.getAllRepeaterMenu);
-
-router
-    .route('/repeater-menu/:id')
-    .get(repeaterMenuController.getRepeaterMenuById);
-
 // Define routes for page endpoint
 router
     .route('/pages')
@@ -122,26 +71,23 @@ router
     .post(authenticateJWT, pageController.createPage);
 
 router
-    .route('/pages/:id')
-    .get(pageController.getPageById)
-    .put(authenticateJWT, pageController.updatePage)
-    .delete(authenticateJWT, pageController.deletePage);
+    .route('/pages/identifier/:identifier')
+    .get(pageController.getPageByIdentifier)
+    .put(authenticateJWT, pageController.updatePageByIdentifier);
 
 router
-    .route('/pages/identifier/:identifier')
-    .get(pageController.getPageByIdentifier);
+    .route('/pages/:id')
+    .get(pageController.getPageById)
+    .put(authenticateJWT, pageController.updatePageById)
+    .delete(authenticateJWT, pageController.deletePage);
 
 // Define routes for updating a specific component
 router
-    .route('/components/:componentType/:componentId')
-    .put(authenticateJWT, pageController.updateComponent);
+    .route('/components/:componentType/:id')
+    .get(componentController.getComponentById) 
+    .put(authenticateJWT, componentController.updateComponent);
 
 router.route('/components/:componentType')
     .get(componentController.getAllComponents); 
-
-router
-    .route('/components/:componentType/:id')
-    .get(componentController.getComponentById) 
-    .put(authenticateJWT, pageController.updateComponent); 
 
 module.exports = router;
