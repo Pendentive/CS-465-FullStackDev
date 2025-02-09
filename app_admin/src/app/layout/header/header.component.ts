@@ -31,6 +31,6 @@ export class HeaderComponent {
 
   logout(): void {
     this.authenticationService.logout();
-    this.router.navigate(['/']);
+    this.router.navigate(['/auth/login']); // Redirect to login page after logout
   }
 }

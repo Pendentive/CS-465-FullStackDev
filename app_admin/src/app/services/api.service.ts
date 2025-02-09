@@ -20,19 +20,19 @@ export class ApiService {
 
   // Template request methods
   get<T>(endpoint: string): Observable<T> {
-    return this.http.get<T>(`${this.apiUrl}/${endpoint}`, this.getHeaders());
+    return this.http.get<T>(`${this.apiUrl}/${endpoint}`);
   }
 
   post<T>(endpoint: string, data: any): Observable<T> {
-    return this.http.post<T>(`${this.apiUrl}/${endpoint}`, data, this.getHeaders());
+    return this.http.post<T>(`${this.apiUrl}/${endpoint}`, data);
   }
 
   put<T>(endpoint: string, data: any): Observable<T> {
-    return this.http.put<T>(`${this.apiUrl}/${endpoint}`, data, this.getHeaders());
+    return this.http.put<T>(`${this.apiUrl}/${endpoint}`, data);
   }
 
   delete<T>(endpoint: string): Observable<T> {
-    return this.http.delete<T>(`${this.apiUrl}/${endpoint}`, this.getHeaders());
+    return this.http.delete<T>(`${this.apiUrl}/${endpoint}`);
   }
 
   // Image methods 
@@ -72,14 +72,5 @@ export class ApiService {
   // Component methods
   updateComponent(componentType: string, componentId: string, component: any): Observable<any> {
     return this.put<any>(`components/${componentType}/${componentId}`, component);
-  }
-
-  private getHeaders(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('mean-token');
-    let headers = new HttpHeaders();
-    if (token) {
-      headers = headers.set('Authorization', `Bearer ${token}`);
-    }
-    return { headers: headers };
   }
 }

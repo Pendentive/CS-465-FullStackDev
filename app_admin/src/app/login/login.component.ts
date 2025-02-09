@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../interfaces/user';
 
@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +48,8 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(newUser, this.credentials.password).subscribe({
       next: (authResp) => {
         if (this.authenticationService.isLoggedIn()) {
-          this.router.navigate(['/admin']); // Navigate to admin dashboard
+          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/admin';
+          this.router.navigate([returnUrl]); // Navigate to admin dashboard
         }
       },
       error: (err) => {
