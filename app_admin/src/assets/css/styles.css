@@ -2,3 +2,25 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+mat-card-header.edit-fec-header {
+    margin-bottom: 16px;
+}
+  
+mat-card-content.edit-fec-content
+{ 
+    display: flex !important;
+    flex-direction: column;
+    
+}
+
+textarea.description-box {
+    min-height: 8em;
+}
+
+/* Style Angular Material input */
+.mat-input-element {
+    font-size: 16px; /* Redundent for now but later will be set be global*/
+}
+
+
