@@ -13,7 +13,12 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     hash: String,
-    salt: String
+    salt: String,
+    role: { 
+        type: String,
+        enum: ['admin', 'editor', 'express'], 
+        default: 'express'
+    }
 });
 
 // Set password on current record
@@ -37,6 +42,7 @@ userSchema.methods.generateJwt = function() {
         _id: this._id,
         email: this.email,
         name: this.name,
+        role: this.role, // Add role to payload
         exp: Math.floor(Date.now() / 1000) + (60 * 60), // Token expires in 1 hour
     };
     return jwt.sign(payload, process.env.JWT_SECRET);   // SECRET stored in .env file

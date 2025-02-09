@@ -9,13 +9,21 @@ const apiUrl = 'http://localhost:3000/api';
 
 const fetchToken = async () => {
     try {
+        const email = process.env.EXPRESS_FRONTEND_EMAIL;
+        const password = process.env.EXPRESS_FRONTEND_PASSWORD;
+
+        if (!email || !password) {
+            console.error('Error: EXPRESS_FRONTEND_EMAIL and EXPRESS_FRONTEND_PASSWORD must be set in .env');
+            return;
+        }
+
         const response = await axios.post(`${apiUrl}/service-token`, {
-            email: process.env.EXPRESS_FRONTEND_EMAIL,
-            password: process.env.EXPRESS_FRONTEND_PASSWORD
+            email: email,
+            password: password
         });
 
         const token = response.data.token;
-        console.log('Token:', token);
+        console.log('New token:', token);
 
         // Update .env file
         const envPath = path.join(__dirname, '../../.env');

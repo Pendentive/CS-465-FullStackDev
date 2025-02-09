@@ -87,4 +87,19 @@ export class AuthenticationService {
     // Return a default user when not logged in
     return { email: '', name: '' } as User;
   }
+
+  public getRole(): string {
+    if (this.isLoggedIn()) {
+      const token: string = this.getToken();
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        return payload.role;
+      } catch (error) {
+        console.error('Error parsing token:', error);
+        return '';
+      }
+    } else {
+      return '';
+    }
+  }
 }

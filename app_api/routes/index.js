@@ -29,7 +29,7 @@ function authenticateJWT(req, res, next) {
             console.log('Token Validation Error:', err.message);
             return res.status(401).json({ message: 'Token Validation Error.' });
         }
-        req.auth = verified; // Set the auth parameter to the decoded payload
+        req.user = verified; // Set the user object to the request
         next(); // Continue or will hang forever
     });
 }
@@ -72,7 +72,7 @@ router
 
 router
     .route('/pages/identifier/:identifier')
-    .get(pageController.getPageByIdentifier)
+    .get(authenticateJWT, pageController.getPageByIdentifier)
     .put(authenticateJWT, pageController.updatePageByIdentifier);
 
 router

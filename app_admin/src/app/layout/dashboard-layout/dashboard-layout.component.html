@@ -1,8 +1,8 @@
 <app-header></app-header>
 <div class="dashboard-container">
   <div class="navigation-buttons">
-    <button mat-button routerLink="/admin/pages/page-landing">page-landing</button>
-    <button mat-button routerLink="/admin/pages/page-portfolio-personal">page-portfolio-personal</button>
+    <button mat-button routerLink="/admin/pages/page-landing" *ngIf="isAdmin()">page-landing</button>
+    <button mat-button routerLink="/admin/pages/page-portfolio-personal" *ngIf="isAdmin() || isEditor()">page-portfolio-personal</button>
   </div>
   <div class="content">
     <router-outlet></router-outlet>

@@ -48,7 +48,14 @@ const getPageById = async (req, res) => {
 
 // GET page by identifier
 const getPageByIdentifier = async (req, res) => {
-    const userRole = req.user?.role || 'admin'; // TODO: FIX when rba is implemented
+    const user = req.user; // TODO: FIX when rba is implemented
+    console.log('User:', user);
+    if (!user) {
+        return res.status(401).json({ message: 'Unauthorized: User not authenticated' });
+    }
+
+    const userRole = user.role;
+    const pageIdentifier = req.params.identifier;
 
     let populateOptions;
     if (userRole === 'admin') {
@@ -59,23 +66,56 @@ const getPageByIdentifier = async (req, res) => {
                 model: 'Image',
             }
         };
-    } else {
+    } else if (userRole === 'editor') {             // TODO: Restrict Further
         populateOptions = {
             path: 'components',
             populate: {
                 path: 'images menuCards.image',
                 model: 'Image',
-                select: 'path alt title description' // Select only necessary fields
+            }
+        };
+    } else if (userRole === 'express') {            // TODO: Restrict further
+        populateOptions = {
+            path: 'components',
+            populate: {
+                path: 'images menuCards.image',
+                model: 'Image',
+            }
+        };
+    } else {                                        // TODO: Restrict further
+        populateOptions = {
+            path: 'components',
+            populate: {
+                path: 'images menuCards.image',
+                model: 'Image',
+                select: 'path title'
             }
         };
     }
 
     try {
-        const page = await Page.findOne({ identifier: req.params.identifier }).populate(populateOptions);
-        console.log('Populated page data:', page); // Add this line
+        let page;
+
+        if (userRole === 'admin') {
+            page = await Page.findOne({ identifier: pageIdentifier }).populate(populateOptions);
+        } else if (userRole === 'express') {
+            page = await Page.findOne({ identifier: pageIdentifier }).populate(populateOptions);
+        } else if (userRole === 'editor') {
+            // Editors can only access the portfolio-personal page
+            if (pageIdentifier === 'page-portfolio-personal') {
+                page = await Page.findOne({ identifier: pageIdentifier }).populate(populateOptions);
+            } else {
+                return res.status(403).json({ message: 'Forbidden: Editors can only access page-portfolio-personal' });
+            }
+        }
+        else {
+            return res.status(403).json({ message: 'Forbidden: Invalid Role' });
+        }
+
         if (!page) {
             return res.status(404).json({ message: 'Page not found' });
         }
+
         res.status(200).json(page);
     } catch (err) {
         res.status(500).json({ message: err.message });
