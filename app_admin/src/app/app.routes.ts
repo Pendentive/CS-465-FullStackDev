@@ -24,7 +24,7 @@ export const routes: Routes = [
     path: 'auth',
     component: AuthLayoutComponent,
     children: [
-      { path: 'login', component: LoginComponent }, // SHOULD BE LOGIN COMPONENT
+      { path: 'login', component: LoginComponent },
     ]
   },
   

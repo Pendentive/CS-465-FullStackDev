@@ -14,7 +14,7 @@ import { Image } from '../interfaces/image';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = '/api';
+  private apiUrl = 'http://localhost:3000/api'; // APi URL
 
   constructor(private http: HttpClient) { }
 

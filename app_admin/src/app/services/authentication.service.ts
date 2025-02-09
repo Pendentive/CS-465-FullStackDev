@@ -11,11 +11,11 @@ import { User } from '../interfaces/user';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:3000/api'; // Corrected API URL
+  private apiUrl = 'http://localhost:3000/api'; // APi URL
 
   constructor(
     @Inject(BROWSER_STORAGE) private storage: Storage,
-    private http: HttpClient // Inject HttpClient directly
+    private http: HttpClient
   ) { }
 
   public getToken(): string {
