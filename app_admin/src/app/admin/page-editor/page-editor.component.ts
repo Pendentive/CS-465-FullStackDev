@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { ApiService } from '../../services/api.service';
 import { Page } from '../../interfaces/page';
 import { EditTextIntroComponent } from '../edit-text-intro/edit-text-intro.component';
 import { ComponentService } from '../../services/component.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-page-editor',
@@ -14,10 +15,11 @@ import { ComponentService } from '../../services/component.service';
   templateUrl: './page-editor.component.html',
   styleUrls: ['./page-editor.component.css']
 })
-export class PageEditorComponent implements OnInit {
+export class PageEditorComponent implements OnInit, OnDestroy {
   pageForm!: FormGroup;
   pageId!: string;
   pageData!: Page;
+  routeSubscription!: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -28,13 +30,25 @@ export class PageEditorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pageId = this.route.snapshot.paramMap.get('id')!;
     this.pageForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
       components: this.fb.array([])
     });
 
+    this.routeSubscription = this.route.paramMap.subscribe(params => {
+      this.pageId = params.get('id')!;
+      this.loadPageData();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+  }
+
+  loadPageData(): void {
     if (this.pageId) {
       this.apiService.getPageByIdentifier(`${this.pageId}`).subscribe((page: Page) => {
         this.pageData = page;
