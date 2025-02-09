@@ -27,6 +27,15 @@ export class ComponentService {
       );
   }
 
+  updateRepeaterMenu(componentId: string, update: any): Observable<any> {
+    // Prepare the data for sending to the API (e.g., formatting, validation)
+    const componentType = 'RepeaterMenu'; // Hardcoded for now, can be made dynamic
+    return this.apiService.put<any>(`components/${componentType}/${componentId}`, update)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An error occurred';
     if (error.error instanceof ErrorEvent) {

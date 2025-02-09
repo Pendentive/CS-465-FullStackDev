@@ -1,0 +1,5 @@
+<div class="image-list">
+    <div *ngFor="let image of images" (click)="selectImage(image._id)" class="image-item">
+      <img [src]="image.path" [alt]="image.alt" width="100">
+    </div>
+</div>

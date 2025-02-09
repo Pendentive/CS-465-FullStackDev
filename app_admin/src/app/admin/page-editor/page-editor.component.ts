@@ -2,16 +2,20 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../services/api.service';
-import { Page } from '../../interfaces/page';
-import { EditTextIntroComponent } from '../edit-text-intro/edit-text-intro.component';
-import { ComponentService } from '../../services/component.service';
 import { Subscription } from 'rxjs';
+
+import { ApiService } from '../../services/api.service';
+import { ComponentService } from '../../services/component.service';
+
+import { Page } from '../../interfaces/page';
+
+import { EditTextIntroComponent } from '../edit-text-intro/edit-text-intro.component';
+import { EditRepeaterMenuComponent } from '../edit-repeater-menu/edit-repeater-menu.component'; // Import EditRepeaterMenuComponent
 
 @Component({
   selector: 'app-page-editor',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, EditTextIntroComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, EditTextIntroComponent, EditRepeaterMenuComponent], // Add EditRepeaterMenuComponent
   templateUrl: './page-editor.component.html',
   styleUrls: ['./page-editor.component.css']
 })
@@ -87,6 +91,31 @@ export class PageEditorComponent implements OnInit, OnDestroy {
             tags: [component.tags],
             kind: [component.kind]
           })
+        });
+        this.components.push(componentGroup);
+      } else if (component.kind === 'RepeaterMenu') { // Add RepeaterMenu case
+        const componentGroup = this.fb.group({
+          kind: ['RepeaterMenu'],
+          data: this.fb.group({
+            _id: [component._id],
+            menuCards: this.fb.array([]),
+            photoHeight: [component.photoHeight],
+            photoWidth: [component.photoWidth],
+            photoPaddingX: [component.photoPaddingX],
+            photoPaddingY: [component.photoPaddingY],
+            menuCardPaddingX: [component.menuCardPaddingX],
+            identifier: [component.identifier],
+            tags: [component.tags],
+            kind: [component.kind]
+          })
+        });
+        (component.menuCards || []).forEach((menuCard: any) => {  // SOC: Should be in controller
+          (componentGroup.get('data.menuCards') as FormArray).push(this.fb.group({
+            title: [menuCard.title, Validators.required],
+            image: [menuCard.image, Validators.required],
+            route: [menuCard.route, Validators.required],
+            buttonTitle: [menuCard.buttonTitle, Validators.required]
+          }));
         });
         this.components.push(componentGroup);
       }

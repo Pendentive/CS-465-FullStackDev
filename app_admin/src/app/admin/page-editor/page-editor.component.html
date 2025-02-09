@@ -18,6 +18,11 @@
                             [formGroup]="asFormGroup(component.get('data'))"
                             [componentId]="component.get('data')?.get('_id')?.value">
                         </app-edit-text-intro>
+                        <app-edit-repeater-menu
+                            *ngSwitchCase="'RepeaterMenu'"
+                            [formGroup]="asFormGroup(component.get('data'))"
+                            [componentId]="component.get('data')?.get('_id')?.value">
+                        </app-edit-repeater-menu>
                         <!-- Add cases for other component types -->
                     </ng-container>
                 </ng-container>

@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ componentTitle }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content [formGroup]="formGroup">
+    <div formArrayName="data.menuCards">
+      <div *ngFor="let menuCard of menuCards.controls; let i = index" [formGroupName]="i" class="menu-card">
+        <h4>Menu Card {{i + 1}}</h4>
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Route</mat-label>
+          <input matInput formControlName="route">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Button Title</mat-label>
+          <input matInput formControlName="buttonTitle">
+        </mat-form-field>
+        <app-image-selector (selectedImage)="onImageSelected($event, i)"></app-image-selector>
+        <button mat-icon-button color="warn" (click)="removeMenuCard(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="addMenuCard()">Add Menu Card</button>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onSubmit()">
+      <mat-icon>save</mat-icon> Update
+    </button>
+  </mat-card-actions>
+</mat-card>
