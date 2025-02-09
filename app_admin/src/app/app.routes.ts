@@ -5,6 +5,7 @@ import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-la
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 
 import { PageEditorComponent } from './admin/page-editor/page-editor.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
 
@@ -23,7 +24,7 @@ export const routes: Routes = [
     path: 'auth',
     component: AuthLayoutComponent,
     children: [
-      { path: 'login', component: PageEditorComponent }, // SHOULD BE LOGIN COMPONENT
+      { path: 'login', component: LoginComponent }, // SHOULD BE LOGIN COMPONENT
     ]
   },
   

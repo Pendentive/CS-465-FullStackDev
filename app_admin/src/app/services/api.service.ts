@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { Page } from '../interfaces/page';
 import { GalleryHeroVert } from '../interfaces/gallery-hero-vert';
 import { TypeIntro } from '../interfaces/type-intro';
@@ -8,36 +9,15 @@ import { GalleryGrid } from '../interfaces/gallery-grid';
 import { GalleryBanner } from '../interfaces/gallery-banner';
 import { RepeaterMenu } from '../interfaces/repeater-menu';
 import { Image } from '../interfaces/image';
-import { User } from '../interfaces/user';
-import { AuthResponse } from '../interfaces/authresponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = '/api';  // Your API base URL
+  private apiUrl = '/api';
 
   constructor(private http: HttpClient) { }
 
-  // Authentication methods
-  login(user: User, passwd: string): Observable<AuthResponse> {
-    return this.handleAuthAPICall('login', user, passwd);
-  }
-
-  register(user: User, passwd: string): Observable<AuthResponse> {
-    return this.handleAuthAPICall('register', user, passwd);
-  }
-
-  private handleAuthAPICall(endpoint: string, user: User, passwd: string): Observable<AuthResponse> {
-    const formData = {
-      name: user.name,
-      email: user.email,
-      password: passwd
-    };
-    return this.post<AuthResponse>(endpoint, formData);
-  }
-
-  // Data fetching methods
   getGalleryHeroVerts(): Observable<GalleryHeroVert[]> {
     return this.get<GalleryHeroVert[]>('gallery-hero-vert');
   }
@@ -112,7 +92,7 @@ export class ApiService {
   }
 
   private getHeaders(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('mean-token'); // Or however you store your token
+    const token = localStorage.getItem('mean-token');
     let headers = new HttpHeaders();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);

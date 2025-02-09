@@ -1,26 +1,36 @@
 import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule],
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    CommonModule,
+    RouterLink // Add RouterLink to imports
+  ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  username: string = 'Current User'; // Replace with actual username
+  username = 'Admin'; // Replace with actual username if available
 
   constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {}
+
+  isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn();
+  }
 
   logout(): void {
     this.authenticationService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }

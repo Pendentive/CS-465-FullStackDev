@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { Page } from '../../interfaces/page';
 import { EditTextIntroComponent } from '../edit-text-intro/edit-text-intro.component';
+import { ComponentService } from '../../services/component.service';
 
 @Component({
   selector: 'app-page-editor',
@@ -22,7 +23,8 @@ export class PageEditorComponent implements OnInit {
     private fb: FormBuilder,
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private componentService: ComponentService
   ) {}
 
   ngOnInit(): void {

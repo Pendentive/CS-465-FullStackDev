@@ -33,12 +33,13 @@ userSchema.methods.validPassword = function(password) {
 
 // Generate a JSON Web Token for the current record
 userSchema.methods.generateJwt = function() {
-    return jwt.sign( {  // Payload for JSON Web Token
+    const payload = {  // Payload for JSON Web Token
         _id: this._id,
         email: this.email,
         name: this.name,
-    }
-    , process.env.JWT_SECRET);   // SECRET stored in .env file
+        exp: Math.floor(Date.now() / 1000) + (60 * 60), // Token expires in 1 hour
+    };
+    return jwt.sign(payload, process.env.JWT_SECRET);   // SECRET stored in .env file
 };
 
 const User = mongoose.model('users', userSchema);

@@ -44,11 +44,10 @@ export class LoginComponent implements OnInit {
       email: this.credentials.email,
     } as User;
 
-    // Subscribe to the login Observable
     this.authenticationService.login(newUser, this.credentials.password).subscribe({
       next: (authResp) => {
         if (this.authenticationService.isLoggedIn()) {
-          this.router.navigate(['']); // Navigate to home or dashboard
+          this.router.navigate(['/admin']); // Navigate to admin dashboard
         }
       },
       error: (err) => {
