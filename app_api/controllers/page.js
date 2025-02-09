@@ -1,5 +1,5 @@
 const Page = require('../models/page');
-const TypeIntro = require('../models/type-intro');
+const TypeIntro = require('../models/page-components/type-intro');
 
 // GET all pages
 const getAllPages = async (req, res) => {

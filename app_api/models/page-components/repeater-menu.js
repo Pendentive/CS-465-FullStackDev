@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const BaseModel = require('./base');
-const Image = require('./image');
+const Image = require('../image');
 
 const menuCardSchema = new mongoose.Schema({
     title: { 

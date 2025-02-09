@@ -1,8 +1,8 @@
-const GalleryHeroVert = require('../models/gallery-hero-vert');
-const TypeIntro = require('../models/type-intro');
-const GalleryGrid = require('../models/gallery-grid');
-const GalleryBanner = require('../models/gallery-banner');
-const RepeaterMenu = require('../models/repeater-menu');
+const GalleryHeroVert = require('../models/page-components/gallery-hero-vert');
+const TypeIntro = require('../models/page-components/type-intro');
+const GalleryGrid = require('../models/page-components/gallery-grid');
+const GalleryBanner = require('../models/page-components/gallery-banner');
+const RepeaterMenu = require('../models/page-components/repeater-menu');
 
 const getComponentModel = (componentType) => {
     switch (componentType) {
