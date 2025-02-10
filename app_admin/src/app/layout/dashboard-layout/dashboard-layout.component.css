@@ -14,6 +14,9 @@
   margin-right: 8px;
 }
 
-.content {
-  flex: 1;
+
+.navigation-buttons button.active-link {
+  /* Active button styles */
+  background-color: #ff8c00; 
+  color: white;
 }
