@@ -11,11 +11,12 @@ import { Page } from '../../interfaces/page';
 
 import { EditTextIntroComponent } from '../edit-text-intro/edit-text-intro.component';
 import { EditRepeaterMenuComponent } from '../edit-repeater-menu/edit-repeater-menu.component'; // Import EditRepeaterMenuComponent
+import { EditPageComponent } from '../edit-page/edit-page.component';
 
 @Component({
   selector: 'app-page-editor',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, EditTextIntroComponent, EditRepeaterMenuComponent], // Add EditRepeaterMenuComponent
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, EditTextIntroComponent, EditRepeaterMenuComponent, EditPageComponent], // Add EditRepeaterMenuComponent
   templateUrl: './page-editor.component.html',
   styleUrls: ['./page-editor.component.css']
 })

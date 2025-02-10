@@ -1,4 +1,18 @@
 <div class="image-selector">
-  <h3>Select an Image</h3>
-  <app-image-list [images]="images" (imageSelected)="onImageSelected($event)"></app-image-list>
-</div><p>image-selector works!</p>
+  <h3>Current Images</h3>
+  <div class="current-images">
+    <div *ngFor="let imageId of currentImages" class="image-item">
+      <img [src]="getImagePath(imageId)" alt="Current Image" width="100">
+    </div>
+  </div>
+
+  <h3>Select Images</h3>
+  <div class="selectable-images">
+    <div *ngFor="let image of selectableImages" class="image-item" (click)="toggleImageSelection(image._id)"
+      [class.selected]="isImageSelected(image._id)">
+      <img [src]="image.path" alt="Selectable Image" width="100">
+    </div>
+  </div>
+
+  <button (click)="addImage()">Add Images</button>
+</div>

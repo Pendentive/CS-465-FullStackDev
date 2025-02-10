@@ -1,15 +1,8 @@
 <div class="page-editor">
     <h2>Edit Page</h2>
-    <form [formGroup]="pageForm">
-        <div class="form-group">
-        <label for="title">Title</label>
-        <input id="title" formControlName="title" class="form-control" />
-        </div>
-        <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" formControlName="description" class="form-control"></textarea>
-        </div>
-        <div formArrayName="components">
+    <form [formGroup]="pageForm" >
+        <div formArrayName="components" class="edit-fec-content-container">
+            <app-edit-page [formGroup]="pageForm" [pageId]="pageId"></app-edit-page>
             <div *ngFor="let component of components.controls; let i = index" [formGroupName]="i">
                 <ng-container [ngSwitch]="component.get('kind')?.value">
                     <ng-container *ngIf="component.get('data')">

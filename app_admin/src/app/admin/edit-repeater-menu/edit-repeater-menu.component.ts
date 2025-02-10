@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ComponentService } from '../../services/component.service';
 
 import { ImageSelectorComponent } from '../../components/image-selector/image-selector.component'; // Import ImageSelectorComponent
+import { Image } from '../../interfaces/image';
 
 @Component({
   selector: 'app-edit-repeater-menu',
@@ -31,11 +32,13 @@ export class EditRepeaterMenuComponent implements OnInit, OnChanges {
   @Input() formGroup!: FormGroup;
   @Input() componentId!: string;
   componentTitle: string = '';
+  currentImages: string[] = []; // Array to hold current image IDs
 
   constructor(private componentService: ComponentService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.setComponentTitle();
+    this.loadCurrentImages();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -52,25 +55,30 @@ export class EditRepeaterMenuComponent implements OnInit, OnChanges {
     }
   }
 
+  loadCurrentImages(): void {
+    // Load current images from the form group
+    const menuCards = this.formGroup.get('data.menuCards')?.value;
+    if (menuCards && Array.isArray(menuCards)) {
+      this.currentImages = menuCards.map((card: any) => card.image);
+    }
+  }
+
   get menuCards(): FormArray {
     return this.formGroup.get('data.menuCards') as FormArray;
   }
 
-  addMenuCard(): void {
-    this.menuCards.push(this.fb.group({
-      title: ['', Validators.required],
-      image: ['', Validators.required],
-      route: ['', Validators.required],
-      buttonTitle: ['', Validators.required]
-    }));
-  }
-
-  removeMenuCard(index: number): void {
-    this.menuCards.removeAt(index);
-  }
-
-  onImageSelected(imageId: string, index: number): void {
-    this.menuCards.at(index).get('image')?.setValue(imageId);
+  onImagesSelected(imageIds: string[]): void {
+    // Update the form group with the selected image IDs
+    this.currentImages = imageIds;
+    this.menuCards.clear(); // Clear existing menu cards
+    imageIds.forEach(imageId => {
+      this.menuCards.push(this.fb.group({
+        title: ['', Validators.required],
+        image: [imageId, Validators.required],
+        route: ['', Validators.required],
+        buttonTitle: ['', Validators.required]
+      }));
+    });
   }
 
   onSubmit(): void {
