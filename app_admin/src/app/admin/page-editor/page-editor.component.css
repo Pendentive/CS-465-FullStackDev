@@ -8,6 +8,6 @@
 
 .edit-fec-content-container {
     display: flex !important;
-    flex-direction: column; /* Or row, depending on your desired layout */
-    gap: 16px; /* Add bottom margin */
+    flex-direction: column;
+    gap: 16px; /* Distance between FECs */
 }

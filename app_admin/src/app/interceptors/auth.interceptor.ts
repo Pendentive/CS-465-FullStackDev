@@ -43,7 +43,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 } else if (error.status === 403) {
                     // Forbidden: Display an error message
                     console.error('Forbidden:', error);
-                    // You might want to display a user-friendly message here
+                    // TODO: display a user-friendly message here
                 }
                 return throwError(error);
             })
