@@ -245,6 +245,20 @@ html, body {
     flex: 1;
 }
 
+/* Initially hide images with opacity 0 */
+.gallery-item {
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 0.4s ease-out, transform 0.3s ease-out;
+}
+
+/* When image is in the viewport, it fades in */
+.gallery-item.visible {
+    opacity: 1;
+    transform: translateY(0); /* Image moves to final position */
+}
+
+
 .gallery-item img {
     width: 100%;
     height: auto;
