@@ -1,4 +1,4 @@
-<div class="repeater-menu" style="padding: 0 {{menuCardPaddingX}}px;">
+<div class="repeater-menu" style="gap: {{menuCardPaddingX}}px;">
     {{#each menuCards}}
     {{> sections/menu-card 
         title=this.title 
@@ -6,8 +6,9 @@
         route=this.route 
         photoHeight=../photoHeight 
         photoWidth=../photoWidth 
-        photoPaddingX=../photoPaddingX 
-        photoPaddingY=../photoPaddingY
         buttonTitle=this.buttonTitle}}
     {{/each}}
 </div>
+
+{{!     photoPaddingX=../photoPaddingX // TODO: Add backin or remove. currently reduncent. }}
+{{!     photoPaddingY=../photoPaddingY // TODO: Add backin or remove. currently reduncent. }}
