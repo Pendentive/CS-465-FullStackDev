@@ -1,0 +1,22 @@
+.gallery-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.gallery-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* Adjust as needed */
+}
+
+.gallery-item {
+  flex: 1; /* Distribute space evenly */
+  margin: 5px; /* Adjust spacing as needed */
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

@@ -1,26 +1,28 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApiService } from '../../services/api.service';
 
 import { Image } from '../../interfaces/image';
-import { ImageListComponent } from '../image-list/image-list.component';
+import { ImageDisplayCascadeComponent } from '../image-display-cascade/image-display-cascade.component';
 
 @Component({
   selector: 'app-image-selector',
   standalone: true,
   imports: [
-    CommonModule, 
-    ImageListComponent
+    CommonModule,
+    ImageDisplayCascadeComponent,
   ],
   templateUrl: './image-selector.component.html'
 })
-export class ImageSelectorComponent implements OnInit {
+export class ImageSelectorComponent implements OnInit, OnChanges {
   @Output() selectedImage = new EventEmitter<string[]>();
   @Input() currentImages: string[] = []; // Input for current image IDs
+  @Input() columns: number = 3; // Input for number of columns
   images: Image[] = [];
   selectableImages: Image[] = []; // Images available for selection
   selectedImageIds: string[] = []; // Track selected image IDs
+  currentImageObjects: Image[] = []; // Array to hold Image objects for current images
 
   constructor(private apiService: ApiService) { }
 
@@ -28,11 +30,25 @@ export class ImageSelectorComponent implements OnInit {
     this.loadImages();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['currentImages'] && this.images) {
+      this.updateCurrentImageObjects();
+    }
+    if (changes['images'] && this.currentImages) {
+      this.updateCurrentImageObjects();
+    }
+  }
+
   loadImages(): void {
     this.apiService.getImages().subscribe(images => {
       this.images = images;
       this.selectableImages = images.filter(image => !this.currentImages.includes(image._id));
+      this.updateCurrentImageObjects();
     });
+  }
+
+  updateCurrentImageObjects(): void {
+    this.currentImageObjects = this.currentImages.map(id => this.images.find(img => img._id === id)).filter(img => img !== undefined) as Image[];
   }
 
   toggleImageSelection(imageId: string): void {
@@ -51,10 +67,5 @@ export class ImageSelectorComponent implements OnInit {
 
   isImageSelected(imageId: string): boolean {
     return this.selectedImageIds.includes(imageId);
-  }
-
-  getImagePath(imageId: string): string {
-    const image = this.images.find(img => img._id === imageId);
-    return image ? image.path : '';
   }
 }

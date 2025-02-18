@@ -3,7 +3,7 @@
     <mat-card-title>{{ componentTitle }}</mat-card-title>
   </mat-card-header>
   <mat-card-content [formGroup]="formGroup">
-    <app-image-selector (selectedImage)="onImagesSelected($event)" [currentImages]="currentImages"></app-image-selector>
+    <app-image-selector (selectedImage)="onImagesSelected($event)" [currentImages]="currentImages" [columns]="3"></app-image-selector>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" type="button" (click)="onSubmit()">

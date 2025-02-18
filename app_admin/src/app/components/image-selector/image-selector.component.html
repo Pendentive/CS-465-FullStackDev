@@ -1,18 +1,9 @@
 <div class="image-selector">
   <h3>Current Images</h3>
-  <div class="current-images">
-    <div *ngFor="let imageId of currentImages" class="image-item">
-      <img [src]="getImagePath(imageId)" alt="Current Image" width="100">
-    </div>
-  </div>
+  <app-image-display-cascade [images]="currentImageObjects" [columns]="columns"></app-image-display-cascade>
 
   <h3>Select Images</h3>
-  <div class="selectable-images">
-    <div *ngFor="let image of selectableImages" class="image-item" (click)="toggleImageSelection(image._id)"
-      [class.selected]="isImageSelected(image._id)">
-      <img [src]="image.path" alt="Selectable Image" width="100">
-    </div>
-  </div>
+  <app-image-display-cascade [images]="selectableImages" [columns]="columns"></app-image-display-cascade>
 
   <button (click)="addImage()">Add Images</button>
 </div>
