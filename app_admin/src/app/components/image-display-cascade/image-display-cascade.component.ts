@@ -1,18 +1,22 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Image } from '../../interfaces/image';
+import { ImageUrlService } from '../../services/image-url.service';
 
 @Component({
   selector: 'app-image-display-cascade',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './image-display-cascade.component.html',
-  styleUrls: ['./image-display-cascade.component.css']
+  styleUrls: ['./image-display-cascade.component.css'],
+  providers: [ImageUrlService] // Provide the service
 })
 export class ImageDisplayCascadeComponent implements OnChanges {
   @Input() images: Image[] = [];
   @Input() columns: number = 2;
   imageRows: Image[][] = [];
+
+  constructor(public imageUrlService: ImageUrlService) {} // Inject the service
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['images'] || changes['columns']) {

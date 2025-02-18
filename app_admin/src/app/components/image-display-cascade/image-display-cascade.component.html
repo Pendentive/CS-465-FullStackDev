@@ -1,7 +1,7 @@
 <div class="gallery-grid">
   <div *ngFor="let row of imageRows" class="gallery-row">
-    <div *ngFor="let image of row" class="gallery-item">
-      <img [src]="image.path" [alt]="image.alt" width="100">
+    <div *ngFor="let image of row" class="gallery-item">      
+      <img [src]="imageUrlService.constructImageUrl(image.path)" [alt]="image.alt" width="100">
     </div>
   </div>
 </div>
