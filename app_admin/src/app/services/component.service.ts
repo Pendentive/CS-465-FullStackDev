@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { ApiService } from './api.service';
+import { environment } from '../../environments/environment'; // Import environment
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComponentService {
-  private apiUrl = 'http://localhost:3000/api/components';
+  private apiUrl = environment.apiBaseUrl; // Use environment variable
 
   constructor(private http: HttpClient, private apiService: ApiService) {}
 

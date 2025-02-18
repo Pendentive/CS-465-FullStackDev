@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'; // Import environment
 
 import { Page } from '../interfaces/page';
 import { GalleryHeroVert } from '../interfaces/gallery-hero-vert';
@@ -14,7 +15,7 @@ import { Image } from '../interfaces/image';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3000/api'; // APi URL
+  private apiUrl = environment.apiBaseUrl; // Use environment variable
 
   constructor(private http: HttpClient) { }
 

@@ -6,12 +6,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BROWSER_STORAGE } from '../storage';
 import { AuthResponse } from '../interfaces/authresponse';
 import { User } from '../interfaces/user';
+import { environment } from '../../environments/environment'; // Import environment
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:3000/api'; // APi URL
+  private apiUrl = environment.apiBaseUrl; // Use environment variable
 
   constructor(
     @Inject(BROWSER_STORAGE) private storage: Storage,
@@ -79,27 +80,32 @@ export class AuthenticationService {
   }
 
   public getCurrentUser(): User {
-    if (this.isLoggedIn()) {
-      const token: string = this.getToken();
-      const { email, name } = JSON.parse(atob(token.split('.')[1]));
-      return { email, name } as User;
+    try {
+      const token = this.getToken();
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        return {
+          email: payload.email,
+          name: payload.name,
+          role: payload.role
+        } as User;
+      }
+    } catch(error) {
+      console.error('Error parsing token:', error);
     }
-    // Return a default user when not logged in
-    return { email: '', name: '' } as User;
+    return {email: '', name: '', role: 'express'};
   }
 
   public getRole(): string {
-    if (this.isLoggedIn()) {
-      const token: string = this.getToken();
-      try {
+    try {
+      const token = this.getToken();
+      if (token) {
         const payload = JSON.parse(atob(token.split('.')[1]));
         return payload.role;
-      } catch (error) {
-        console.error('Error parsing token:', error);
-        return '';
       }
-    } else {
-      return '';
+    } catch(error) {
+      console.error('Error parsing token:', error);
     }
+    return '';
   }
 }
