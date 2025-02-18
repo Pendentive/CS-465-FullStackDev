@@ -17,6 +17,15 @@ export class ComponentService {
         catchError(this.handleError)
       );
   }
+  
+  updateGalleryHeroVert(componentId: string, update: any): Observable<any> {
+    // Prepare the data for sending to the API (e.g., formatting, validation)
+    const componentType = 'GalleryHeroVert'; // Hardcoded for now, can be made dynamic
+    return this.apiService.put<any>(`components/${componentType}/${componentId}`, update)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   updateTypeIntro(componentId: string, update: any): Observable<any> {
     // Prepare the data for sending to the API (e.g., formatting, validation)

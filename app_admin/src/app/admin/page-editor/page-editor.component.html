@@ -6,6 +6,11 @@
             <div *ngFor="let component of components.controls; let i = index" [formGroupName]="i">
                 <ng-container [ngSwitch]="component.get('kind')?.value">
                     <ng-container *ngIf="component.get('data')">
+                        <app-edit-gallery-hero-vert
+                            *ngSwitchCase="'GalleryHeroVert'"
+                            [formGroup]="asFormGroup(component.get('data'))"
+                            [componentId]="component.get('data')?.get('_id')?.value">
+                        </app-edit-gallery-hero-vert>
                         <app-edit-text-intro
                             *ngSwitchCase="'TypeIntro'"
                             [formGroup]="asFormGroup(component.get('data'))"

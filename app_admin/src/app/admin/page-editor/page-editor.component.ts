@@ -12,11 +12,12 @@ import { Page } from '../../interfaces/page';
 import { EditTextIntroComponent } from '../edit-text-intro/edit-text-intro.component';
 import { EditRepeaterMenuComponent } from '../edit-repeater-menu/edit-repeater-menu.component'; // Import EditRepeaterMenuComponent
 import { EditPageComponent } from '../edit-page/edit-page.component';
+import { EditGalleryHeroVertComponent } from '../edit-gallery-hero-vert/edit-gallery-hero-vert.component';
 
 @Component({
   selector: 'app-page-editor',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, EditTextIntroComponent, EditRepeaterMenuComponent, EditPageComponent], // Add EditRepeaterMenuComponent
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, EditTextIntroComponent, EditRepeaterMenuComponent, EditPageComponent, EditGalleryHeroVertComponent], // Add EditRepeaterMenuComponent
   templateUrl: './page-editor.component.html',
   styleUrls: ['./page-editor.component.css']
 })
@@ -90,7 +91,8 @@ export class PageEditorComponent implements OnInit, OnDestroy {
             height: [component.height],
             identifier: [component.identifier],
             tags: [component.tags],
-            kind: [component.kind]
+            kind: [component.kind],
+            images: [component.images]
           })
         });
         this.components.push(componentGroup);
@@ -117,6 +119,21 @@ export class PageEditorComponent implements OnInit, OnDestroy {
             route: [menuCard.route, Validators.required],
             buttonTitle: [menuCard.buttonTitle, Validators.required]
           }));
+        });
+        this.components.push(componentGroup);
+      } else if (component.kind === 'GalleryHeroVert') {
+        const componentGroup = this.fb.group({
+          kind: ['GalleryHeroVert'],
+          data: this.fb.group({
+            _id: [component._id],
+            images: [component.images || []],
+            padding: [component.padding],
+            width: [component.width],
+            height: [component.height],
+            identifier: [component.identifier],
+            tags: [component.tags],
+            kind: [component.kind]
+          })
         });
         this.components.push(componentGroup);
       }
