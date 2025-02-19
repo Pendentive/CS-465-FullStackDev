@@ -1,10 +1,13 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApiService } from '../../services/api.service';
 
-import { MatListModule, MatSelectionList, MatListOption } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule, MatAccordion } from '@angular/material/expansion';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { Image } from '../../interfaces/image';
 import { ImageDisplayCascadeComponent } from '../image-display-cascade/image-display-cascade.component';
@@ -15,10 +18,14 @@ import { ImageDisplayCascadeComponent } from '../image-display-cascade/image-dis
   imports: [
     CommonModule,
     ImageDisplayCascadeComponent,
-    MatListModule,
     MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatToolbarModule,
   ],
-  templateUrl: './image-selector.component.html'
+  templateUrl: './image-selector.component.html',
+  styleUrls: ['./image-selector.component.css'],
 })
 export class ImageSelectorComponent implements OnInit {
   @Input() columns: number = 2;                                   // Input for number of columns
@@ -28,8 +35,7 @@ export class ImageSelectorComponent implements OnInit {
   selectableImages: Image[] = [];           // Images available for selection
   selectedImageIds: string[] = [];          // Track selected image IDs
 
-  @ViewChildren('selectableImagesList') selectableImagesList!: QueryList<MatSelectionList>;
-  @ViewChildren('currentImagesList') currentImagesList!: QueryList<MatSelectionList>;
+  @ViewChild(MatAccordion) accordion!: MatAccordion;
 
   constructor(private apiService: ApiService) { }
 
