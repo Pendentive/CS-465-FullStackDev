@@ -54,7 +54,8 @@ export class EditGalleryHeroVertComponent implements OnInit, OnChanges {
   }
 
   loadCurrentImages(): void {
-    this.currentImages = this.formGroup.get('data.images')?.value || [];
+    const images = this.formGroup.get('images')?.value || [];       // Get all images from data
+    this.currentImages = images.map((image: Image) => image._id);   // Only send image ID array
   }
 
   private setComponentTitle(): void {
