@@ -1,9 +1,9 @@
 <div class="image-selector">
   <h3>Current Images</h3>
-  <app-image-display-cascade [images]="currentImageObjects" [columns]="columns"></app-image-display-cascade>
+  <image-display-cascade [images]="currentImageObjects" [columns]="columns"></image-display-cascade>
 
   <h3>Select Images</h3>
-  <app-image-display-cascade [images]="selectableImages" [columns]="columns"></app-image-display-cascade>
+  <image-display-cascade [images]="selectableImages" [columns]="columns"></image-display-cascade>
 
   <button (click)="addImage()">Add Images</button>
 </div>

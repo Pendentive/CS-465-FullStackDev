@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ImageUrlService } from '../../services/image-url.service';
@@ -8,7 +8,7 @@ import { MatGridListModule } from '@angular/material/grid-list'; // Import MatGr
 import { Image } from '../../interfaces/image';
 
 @Component({
-  selector: 'app-image-display-cascade',
+  selector: 'image-display-cascade',
   standalone: true,
   imports: [CommonModule, 
     MatGridListModule
@@ -17,35 +17,9 @@ import { Image } from '../../interfaces/image';
   styleUrls: ['./image-display-cascade.component.css'],
   providers: [ImageUrlService] // Provide the service
 })
-export class ImageDisplayCascadeComponent implements OnChanges {
+export class ImageDisplayCascadeComponent {
   @Input() images: Image[] = [];
   @Input() columns: number = 2;
-  imageRows: Image[][] = [];
 
   constructor(public imageUrlService: ImageUrlService) {} // Inject the service
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['images'] || changes['columns']) {
-      this.createImageRows();
-    }
-  }
-
-  createImageRows(): void {
-    this.imageRows = [];
-    if (!this.images || this.images.length === 0) {
-      return;
-    }
-
-    const numRows = Math.ceil(this.images.length / this.columns);
-    for (let i = 0; i < numRows; i++) {
-      const row: Image[] = [];
-      for (let j = 0; j < this.columns; j++) {
-        const imageIndex = j * numRows + i;
-        if (imageIndex < this.images.length) {
-          row.push(this.images[imageIndex]);
-        }
-      }
-      this.imageRows.push(row);
-    }
-  }
 }

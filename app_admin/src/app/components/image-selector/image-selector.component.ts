@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApiService } from '../../services/api.service';
@@ -15,7 +15,7 @@ import { ImageDisplayCascadeComponent } from '../image-display-cascade/image-dis
   ],
   templateUrl: './image-selector.component.html'
 })
-export class ImageSelectorComponent implements OnInit, OnChanges {
+export class ImageSelectorComponent implements OnInit {
   @Output() selectedImage = new EventEmitter<string[]>();
   @Input() currentImages: string[] = []; // Input for current image IDs
   @Input() columns: number = 2; // Input for number of columns
@@ -30,18 +30,10 @@ export class ImageSelectorComponent implements OnInit, OnChanges {
     this.loadImages();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['currentImages'] && this.images) {
-      this.updateCurrentImageObjects();
-    }
-    if (changes['images'] && this.currentImages) {
-      this.updateCurrentImageObjects();
-    }
-  }
-
   loadImages(): void {
     this.apiService.getImages().subscribe(images => {
       this.images = images;
+      // Filter current images from selectable images
       this.selectableImages = images.filter(image => !this.currentImages.includes(image._id));
       this.updateCurrentImageObjects();
     });
