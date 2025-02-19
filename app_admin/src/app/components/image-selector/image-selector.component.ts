@@ -18,7 +18,7 @@ import { ImageDisplayCascadeComponent } from '../image-display-cascade/image-dis
 export class ImageSelectorComponent implements OnInit, OnChanges {
   @Output() selectedImage = new EventEmitter<string[]>();
   @Input() currentImages: string[] = []; // Input for current image IDs
-  @Input() columns: number = 3; // Input for number of columns
+  @Input() columns: number = 2; // Input for number of columns
   images: Image[] = [];
   selectableImages: Image[] = []; // Images available for selection
   selectedImageIds: string[] = []; // Track selected image IDs

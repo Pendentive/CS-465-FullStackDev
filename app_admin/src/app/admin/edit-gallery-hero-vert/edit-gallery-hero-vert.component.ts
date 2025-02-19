@@ -2,14 +2,16 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { MatCardModule } from '@angular/material/card';
-import { ImageSelectorComponent } from '../../components/image-selector/image-selector.component';
-import { Image } from '../../interfaces/image';
 import { ComponentService } from '../../services/component.service';
+
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+
+import { ImageSelectorComponent } from '../../components/image-selector/image-selector.component';
+import { Image } from '../../interfaces/image';
 
 @Component({
   selector: 'app-edit-gallery-hero-vert',

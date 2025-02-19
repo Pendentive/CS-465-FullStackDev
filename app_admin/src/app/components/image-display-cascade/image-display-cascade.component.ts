@@ -1,12 +1,18 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Image } from '../../interfaces/image';
+
 import { ImageUrlService } from '../../services/image-url.service';
+
+import { MatGridListModule } from '@angular/material/grid-list'; // Import MatGridListModule
+
+import { Image } from '../../interfaces/image';
 
 @Component({
   selector: 'app-image-display-cascade',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, 
+    MatGridListModule
+  ],
   templateUrl: './image-display-cascade.component.html',
   styleUrls: ['./image-display-cascade.component.css'],
   providers: [ImageUrlService] // Provide the service
