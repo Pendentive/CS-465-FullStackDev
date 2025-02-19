@@ -1,10 +1,20 @@
 <div class="image-selector">
   <h3>Current Images</h3>
-  <image-display-cascade [images]="currentImages" [columns]="columns"></image-display-cascade>
-  <button>Remove Images</button>
+  <image-display-cascade
+    [images]="currentImages"
+    [columns]="columns"
+    [selectedImageIds]="selectedImageIds"
+    (imageClick)="toggleSelection($event)"
+  ></image-display-cascade>
+  <button (click)="removeSelectedImages()">Remove Images</button>
 
   <h3>Select Images</h3>
-  <image-display-cascade [images]="selectableImages" [columns]="columns"></image-display-cascade>
+  <image-display-cascade
+    [images]="selectableImages"
+    [columns]="columns"
+    [selectedImageIds]="selectedImageIds"
+    (imageClick)="toggleSelection($event)"
+  ></image-display-cascade>
 
-  <button>Add Images</button>
+  <button (click)="addSelectedImages()">Add Images</button>
 </div>

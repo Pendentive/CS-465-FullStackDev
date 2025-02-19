@@ -23,16 +23,17 @@
 
     <!-- Image Grid Display -->
     <mat-grid-list [cols]="columns">
-      <mat-grid-tile *ngFor="let image of filteredImages">
+      <mat-grid-tile *ngFor="let image of filteredImages" [class.selected]="isSelected(image)">
         <img 
           [src]="imageUrlService.constructImageUrl(image.path)" 
           [alt]="image.alt"
-          (click)="enlargeImage(image)"
+          (click)="onImageClick(image)"
         />
+        <mat-icon *ngIf="isSelected(image)" class="selected-icon">check_circle</mat-icon>
       </mat-grid-tile>
     </mat-grid-list>
 
     <!-- Pagination -->
-    <mat-paginator [length]="filteredImages.length" [pageSize]="12" [pageSizeOptions]="[24, 36, 48]"></mat-paginator>
+    <mat-paginator [length]="filteredImages.length" [pageSize]="3" [pageSizeOptions]="[12, 36, 48]"></mat-paginator>
   </mat-card-content>
 </mat-card>

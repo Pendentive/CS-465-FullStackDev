@@ -57,16 +57,30 @@ export class ImageSelectorComponent implements OnInit {
     return this.currentImages.some(img => img._id === image._id);
   }
 
+  toggleSelection(image: Image): void {
+    const index = this.selectedImageIds.indexOf(image._id);
+    if (index > -1) {
+      this.selectedImageIds.splice(index, 1); // Deselect
+    } else {
+      this.selectedImageIds.push(image._id); // Select
+    }
+  }
+
+  isSelected(image: Image): boolean {
+    return this.selectedImageIds.includes(image._id);
+  }
+
   addSelectedImages(): void {
-    const selectedImages = this.selectableImagesList.first.selectedOptions.selected.map(item => item.value);
+    const selectedImages = this.selectableImages.filter(image => this.selectedImageIds.includes(image._id));
+
     selectedImages.forEach(image => {
       if (!this.isCurrentImage(image)) {
         this.currentImages.push(image);
       }
     });
+
     this.updateSelectableImages();
-    this.currentImagesChange.emit(this.currentImages);
-    this.selectableImagesList.first.deselectAll(); // Clear selection
+    this.selectedImageIds = []; // Clear selected images
   }
 
   removeSelectedImages(): void {

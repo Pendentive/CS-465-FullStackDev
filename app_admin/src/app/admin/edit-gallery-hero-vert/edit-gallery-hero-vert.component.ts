@@ -53,18 +53,15 @@ export class EditGalleryHeroVertComponent implements OnInit, OnChanges {
   }
 
   private setComponentTitle(): void {
-    if (this.formGroup && this.formGroup.get('kind')?.value) {
-      this.componentTitle = this.formGroup.get('kind')?.value + ' Component';
-    } else {
-      this.componentTitle = 'Component';
-    }
+    this.componentTitle = this.formGroup.get('title')?.value || 'Edit Gallery Hero Vert';
   }
 
   onSubmit(): void {
     if (this.formGroup.valid) {
       this.componentService.updateGalleryHeroVert(this.componentId, {
         ...this.formGroup.get('data')?.value,
-        images: this.currentImages
+        //images: this.currentImages
+        images: this.currentImages.map(image => image._id) // Send only image IDs
       }).subscribe({
         next: () => {
           console.log('GalleryHeroVert component updated successfully');

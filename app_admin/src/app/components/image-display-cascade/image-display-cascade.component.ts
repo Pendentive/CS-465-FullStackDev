@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -10,7 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatDialogModule } from '@angular/material/dialog'; // Ensure this is imported
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+
 
 import { ImageUrlService } from '../../services/image-url.service';
 
@@ -31,6 +33,7 @@ import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
     MatGridListModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatIconModule,
   ],
   templateUrl: './image-display-cascade.component.html',
   styleUrls: ['./image-display-cascade.component.css'],
@@ -40,6 +43,8 @@ export class ImageDisplayCascadeComponent implements OnChanges {
   @Input() images: Image[] = [];
   @Input() columns: number = 2;
   @Input() title: string = '';
+  @Input() selectedImageIds: string[] = [];
+  @Output() imageClick = new EventEmitter<Image>();
 
   filteredImages: Image[] = [];
   private debounceTimeout: any;
@@ -85,6 +90,14 @@ export class ImageDisplayCascadeComponent implements OnChanges {
         );
       }
     }, 300); // Adjust the debounce delay (in milliseconds) as needed
+  }
+
+  onImageClick(image: Image): void {
+    this.imageClick.emit(image);
+  }
+
+  isSelected(image: Image): boolean {
+    return this.selectedImageIds.includes(image._id);
   }
 
   // Enlarge Image (Popup View using MatDialog)
