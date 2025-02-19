@@ -23,7 +23,7 @@
 
     <!-- Image Grid Display -->
     <mat-grid-list [cols]="columns">
-      <mat-grid-tile *ngFor="let image of filteredImages" [class.selected]="isSelected(image)">
+      <mat-grid-tile *ngFor="let image of pagedImages" [class.selected]="isSelected(image)">
         <img 
           [src]="imageUrlService.constructImageUrl(image.path)" 
           [alt]="image.alt"
@@ -34,6 +34,12 @@
     </mat-grid-list>
 
     <!-- Pagination -->
-    <mat-paginator [length]="filteredImages.length" [pageSize]="3" [pageSizeOptions]="[12, 36, 48]"></mat-paginator>
+    <mat-paginator 
+      [length]="filteredImages.length" 
+      [pageSize]="pageSize" 
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[3, 12, 36, 48]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
   </mat-card-content>
 </mat-card>

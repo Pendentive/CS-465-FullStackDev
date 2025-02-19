@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -47,17 +47,22 @@ export class ImageDisplayCascadeComponent implements OnChanges {
   @Output() imageClick = new EventEmitter<Image>();
 
   filteredImages: Image[] = [];
+  pagedImages: Image[] = [];
   private debounceTimeout: any;
+  pageSize: number = 3;
+  pageIndex: number = 0;
 
   constructor(public imageUrlService: ImageUrlService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.filteredImages = [...this.images]; // Initialize with all images
+    this.updatePagedImages();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['images']) {
       this.filteredImages = [...this.images]; // Update filteredImages when images change
+      this.updatePagedImages();
     }
   }
 
@@ -68,6 +73,7 @@ export class ImageDisplayCascadeComponent implements OnChanges {
     } else if (sortBy === 'date') {
       this.filteredImages.sort((a, b) => new Date(b.metadata.dateCreated).getTime() - new Date(a.metadata.dateCreated).getTime());
     }
+    this.updatePagedImages();
   }
 
   // Filtering Logic
@@ -89,6 +95,7 @@ export class ImageDisplayCascadeComponent implements OnChanges {
           img.alt.toLowerCase().includes(filterValue.toLowerCase())
         );
       }
+      this.updatePagedImages();
     }, 300); // Adjust the debounce delay (in milliseconds) as needed
   }
 
@@ -103,5 +110,17 @@ export class ImageDisplayCascadeComponent implements OnChanges {
   // Enlarge Image (Popup View using MatDialog)
   enlargeImage(image: Image) {
     this.dialog.open(ImageDialogComponent, { data: { image } });
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updatePagedImages();
+  }
+
+  updatePagedImages() {
+    const startIndex = this.pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.pagedImages = this.filteredImages.slice(startIndex, endIndex);
   }
 }
