@@ -15,7 +15,7 @@
       <mat-label>Height</mat-label>
       <input matInput formControlName="height" type="number" />
     </mat-form-field>
-    <app-image-selector [currentImages]="currentImages" [columns]="3"></app-image-selector>
+    <app-image-selector [(currentImages)]="currentImages" [columns]="3"></app-image-selector>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" type="button" (click)="onSubmit()">

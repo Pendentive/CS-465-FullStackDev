@@ -32,7 +32,7 @@ import { Image } from '../../interfaces/image';
 export class EditGalleryHeroVertComponent implements OnInit, OnChanges {
   @Input() formGroup!: FormGroup;
   @Input() componentId!: string;
-  currentImages: Image[] = [];
+  currentImages: Image[] = [];      // Two-way bound array of components current images
   componentTitle: string = '';
 
   constructor(private componentService: ComponentService) {}
