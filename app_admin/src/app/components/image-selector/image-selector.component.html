@@ -1,17 +1,18 @@
 <div class="image-selector">
   <h3>Current Images</h3>
-  <mat-selection-list>
-    <mat-list-option *ngFor="let image of currentImages">
+  <mat-selection-list #currentImagesList>
+    <mat-list-option *ngFor="let image of currentImages" [value]="image">
       <image-display-cascade [images]="[image]" [columns]="columns"></image-display-cascade>
     </mat-list-option>
   </mat-selection-list>
 
   <h3>Selectable Images</h3>
-  <mat-selection-list>
-    <mat-list-option *ngFor="let image of selectableImages">
+  <mat-selection-list #selectableImagesList>
+    <mat-list-option *ngFor="let image of selectableImages" [value]="image">
       <image-display-cascade [images]="[image]" [columns]="columns"></image-display-cascade>
     </mat-list-option>
   </mat-selection-list>
 
-  <button>Add Images</button>
+  <button (click)="addSelectedImages()">Add to Gallery</button>
+  <button (click)="removeSelectedImages()">Remove from Gallery</button>
 </div>

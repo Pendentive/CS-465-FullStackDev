@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApiService } from '../../services/api.service';
 
-import { MatListModule } from '@angular/material/list';
+import { MatListModule, MatSelectionList, MatListOption } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 
 import { Image } from '../../interfaces/image';
@@ -27,6 +27,9 @@ export class ImageSelectorComponent implements OnInit {
   allImages: Image[] = [];
   selectableImages: Image[] = []; // Images available for selection
   selectedImageIds: string[] = []; // Track selected image IDs
+
+  @ViewChildren('selectableImagesList') selectableImagesList!: QueryList<MatSelectionList>;
+  @ViewChildren('currentImagesList') currentImagesList!: QueryList<MatSelectionList>;
 
   constructor(private apiService: ApiService) { }
 
@@ -54,15 +57,25 @@ export class ImageSelectorComponent implements OnInit {
     return this.currentImages.some(img => img._id === image._id);
   }
 
-  addImage(image: Image): void {
-    this.currentImages.push(image);
+  addSelectedImages(): void {
+    const selectedImages = this.selectableImagesList.first.selectedOptions.selected.map(item => item.value);
+    selectedImages.forEach(image => {
+      if (!this.isCurrentImage(image)) {
+        this.currentImages.push(image);
+      }
+    });
     this.updateSelectableImages();
     this.currentImagesChange.emit(this.currentImages);
+    this.selectableImagesList.first.deselectAll(); // Clear selection
   }
 
-  removeImage(image: Image): void {
-    this.currentImages = this.currentImages.filter(img => img._id !== image._id);
+  removeSelectedImages(): void {
+    const selectedImages = this.currentImagesList.first.selectedOptions.selected.map(item => item.value);
+    selectedImages.forEach(image => {
+      this.currentImages = this.currentImages.filter(img => img._id !== image._id);
+    });
     this.updateSelectableImages();
     this.currentImagesChange.emit(this.currentImages);
+    this.currentImagesList.first.deselectAll(); // Clear selection
   }
 }
