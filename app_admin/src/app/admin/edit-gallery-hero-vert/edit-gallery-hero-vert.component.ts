@@ -62,7 +62,10 @@ export class EditGalleryHeroVertComponent implements OnInit, OnChanges {
 
   onSubmit(): void {
     if (this.formGroup.valid) {
-      this.componentService.updateGalleryHeroVert(this.componentId, this.formGroup.get('data')?.value).subscribe({
+      this.componentService.updateGalleryHeroVert(this.componentId, {
+        ...this.formGroup.get('data')?.value,
+        images: this.currentImages
+      }).subscribe({
         next: () => {
           console.log('GalleryHeroVert component updated successfully');
         },
