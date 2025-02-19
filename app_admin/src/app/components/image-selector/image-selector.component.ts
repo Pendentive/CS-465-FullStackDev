@@ -25,8 +25,8 @@ export class ImageSelectorComponent implements OnInit {
   @Input() currentImages: Image[] = [];                           // Input for current image objects
   @Output() currentImagesChange = new EventEmitter<Image[]>();    // Emits current images array
   allImages: Image[] = [];
-  selectableImages: Image[] = []; // Images available for selection
-  selectedImageIds: string[] = []; // Track selected image IDs
+  selectableImages: Image[] = [];           // Images available for selection
+  selectedImageIds: string[] = [];          // Track selected image IDs
 
   @ViewChildren('selectableImagesList') selectableImagesList!: QueryList<MatSelectionList>;
   @ViewChildren('currentImagesList') currentImagesList!: QueryList<MatSelectionList>;

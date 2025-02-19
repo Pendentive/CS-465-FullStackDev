@@ -1,5 +1,38 @@
-<mat-grid-list cols="{{columns}}">
-  <mat-grid-tile *ngFor="let image of images">
-    <img [src]="imageUrlService.constructImageUrl(image.path)" [alt]="image.alt">
-  </mat-grid-tile>
-</mat-grid-list>
+<mat-card class="image-display-container">
+  <mat-card-header>
+    <mat-card-title>{{ title }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Sorting Dropdown -->
+    <mat-form-field appearance="fill">
+      <mat-label>Sort by</mat-label>
+      <mat-select (selectionChange)="sortImages($event.value)">
+        <mat-option value="name">Name</mat-option>
+        <mat-option value="date">Date Created</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Filtering Input -->
+    <mat-form-field appearance="fill">
+      <mat-label>Filter images</mat-label>
+      <input matInput (keyup)="filterImages($event)" placeholder="Type to filter..." />
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <!-- Image Grid Display -->
+    <mat-grid-list [cols]="columns">
+      <mat-grid-tile *ngFor="let image of filteredImages">
+        <img 
+          [src]="imageUrlService.constructImageUrl(image.path)" 
+          [alt]="image.alt"
+          (click)="enlargeImage(image)"
+        />
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <!-- Pagination -->
+    <mat-paginator [length]="filteredImages.length" [pageSize]="12" [pageSizeOptions]="[24, 36, 48]"></mat-paginator>
+  </mat-card-content>
+</mat-card>
