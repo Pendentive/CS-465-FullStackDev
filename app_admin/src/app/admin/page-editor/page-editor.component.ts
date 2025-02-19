@@ -96,7 +96,9 @@ export class PageEditorComponent implements OnInit, OnDestroy {
           })
         });
         this.components.push(componentGroup);
-      } else if (component.kind === 'RepeaterMenu') { // Add RepeaterMenu case
+      } 
+      /*
+      else if (component.kind === 'RepeaterMenu') { // Add RepeaterMenu case
         const componentGroup = this.fb.group({
           kind: ['RepeaterMenu'],
           data: this.fb.group({
@@ -121,7 +123,9 @@ export class PageEditorComponent implements OnInit, OnDestroy {
           }));
         });
         this.components.push(componentGroup);
-      } else if (component.kind === 'GalleryHeroVert') {
+      } 
+      */
+      else if (component.kind === 'GalleryHeroVert') {
         const componentGroup = this.fb.group({
           kind: ['GalleryHeroVert'],
           data: this.fb.group({
