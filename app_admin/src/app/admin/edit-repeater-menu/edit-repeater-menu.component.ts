@@ -67,20 +67,6 @@ export class EditRepeaterMenuComponent implements OnInit, OnChanges {
     return this.formGroup.get('data.menuCards') as FormArray;
   }
 
-  onImagesSelected(imageIds: string[]): void {
-    // Update the form group with the selected image IDs
-    this.currentImages = imageIds;
-    this.menuCards.clear(); // Clear existing menu cards
-    imageIds.forEach(imageId => {
-      this.menuCards.push(this.fb.group({
-        title: ['', Validators.required],
-        image: [imageId, Validators.required],
-        route: ['', Validators.required],
-        buttonTitle: ['', Validators.required]
-      }));
-    });
-  }
-
   onSubmit(): void {
     if (this.formGroup.valid) {
       this.componentService.updateRepeaterMenu(this.componentId, this.formGroup.value).subscribe({

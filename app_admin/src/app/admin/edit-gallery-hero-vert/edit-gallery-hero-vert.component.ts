@@ -32,7 +32,7 @@ import { Image } from '../../interfaces/image';
 export class EditGalleryHeroVertComponent implements OnInit, OnChanges {
   @Input() formGroup!: FormGroup;
   @Input() componentId!: string;
-  currentImages: string[] = [];
+  currentImages: Image[] = [];
   componentTitle: string = '';
 
   constructor(private componentService: ComponentService) {}
@@ -48,14 +48,8 @@ export class EditGalleryHeroVertComponent implements OnInit, OnChanges {
     }
   }
 
-  onImagesSelected(imageIds: string[]): void {
-    this.formGroup.get('data.images')?.setValue(imageIds);
-    this.currentImages = imageIds;
-  }
-
   loadCurrentImages(): void {
-    const images = this.formGroup.get('images')?.value || [];       // Get all images from data
-    this.currentImages = images.map((image: Image) => image._id);   // Only send image ID array
+    this.currentImages = this.formGroup.get('images')?.value || [];
   }
 
   private setComponentTitle(): void {
