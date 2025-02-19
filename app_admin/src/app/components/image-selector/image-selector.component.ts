@@ -72,24 +72,24 @@ export class ImageSelectorComponent implements OnInit {
 
   addSelectedImages(): void {
     const selectedImages = this.selectableImages.filter(image => this.selectedImageIds.includes(image._id));
-
+    const newCurrentImages = [...this.currentImages]; // Create a copy
     selectedImages.forEach(image => {
       if (!this.isCurrentImage(image)) {
-        this.currentImages.push(image);
+        newCurrentImages.push(image);
       }
     });
 
+    this.currentImages = newCurrentImages;
     this.updateSelectableImages();
     this.selectedImageIds = []; // Clear selected images
+    this.currentImagesChange.emit([...this.currentImages]); // Emit a new array
   }
 
   removeSelectedImages(): void {
-    const selectedImages = this.currentImagesList.first.selectedOptions.selected.map(item => item.value);
-    selectedImages.forEach(image => {
-      this.currentImages = this.currentImages.filter(img => img._id !== image._id);
-    });
+    const newCurrentImages = this.currentImages.filter(image => !this.selectedImageIds.includes(image._id));
+    this.currentImages = newCurrentImages;
     this.updateSelectableImages();
-    this.currentImagesChange.emit(this.currentImages);
-    this.currentImagesList.first.deselectAll(); // Clear selection
+    this.selectedImageIds = []; // Clear selected images
+    this.currentImagesChange.emit([...this.currentImages]); // Emit a new array
   }
 }

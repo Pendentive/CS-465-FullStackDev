@@ -49,7 +49,7 @@ export class ImageDisplayCascadeComponent implements OnChanges {
   filteredImages: Image[] = [];
   pagedImages: Image[] = [];
   private debounceTimeout: any;
-  pageSize: number = 3;
+  pageSize: number = 12;
   pageIndex: number = 0;
 
   constructor(public imageUrlService: ImageUrlService, public dialog: MatDialog) {}
