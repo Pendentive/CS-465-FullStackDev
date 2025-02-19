@@ -1,7 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use 'custom-theme' as custom; /* Give it a namespace */
+
+@include mat.all-component-themes(custom.$app-theme);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Your other global styles */
 
 mat-card-header.edit-fec-header {
     margin-bottom: 16px;
@@ -23,4 +28,18 @@ textarea.description-box {
     font-size: 16px; /* Redundent for now but later will be set be global*/
 }
 
+/* Change the filled button container color */
+.mat-mdc-button.mat-primary {
+  --mdc-protected-container-color: #ff8c00; /* Example: Orange color */
+}
 
+/* Change the outlined button outline color */
+.mat-mdc-outlined-button.mat-primary {
+  --mdc-outlined-outline-color: #ff8c00; /* Example: Orange color */
+  --mdc-outlined-label-text-color: #ff8c00; /* Example: Orange color */
+}
+
+/* Change the text button label color */
+.mat-mdc-text-button.mat-primary {
+  --mdc-text-label-text-color: #ff8c00; /* Example: Orange color */
+}
