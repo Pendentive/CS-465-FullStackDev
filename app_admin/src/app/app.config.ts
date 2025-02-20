@@ -11,8 +11,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MaterialModule } from './material/material.module';
 
 import { LayoutModule } from './layout/layout.module';
-import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
-import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 
 export const appConfig: ApplicationConfig = {
   providers: [

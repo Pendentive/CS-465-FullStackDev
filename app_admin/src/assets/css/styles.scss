@@ -1,10 +1,15 @@
 @use '@angular/material' as mat;
-@use 'custom-theme' as custom; /* Give it a namespace */
+//@use 'orange-gradient' as my-theme; // Import custom theme
 
-@include mat.all-component-themes(custom.$app-theme);
+html, body {
+  height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 /* Your other global styles */
 
