@@ -1,15 +1,32 @@
+@import url('fonts.css');
+
 :root {
+    --primary-color: #FC9B23;       /* Brand Orange */
+    --secondary-color: #000000;     /* Black */
+    --background-color: #0f0d13;    /* Dark Background */
+    --text-color: #ffffff;          /* White */
+    --accent-color: #a35a00;        /* Darker Orange */
+    --text-hover-color: #FDCC90;    /* Lighter Orange */
+    --base-font-family: 'MontserratVariable', sans-serif;
+    --base-font-size: 14px;
 }
 
-/* Applying the font styles */
-
 html, body {
-    background: #0f0d13;
+    background: var(--background-color);
     margin: 0;
-    font-family: 'MontserratVariable', sans-serif;
-    font-size: 14px;
+    font-family: var(--base-font-family);
+    font-size: var(--base-font-size);
+    color: var(--text-color); /* Default text color */
     min-height: 100%;
     min-width: 100%;
-    /* margin-left: 0;	/* Remove default margin */
+/* margin-left: 0;	/* Remove default margin */
     overflow-x: auto; /* Remove margin indirectly */
+}
+
+#background {
+    width: 100%;
+}
+
+#page {
+    width: 960px;
 }

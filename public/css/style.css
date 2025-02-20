@@ -1,5 +1,11 @@
-@import url('fonts.css');
+/* Import website basic global styles */
 @import url('base.css');
-@import url('layout.css');
-@import url('components.css');
-@import url('pages.css');
+
+
+/* Import FEC component styles */
+@import url('./fecs/components.css');
+
+
+/* Import page styles */
+@import url('./pages/common.css');
+@import url('./pages/pages.css');
