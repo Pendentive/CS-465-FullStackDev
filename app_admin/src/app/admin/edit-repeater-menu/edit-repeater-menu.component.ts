@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { ImageSelectorComponent } from '../../components/image-selector/image-selector.component';
 import { Image } from '../../interfaces/image';
-import { RepeaterMenu } from '../../interfaces/repeater-menu';
+import { RepeaterMenu, MenuCard } from '../../interfaces/repeater-menu';
 
 @Component({
   selector: 'app-edit-repeater-menu',
@@ -93,44 +93,57 @@ export class EditRepeaterMenuComponent implements OnInit, OnChanges {
   // Stores the array of images into the form control
   onImagesChange(newImages: Image[], index: number): void {
     const imageControl = this.menuCards.at(index).get('image');
-    if (imageControl && newImages.length > 0) {
-      // Set only the first image since MenuCard expects single image
+    if (!imageControl) return;
+
+    if (newImages.length === 0) {
+      // Remove the currently selected image
+      imageControl.patchValue(null);
+      this.imageValues[index] = [];
+    } else {
+      // Use the first image for each card
       imageControl.patchValue(newImages[0]);
-      this.imageValues[index] = newImages; // Update image values array
-      
-      // Debug logging
-      console.log(`Image updated for card ${index}:`, newImages[0]);
+      this.imageValues[index] = newImages;
     }
+
+    console.log(`Image updated for card ${index}:`, {
+      newImages,
+      formValue: imageControl.value
+    });
   }
 
   getImageValue(index: number): Image[] {
     const image = this.menuCards.at(index).get('image')?.value;
-    return image ? [image] : [];
+    if (!image) {
+      console.warn(`No image found for card ${index}`);
+      return [];
+    }
+    // Ensure we're returning an array as ImageSelector expects
+    return Array.isArray(image) ? image : [image];
   }
 
   // Submit entire repeater menu form
   onSubmit(): void {
     if (this.formGroup.valid) {
-      // Debug logging before submission
-      console.log('Submitting form values:', this.formGroup.value);
+      const formValue = this.formGroup.value;
       
-      const update = { ...this.formGroup.value } as RepeaterMenu;
-      
-      // Validate menu cards
-      const validCards = update.menuCards?.every(card => 
-        card.title && card.route && card.buttonTitle
-      );
+      // Create update object with proper image IDs
+      const update = {
+        ...formValue,
+        menuCards: this.menuCards.controls.map((control, index) => ({
+          title: control.get('title')?.value,
+          route: control.get('route')?.value,
+          buttonTitle: control.get('buttonTitle')?.value,
+          image: control.get('image')?.value._id // Get just the ID
+        }))
+      };
 
-      if (!validCards) {
-        console.error('Invalid menu card data detected');
-        return;
-      }
+      console.log('Submitting update:', update);
 
       this.componentService.updateRepeaterMenu(this.componentId, update).subscribe({
         next: () => {
           console.log('RepeaterMenu updated successfully');
         },
-        error: (error) => {
+        error: (error: Error) => {
           console.error('Error updating RepeaterMenu:', error);
         }
       });
