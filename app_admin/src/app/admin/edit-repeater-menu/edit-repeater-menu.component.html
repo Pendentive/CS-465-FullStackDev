@@ -2,42 +2,64 @@
   <mat-card-header class="edit-fec-header">
     <mat-card-title>{{ componentTitle }}</mat-card-title>
   </mat-card-header>
+
   <mat-card-content class="edit-fec-content" [formGroup]="formGroup">
+    <!-- Main form fields -->
     <mat-form-field>
       <mat-label>Title</mat-label>
       <input matInput formControlName="title" />
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Photo Height</mat-label>
       <input matInput formControlName="photoHeight" type="number" />
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Photo Width</mat-label>
       <input matInput formControlName="photoWidth" type="number" />
     </mat-form-field>
-  </mat-card-content>
 
-  <mat-card-header class="edit-fec-header">
-    <mat-card-title>Edit First Menu Card</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="edit-fec-content" [formGroup]="menuCardForm">
     <mat-form-field>
-      <mat-label>Menu Card Title</mat-label>
-      <input matInput formControlName="title" />
+      <mat-label>Menu Card Padding x</mat-label>
+      <input matInput formControlName="menuCardPaddingX" type="number" />
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Route</mat-label>
-      <input matInput formControlName="route" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Button Title</mat-label>
-      <input matInput formControlName="buttonTitle" />
-    </mat-form-field>
-    <app-image-selector [(currentImages)]="currentImages" [columns]="3"></app-image-selector>
+
+    <!-- Menu Cards Array -->
+    <div formArrayName="menuCards">
+      <div *ngFor="let card of menuCards.controls; let i=index" 
+           [formGroupName]="i" 
+           class="menu-card-container">
+        <mat-card>
+          <mat-card-content>
+            <mat-form-field>
+              <mat-label>Card Title</mat-label>
+              <input matInput formControlName="title" />
+            </mat-form-field>
+            
+            <mat-form-field>
+              <mat-label>Route</mat-label>
+              <input matInput formControlName="route" />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Button Title</mat-label>
+              <input matInput formControlName="buttonTitle" />
+            </mat-form-field>
+
+            <app-image-selector
+              [currentImages]="getImageValue(i)"
+              (currentImagesChange)="onImagesChange($event, i)"
+              [columns]="3">
+            </app-image-selector>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button color="primary" type="button" (click)="onSubmit()">
+    <button mat-raised-button color="primary" (click)="onSubmit()">
       <mat-icon>save</mat-icon> Update
     </button>
   </mat-card-actions>

@@ -127,10 +127,10 @@ export class PageEditorComponent implements OnInit, OnDestroy {
         const menuCardsFormArray = this.fb.array<FormGroup<any>>([]);
         component.menuCards.forEach((menuCard: any) => {
           menuCardsFormArray.push(this.fb.group({
-            title: [menuCard.title, Validators.required],
-            image: [menuCard.image, Validators.required],
-            route: [menuCard.route, Validators.required],
-            buttonTitle: [menuCard.buttonTitle, Validators.required]
+            title: [menuCard.title],
+            image: [menuCard.image],
+            route: [menuCard.route],
+            buttonTitle: [menuCard.buttonTitle]
           }));
         });
         
