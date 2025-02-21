@@ -1,0 +1,20 @@
+<mat-card class="edit-fec-container">
+  <mat-card-header class="edit-fec-header">
+    <mat-card-title>{{ componentTitle }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="edit-fec-content" [formGroup]="formGroup">
+    <mat-form-field>
+      <mat-label>Photo Edge Length</mat-label>
+      <input matInput formControlName="photoEdgeLength" type="number" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Bar Height</mat-label>
+      <input matInput formControlName="barHeight" type="number" />
+    </mat-form-field>
+    <app-image-selector [(currentImages)]="currentImages" [columns]="3"></app-image-selector>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onSubmit()">
+      <mat-icon>save</mat-icon> Update
+    </button>
+  </mat-card-actions>

@@ -21,6 +21,11 @@
                             [formGroup]="asFormGroup(component.get('data'))"
                             [componentId]="component.get('data')?.get('_id')?.value">
                         </app-edit-repeater-menu>
+                        <app-edit-gallery-banner
+                            *ngSwitchCase="'GalleryBanner'"
+                            [formGroup]="asFormGroup(component.get('data'))"
+                            [componentId]="component.get('data')?.get('_id')?.value">
+                        </app-edit-gallery-banner>
                         <!-- Add cases for other component types -->
                     </ng-container>
                 </ng-container>

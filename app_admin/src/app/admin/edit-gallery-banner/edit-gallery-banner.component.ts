@@ -14,7 +14,7 @@ import { ImageSelectorComponent } from '../../components/image-selector/image-se
 import { Image } from '../../interfaces/image';
 
 @Component({
-  selector: 'app-edit-gallery-hero-vert',
+  selector: 'app-edit-gallery-banner',
   standalone: true,
   imports: [
     CommonModule,
@@ -26,13 +26,13 @@ import { Image } from '../../interfaces/image';
     MatButtonModule,
     MatIconModule
   ],
-  templateUrl: './edit-gallery-hero-vert.component.html',
-  styleUrls: ['./edit-gallery-hero-vert.component.css']
+  templateUrl: './edit-gallery-banner.component.html',
+  styleUrls: ['./edit-gallery-banner.component.css']
 })
-export class EditGalleryHeroVertComponent implements OnInit, OnChanges {
+export class EditGalleryBannerComponent implements OnInit, OnChanges {
   @Input() formGroup!: FormGroup;
   @Input() componentId!: string;
-  currentImages: Image[] = [];      // Two-way bound array of components current images
+  currentImages: Image[] = [];
   componentTitle: string = '';
 
   constructor(private componentService: ComponentService) {}
@@ -53,24 +53,22 @@ export class EditGalleryHeroVertComponent implements OnInit, OnChanges {
   }
 
   private setComponentTitle(): void {
-    this.componentTitle = this.formGroup.get('title')?.value || 'Edit Gallery Hero Vert';
+    this.componentTitle = this.formGroup.get('title')?.value || 'Edit Gallery Banner';
   }
 
   onSubmit(): void {
     if (this.formGroup.valid) {
-      this.componentService.updateGalleryHeroVert(this.componentId, {
+      this.componentService.updateGalleryBanner(this.componentId, {
         ...this.formGroup.value,
-        images: this.currentImages.map(image => image._id) // Send only image IDs
+        images: this.currentImages.map(image => image._id)
       }).subscribe({
         next: () => {
-          console.log('GalleryHeroVert component updated successfully');
+          console.log('GalleryBanner component updated successfully');
         },
         error: (error) => {
-          console.error('Error updating GalleryHeroVert component:', error);
+          console.error('Error updating GalleryBanner component:', error);
         }
       });
     }
   }
 }
-
-// TODO: SOMETHING IS CITED ON PAGE
