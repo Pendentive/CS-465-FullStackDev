@@ -105,35 +105,7 @@ export class PageEditorComponent implements OnInit, OnDestroy {
           })
         });
         this.components.push(componentGroup);
-      } 
-      /*
-      else if (component.kind === 'RepeaterMenu') { // Add RepeaterMenu case
-        const componentGroup = this.fb.group({
-          kind: ['RepeaterMenu'],
-          data: this.fb.group({
-            _id: [component._id],
-            menuCards: this.fb.array([]),
-            photoHeight: [component.photoHeight],
-            photoWidth: [component.photoWidth],
-            photoPaddingX: [component.photoPaddingX],
-            photoPaddingY: [component.photoPaddingY],
-            menuCardPaddingX: [component.menuCardPaddingX],
-            identifier: [component.identifier],
-            tags: [component.tags],
-            kind: [component.kind]
-          })
-        });
-        (component.menuCards || []).forEach((menuCard: any) => {  // SOC: Should be in controller
-          (componentGroup.get('data.menuCards') as FormArray).push(this.fb.group({
-            title: [menuCard.title, Validators.required],
-            image: [menuCard.image, Validators.required],
-            route: [menuCard.route, Validators.required],
-            buttonTitle: [menuCard.buttonTitle, Validators.required]
-          }));
-        });
-        this.components.push(componentGroup);
-      } 
-      */
+      }
       else if (component.kind === 'GalleryHeroVert') {
         const componentGroup = this.fb.group({
           kind: ['GalleryHeroVert'],
