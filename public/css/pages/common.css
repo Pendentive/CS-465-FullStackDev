@@ -33,7 +33,7 @@
 #logo img {
     width: 28px;
     height: 28px;
-    padding-bottom: 5.5px; /* Align the logo baseline with the text */
+    padding-bottom: 5.5px;      /* Align the logo baseline with the text */
 }
 
 .logo-text {
@@ -42,207 +42,187 @@
     font-weight: 500;
     font-size: 17px;
     text-decoration: none;
-    letter-spacing: 0.5px; /* Increase space between letters */
+    letter-spacing: 0.5px;      /* Increase space between letters */
+}
+.logo-text:hover {
+    color: var(--primary-color);
 }
 
-#navigation {   
+#navigation {
     justify-content: flex-end;
 }
 
 #navigation ul {
     display: flex;
-    align-items: center; /* Align items vertically */
-    list-style: none;
-    margin: 0;
+    align-items: center;        /* Align items vertically */
     padding: 0 20px;
 }
 
 #navigation li {
-    padding: 0;
     text-align: center;
 }
 
 #navigation li a {
-    color: var(--primary-color);
     font-weight: 570;
     font-size: 14px;
-    letter-spacing: -0.3px; /* decrease space between letters */
-    text-decoration: none;
+    letter-spacing: -0.3px;     /* decrease space between letters */
     padding: 0px 15px;
-    transition: color 0.1s ease-in-out;
-}
-
-#navigation li a:hover {
-    color: var(--text-hover-color);
-}
-
-#navigation li.selected a {
-    color: var(--accent-color);
-
 }
 
 /* ------------------------------ FOOTER ------------------------------ */
 .site-footer {
-    background-color: #000000;
-    color: #ff8c00;
-    font-family: sans-serif;
     width: 100%;
-    padding-top: 60px;
-}
+    background-color: var(--secondary-color);
 
-.site-footer a {
-    color: #ff8c00;
-    text-decoration: none;
-}
-
-.site-footer a:hover {
-    text-decoration: underline;
+    color: var(--primary-color);
+    font-family: var(--base-font-family);
+    font-weight: 450;
+    
+    padding-top: 80px;
 }
 
 .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 1200px;
+    width: var(--footer-width);
+    height: 200px;
     margin: 0 auto;
+    display: flex;
 }
 
-.footer-left {
-    flex: 1 1 200px;
-    margin-bottom: 1rem;
+/* Common styles for footer sections */
+.footer-section {
+    flex: 1;
+    height: 100%;
 }
 
-.footer-logo {
-    text-align: left;
+.footer-divider {
+    width: 3px;
+    height: 100%;
+    align-self: center;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    margin: 0 50px;
 }
 
-.footer-logo .logo-icon {
+
+/* Left Section: Logo and Site Text */
+.logo-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-icon img {
     display: inline-block;
-    width: 40px;
-    height: 40px;
-    background-color: #ff8c00;
-    margin-bottom: 0.5rem;
+    width: 80px;
+    height: 80px;
 }
 
 .footer-site-title {
-    font-weight: bold;
-    margin: 0.5rem 0;
+    font-weight: 700;
+    text-transform: var(--heading-text-transform);
+    letter-spacing: 1.5px;          /* Increase space between letters */
+    margin: 1rem 0;
 }
 
 .footer-tagline {
-    margin: 0;
+    font-weight: 550;
 }
 
-.footer-nav {
-    flex: 1 1 200px;
-    margin-bottom: 1rem;
-}
 
-.footer-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-nav li {
-    margin: 0.3rem 0;
-}
-
-.footer-right {
-    flex: 1 1 200px;
-    margin-bottom: 1rem;
+/* Navigation Section */
+.nav-content {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: center;       /* Center the ul vertically */
+    align-items: flex-start;       /* Align text to the left */
+}
+
+#footer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 90%;                    /* Distrubuted Height percentage */
+    display: flex;                 
+    flex-direction: column;         
+    justify-content: space-between; /* Distribute items evenly */
+}
+
+
+/* Right Section: Button, Contact Info, Social Icons */
+.right-content {
+    height: 100%;
+    display: flex;                        
+    flex-direction: column;
+    justify-content: center;     /* Center the ul vertically */
+    align-items: center;         /* Align text to the left */
+    gap: 0.4rem;
 }
 
 .book-now-btn {
+    margin: 0 auto;
     background-color: transparent;
-    border: 1px solid #ff8c00;
-    color: #ff8c00;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
     cursor: pointer;
-    width: 40%;
+    width: 90%;
     box-sizing: border-box;
     border-radius: 10px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .book-now-btn:hover {
-    background-color: #ff8c00;
-    color: #000;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 .contact-info a {
     display: block;
-    margin-bottom: 0.5rem;
-    color: #ff8c00;
+    letter-spacing: 1px;
 }
 
+#footer-email.contact-info {
+    text-transform: var(--heading-text-transform);
+    text-decoration: underline;
+}
+
+#footer-phone-loc.contact-info {
+    padding-bottom: 1rem;
+}
 .social-icons {
     display: flex;
     justify-content: center;
+    gap: 2rem;
 }
-
 .social-icons a {
-    margin-right: 0.5rem;
-}
-
-.footer-bottom {
-    margin-top: 2rem;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.footer-bottom p {
-    margin: 0.3rem 0;
-}
-
-.vertical-line {
-    width: 3px;
-    height: 135px;
-    background-color: #ff8c00;
-    border-radius: 1px;
-    margin: 0 20px;
-}
-
-#connect a {
-    background: url(../images/icons.png) no-repeat;
     display: inline-block;
-    height: 23px;
-    width: 23px;
-    margin-left: 10px;
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: opacity 0.2s ease;
 }
 
-#connect a.pinterest {
-    background-position: 0 -33px;
+.social-icons a:hover {
+    opacity: 0.8;
 }
 
-#connect a.facebook {
-    background-position: 0 -98px;
+.social-icons .facebook {
+    background-image: url('../../../images/social/facebook.avif');
 }
 
-#connect a.twitter {
-    background-position: 0 -164px;
-    width: 28px;
+.social-icons .instagram {
+    background-image: url('../../../images/social/instagram.avif');
 }
 
-#connect a.googleplus {
-    background-position: 0 -230px;
-}
 
-#connect a.pinterest:hover {
-    background-position: 0 0;
-}
-
-#connect a.facebook:hover {
-    background-position: 0 -65px;
-}
-
-#connect a.twitter:hover {
-    background-position: 0 -131px;
-}
-
-#connect a.googleplus:hover {
-    background-position: 0 -197px;
+/* Footer Bottom Text */
+.footer-bottom {
+    padding: 3.75rem 0;
+    text-align: center;
+    font-size: 0.8rem;
 }

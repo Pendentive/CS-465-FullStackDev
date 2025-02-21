@@ -9,7 +9,7 @@
 }
 
 #landing-page {
-    max-width: 1200px;
+    max-width: var(--page-max-width);
     margin: 0 auto;
 }
 
@@ -25,6 +25,6 @@
 }
 
 #portfolio-page {
-    max-width: 1200px;
+    max-width: var(--page-max-width);
     margin: 0 auto;
 }
