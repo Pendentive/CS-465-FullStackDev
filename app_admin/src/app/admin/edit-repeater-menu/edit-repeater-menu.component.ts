@@ -87,6 +87,14 @@ export class EditRepeaterMenuComponent implements OnInit, OnChanges {
     }
   }
 
+  onImageChange(newImages: Image[]): void {
+    this.currentImages = newImages;
+    // Update the image control with the first image in the array (or null if none)
+    this.menuCardForm.patchValue({
+      image: newImages && newImages.length > 0 ? newImages[0] : null
+    });
+  }
+
   onSubmit(): void {
     if (this.menuCardForm.valid) {
       // Update the first menu card in the form group with the values from the menuCardForm
