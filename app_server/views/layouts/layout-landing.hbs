@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>{{title}}</title>
 
+    {{!-- Preload critical fonts --}}
+    <link rel="preload" href="/fonts/avenir-lt-pro-cufonfonts/AvenirLTProMedium.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="/fonts/Montserrat/Montserrat-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="/fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-Medium.otf" as="font" type="font/otf" crossorigin>
 
-    <link rel='stylesheet' href='/css/style.css' />
+    <link rel='stylesheet' href='/css/style.css'>
   </head>
   <body>
     {{> common/header }}

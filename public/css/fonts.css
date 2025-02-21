@@ -1,87 +1,110 @@
 /* Avenir Font Declarations */
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-Black.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProBlack.otf') format('opentype');
     font-weight: 900;
     font-style: normal;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-BlackOblique.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProBlackOblique.otf') format('opentype');
     font-weight: 900;
     font-style: oblique;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-Book.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProBook.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-BookOblique.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProBookOblique.otf') format('opentype');
     font-weight: 400;
     font-style: oblique;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-Heavy.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProHeavy.otf') format('opentype');
     font-weight: 800;
     font-style: normal;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-HeavyOblique.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProHeavyOblique.otf') format('opentype');
     font-weight: 800;
     font-style: oblique;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-Light.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProLight.otf') format('opentype');
     font-weight: 300;
     font-style: normal;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-LightOblique.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProLightOblique.otf') format('opentype');
     font-weight: 300;
     font-style: oblique;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-Medium.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProMedium.otf') format('opentype');
     font-weight: 500;
     font-style: normal;
-    font-display: swap;
+    font-display: block; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-MediumOblique.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProMediumOblique.otf') format('opentype');
     font-weight: 500;
     font-style: oblique;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-Oblique.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProOblique.otf') format('opentype');
     font-weight: normal;
     font-style: oblique;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 @font-face {
     font-family: 'AvenirLTPro';
-    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTPro-Roman.otf') format('opentype');
+    src: url('../fonts/avenir-lt-pro-cufonfonts/AvenirLTProRoman.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap; /* Prevents FOUT */
+    unicode-range: U+000-5FF; /* Subset loading for better performance */
 }
 
 /* Montserrat Font Declarations */
@@ -92,6 +115,7 @@
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
+    unicode-range: U+000-5FF;
 }
 
 @font-face {
@@ -99,4 +123,6 @@
     src: url('../fonts/Montserrat/Montserrat-Italic-VariableFont_wght.ttf') format('truetype-variations');
     font-weight: 100 900;
     font-style: italic;
+    font-display: swap;
+    unicode-range: U+000-5FF;
 }

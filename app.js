@@ -37,12 +37,23 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 
+// Middleware: Font caching
+const staticConfig = {
+  setHeaders: (res, filepath, stat) => {
+    if (filepath.endsWith('.ttf') || filepath.endsWith('.otf')) {
+      const contentType = filepath.endsWith('.ttf') ? 'font/ttf' : 'font/otf';
+      res.set('Content-Type', contentType);
+      res.set('Cache-Control', 'public, max-age=31536000');
+    }
+  }
+};
+
 // Middleware setup
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), staticConfig));
 app.use(passport.initialize());
 
 // Enable CORS
