@@ -33,11 +33,7 @@
       <mat-label>Button Title</mat-label>
       <input matInput formControlName="buttonTitle" />
     </mat-form-field>
-    <app-image-selector
-      [currentImages]="currentImages"
-      (currentImagesChange)="onImageChange($event)"
-      [columns]="3">
-    </app-image-selector>
+    <app-image-selector [(currentImages)]="currentImages" [columns]="3"></app-image-selector>
   </mat-card-content>
 
   <mat-card-actions>

@@ -139,7 +139,7 @@ export class PageEditorComponent implements OnInit, OnDestroy {
           data: this.fb.group({
             _id: [component._id],
             title: [component.title],
-            menuCards: menuCardsFormArray, // no casting necessary now
+            menuCards: menuCardsFormArray,
             photoHeight: [component.photoHeight],
             photoWidth: [component.photoWidth],
             photoPaddingX: [component.photoPaddingX],

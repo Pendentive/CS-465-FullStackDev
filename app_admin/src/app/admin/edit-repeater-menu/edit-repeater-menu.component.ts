@@ -35,7 +35,7 @@ export class EditRepeaterMenuComponent implements OnInit, OnChanges {
   @Input() componentId!: string;
   componentTitle: string = '';
   menuCardForm!: FormGroup;
-  currentImages: Image[] = [];
+  currentImages: any[] = [];  // <-- will hold an array of images
   firstMenuCardFormGroup!: FormGroup;
 
   constructor(
@@ -46,12 +46,17 @@ export class EditRepeaterMenuComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.setComponentTitle();
     this.initializeMenuCardForm();
+    // Sync currentImages with the form control value if present
+    const imageValue = this.menuCardForm.get('image')?.value;
+    this.currentImages = imageValue ? (Array.isArray(imageValue) ? imageValue : [imageValue]) : [];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['formGroup']) {
       this.setComponentTitle();
       this.initializeMenuCardForm();
+      const imageValue = this.menuCardForm.get('image')?.value;
+      this.currentImages = imageValue ? (Array.isArray(imageValue) ? imageValue : [imageValue]) : [];
     }
   }
 
@@ -69,7 +74,8 @@ export class EditRepeaterMenuComponent implements OnInit, OnChanges {
       // Initialize the menuCardForm with the values from the first menu card
       this.menuCardForm = this.fb.group({
         title: [this.firstMenuCardFormGroup.get('title')?.value || '', Validators.required],
-        image: [this.firstMenuCardFormGroup.get('image')?.value || null, Validators.required],
+        // We're expecting an array for currentImages (even if it is one image)
+        image: [this.firstMenuCardFormGroup.get('image')?.value || [], Validators.required],
         route: [this.firstMenuCardFormGroup.get('route')?.value || '', Validators.required],
         buttonTitle: [this.firstMenuCardFormGroup.get('buttonTitle')?.value || '', Validators.required]
       });
@@ -79,7 +85,7 @@ export class EditRepeaterMenuComponent implements OnInit, OnChanges {
       // If there are no menu cards, create an empty form
       this.menuCardForm = this.fb.group({
         title: ['', Validators.required],
-        image: [null, Validators.required],
+        image: [[], Validators.required],
         route: ['', Validators.required],
         buttonTitle: ['', Validators.required]
       });
@@ -87,37 +93,30 @@ export class EditRepeaterMenuComponent implements OnInit, OnChanges {
     }
   }
 
-  onImageChange(newImages: Image[]): void {
-    this.currentImages = newImages;
-    // Update the image control with the first image in the array (or null if none)
-    this.menuCardForm.patchValue({
-      image: newImages && newImages.length > 0 ? newImages[0] : null
+// At submission time, update the image control from currentImages
+onSubmit(): void {
+  // Patch the image control with the first image from the currentImages array.
+  this.menuCardForm.patchValue({
+    image: this.currentImages && this.currentImages.length > 0 ? this.currentImages[0] : null
+  });
+
+  if (this.menuCardForm.valid) {
+    const menuCards = this.formGroup.get('menuCards') as FormArray;
+    if (menuCards && menuCards.length > 0) {
+      const firstMenuCard = menuCards.at(0) as FormGroup;
+      firstMenuCard.patchValue(this.menuCardForm.value);
+    }
+  
+    const update = { ...this.formGroup.value };
+    this.componentService.updateRepeaterMenu(this.componentId, update).subscribe({
+      next: () => {
+        console.log('RepeaterMenu component updated successfully');
+      },
+      error: (error) => {
+        console.error('Error updating RepeaterMenu component:', error);
+      }
     });
   }
-
-  onSubmit(): void {
-    if (this.menuCardForm.valid) {
-      // Update the first menu card in the form group with the values from the menuCardForm
-      const menuCards = this.formGroup.get('menuCards') as FormArray;
-      if (menuCards && menuCards.length > 0) {
-        const firstMenuCard = menuCards.at(0) as FormGroup;
-        firstMenuCard.patchValue(this.menuCardForm.value);
-      }
-
-      // Prepare the update object
-      const update = {
-        ...this.formGroup.value
-      };
-
-      // Call the component service to update the repeater menu
-      this.componentService.updateRepeaterMenu(this.componentId, update).subscribe({
-        next: () => {
-          console.log('RepeaterMenu component updated successfully');
-        },
-        error: (error) => {
-          console.error('Error updating RepeaterMenu component:', error);
-        }
-      });
-    }
-  }
+}
+  
 }
