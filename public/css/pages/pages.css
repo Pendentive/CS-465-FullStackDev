@@ -1,3 +1,7 @@
+.body-background {
+    padding-top: var(--header-height);
+}
+
 /* ------------------------------ LANDING LAYOUT ----------------------------- */
 #landing-background {
     min-height: 100vh;
