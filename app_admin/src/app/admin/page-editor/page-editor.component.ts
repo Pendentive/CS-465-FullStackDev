@@ -122,6 +122,36 @@ export class PageEditorComponent implements OnInit, OnDestroy {
         });
         this.components.push(componentGroup);
       }
+      else if (component.kind === 'RepeaterMenu') {
+        // Explicitly type menuCardsFormArray as FormArray of FormGroup<any>
+        const menuCardsFormArray = this.fb.array<FormGroup<any>>([]);
+        component.menuCards.forEach((menuCard: any) => {
+          menuCardsFormArray.push(this.fb.group({
+            title: [menuCard.title, Validators.required],
+            image: [menuCard.image, Validators.required],
+            route: [menuCard.route, Validators.required],
+            buttonTitle: [menuCard.buttonTitle, Validators.required]
+          }));
+        });
+        
+        const componentGroup = this.fb.group({
+          kind: ['RepeaterMenu'],
+          data: this.fb.group({
+            _id: [component._id],
+            title: [component.title],
+            menuCards: menuCardsFormArray, // no casting necessary now
+            photoHeight: [component.photoHeight],
+            photoWidth: [component.photoWidth],
+            photoPaddingX: [component.photoPaddingX],
+            photoPaddingY: [component.photoPaddingY],
+            menuCardPaddingX: [component.menuCardPaddingX],
+            identifier: [component.identifier],
+            tags: [component.tags],
+            kind: [component.kind]
+          })
+        });
+        this.components.push(componentGroup);
+      }
       else if (component.kind === 'GalleryBanner') {
         const componentGroup = this.fb.group({
           kind: ['GalleryBanner'],

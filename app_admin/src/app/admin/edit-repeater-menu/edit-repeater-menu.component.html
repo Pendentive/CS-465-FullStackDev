@@ -1,0 +1,44 @@
+<mat-card class="edit-fec-container">
+  <mat-card-header class="edit-fec-header">
+    <mat-card-title>{{ componentTitle }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="edit-fec-content" [formGroup]="formGroup">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Photo Height</mat-label>
+      <input matInput formControlName="photoHeight" type="number" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Photo Width</mat-label>
+      <input matInput formControlName="photoWidth" type="number" />
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-header class="edit-fec-header">
+    <mat-card-title>Edit First Menu Card</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="edit-fec-content" [formGroup]="menuCardForm">
+    <mat-form-field>
+      <mat-label>Menu Card Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Route</mat-label>
+      <input matInput formControlName="route" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Button Title</mat-label>
+      <input matInput formControlName="buttonTitle" />
+    </mat-form-field>
+    <app-image-selector [(currentImages)]="currentImages" [columns]="3"></app-image-selector>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onSubmit()">
+      <mat-icon>save</mat-icon> Update
+    </button>
+  </mat-card-actions>
+</mat-card>
