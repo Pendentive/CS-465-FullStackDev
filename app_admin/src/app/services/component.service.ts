@@ -37,6 +37,15 @@ export class ComponentService {
       );
   }
 
+  updateGalleryGrid(componentId: string, update: any): Observable<any> {
+    // Prepare the data for sending to the API (e.g., formatting, validation)
+    const componentType = 'GalleryGrid'; // Hardcoded for now, can be made dynamic
+    return this.apiService.put<any>(`components/${componentType}/${componentId}`, update)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   updateRepeaterMenu(componentId: string, update: any): Observable<any> {
     // Prepare the data for sending to the API (e.g., formatting, validation)
     const componentType = 'RepeaterMenu'; // Hardcoded for now, can be made dynamic

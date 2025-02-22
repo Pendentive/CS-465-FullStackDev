@@ -14,6 +14,7 @@ import { EditRepeaterMenuComponent } from '../edit-repeater-menu/edit-repeater-m
 import { EditPageComponent } from '../edit-page/edit-page.component';
 import { EditGalleryHeroVertComponent } from '../edit-gallery-hero-vert/edit-gallery-hero-vert.component';
 import { EditGalleryBannerComponent } from '../edit-gallery-banner/edit-gallery-banner.component';
+import { EditGalleryGridComponent } from '../edit-gallery-grid/edit-gallery-grid.component';
 
 @Component({
   selector: 'app-page-editor',
@@ -25,7 +26,8 @@ import { EditGalleryBannerComponent } from '../edit-gallery-banner/edit-gallery-
     EditRepeaterMenuComponent, 
     EditPageComponent, 
     EditGalleryHeroVertComponent, 
-    EditGalleryBannerComponent
+    EditGalleryBannerComponent,
+    EditGalleryGridComponent
   ],
   templateUrl: './page-editor.component.html',
   styleUrls: ['./page-editor.component.css']
@@ -115,6 +117,23 @@ export class PageEditorComponent implements OnInit, OnDestroy {
             padding: [component.padding],
             width: [component.width],
             height: [component.height],
+            identifier: [component.identifier],
+            tags: [component.tags],
+            kind: [component.kind]
+          })
+        });
+        this.components.push(componentGroup);
+      }
+      else if (component.kind === 'GalleryGrid') {
+        const componentGroup = this.fb.group({
+          kind: ['GalleryGrid'],
+          data: this.fb.group({
+            _id: [component._id],
+            title: [component.title],
+            images: [component.images || []],
+            columns: [component.columns],
+            rows: [component.rows],
+            gap: [component.gap],
             identifier: [component.identifier],
             tags: [component.tags],
             kind: [component.kind]

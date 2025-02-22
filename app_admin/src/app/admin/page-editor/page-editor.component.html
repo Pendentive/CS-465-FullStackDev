@@ -16,6 +16,11 @@
                             [formGroup]="asFormGroup(component.get('data'))"
                             [componentId]="component.get('data')?.get('_id')?.value">
                         </app-edit-text-intro>
+                        <app-edit-gallery-grid
+                            *ngSwitchCase="'GalleryGrid'"
+                            [formGroup]="asFormGroup(component.get('data'))"
+                            [componentId]="component.get('data')?.get('_id')?.value">
+                        </app-edit-gallery-grid>
                         <app-edit-repeater-menu
                             *ngSwitchCase="'RepeaterMenu'"
                             [formGroup]="asFormGroup(component.get('data'))"
