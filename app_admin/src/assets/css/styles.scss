@@ -150,13 +150,13 @@ mat-card-header.edit-fec-header {
 }
 
 /* Default card content */
-mat-card-content {
+.edit-fec-content {
     display: flex !important;
-    flex-direction: row; /* Display form fields in a row */
-    flex-wrap: wrap; /* Allow form fields to wrap to the next line */
-    justify-content: flex-start; /* Align items to the start of the container */
-    gap: 16px; /* Add some spacing between form fields */
-    margin-top: 20px; /* Add some space between the header and content */
+    flex-direction: row;              /* Display form fields in a row */
+    flex-wrap: wrap;                  /* Allow form fields to wrap to the next line */
+    justify-content: flex-start;      /* Align items to the start of the container */
+    gap: 16px;                        /* Add some spacing between form fields */
+    margin-top: 20px;                 /* Add some space between the header and content */
 }
 
 /* Style for each form field */
@@ -213,11 +213,4 @@ app-image-selector {
   box-shadow: 0px 1px 1.5px -1px rgba(0, 0, 0, .2), 0px 1px 1px 0px rgba(0, 0, 0, .05), 0px 1px 3px 0px rgba(0, 0, 0, .12);
   transform: scalex(1.001);
   transform-origin: center;
-}
-
-/* Repeater menu card flex layout */
-[formArrayName="menuCards"] {
-  display: flex;
-  flex-direction: column;
-  gap: 16px; // Adjust the gap value as needed
 }

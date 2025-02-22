@@ -26,37 +26,39 @@
     </mat-form-field>
 
     <!-- Menu Cards Array -->
-    <div formArrayName="menuCards">
-      <div *ngFor="let card of menuCards.controls; let i=index" 
-           [formGroupName]="i" 
-           class="menu-card-container">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>Menu Card {{ i + 1 }}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <mat-form-field>
-              <mat-label>Card Title</mat-label>
-              <input matInput formControlName="title" />
-            </mat-form-field>
-            
-            <mat-form-field>
-              <mat-label>Route</mat-label>
-              <input matInput formControlName="route" />
-            </mat-form-field>
+    <div class="menu-cards-wrapper">
+      <div formArrayName="menuCards" class="menu-cards-container">
+        <div *ngFor="let card of menuCards.controls; let i=index" 
+             [formGroupName]="i" 
+             class="menu-card-container">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Menu Card {{ i + 1 }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-form-field>
+                <mat-label>Card Title</mat-label>
+                <input matInput formControlName="title" />
+              </mat-form-field>
+              
+              <mat-form-field>
+                <mat-label>Route</mat-label>
+                <input matInput formControlName="route" />
+              </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>Button Title</mat-label>
-              <input matInput formControlName="buttonTitle" />
-            </mat-form-field>
+              <mat-form-field>
+                <mat-label>Button Title</mat-label>
+                <input matInput formControlName="buttonTitle" />
+              </mat-form-field>
 
-            <app-image-selector
-              [currentImages]="getImageValue(i)"
-              (currentImagesChange)="onImagesChange($event, i)"
-              [columns]="3">
-            </app-image-selector>
-          </mat-card-content>
-        </mat-card>
+              <app-image-selector
+                [currentImages]="getImageValue(i)"
+                (currentImagesChange)="onImagesChange($event, i)"
+                [columns]="3">
+              </app-image-selector>
+            </mat-card-content>
+          </mat-card>
+        </div>
       </div>
     </div>
   </mat-card-content>
