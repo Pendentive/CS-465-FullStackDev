@@ -129,7 +129,6 @@ export class PageEditorComponent implements OnInit, OnDestroy {
           kind: ['GalleryGrid'],
           data: this.fb.group({
             _id: [component._id],
-            title: [component.title],
             images: [component.images || []],
             columns: [component.columns],
             rows: [component.rows],
@@ -157,7 +156,6 @@ export class PageEditorComponent implements OnInit, OnDestroy {
           kind: ['RepeaterMenu'],
           data: this.fb.group({
             _id: [component._id],
-            title: [component.title],
             menuCards: menuCardsFormArray,
             photoHeight: [component.photoHeight],
             photoWidth: [component.photoWidth],
