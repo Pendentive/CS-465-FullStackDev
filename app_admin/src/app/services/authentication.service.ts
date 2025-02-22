@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -13,6 +13,8 @@ import { environment } from '../../environments/environment'; // Import environm
 })
 export class AuthenticationService {
   private apiUrl = environment.apiBaseUrl; // Use environment variable
+  private logoutSubject = new Subject<void>(); 
+  public logout$ = this.logoutSubject.asObservable(); 
 
   constructor(
     @Inject(BROWSER_STORAGE) private storage: Storage,
@@ -57,6 +59,7 @@ export class AuthenticationService {
 
   public logout(): void {
     this.storage.removeItem('mean-token');
+    this.logoutSubject.next(); // Emit logout event
   }
 
   public isLoggedIn(): boolean {
