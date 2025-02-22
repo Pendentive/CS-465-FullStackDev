@@ -91,8 +91,10 @@ export class ImageDisplayCascadeComponent implements OnChanges {
       if (filterValue === '') {
         this.filteredImages = [...this.images]; // Reset to original images
       } else {
+        const searchTerm = filterValue.toLowerCase();
         this.filteredImages = this.images.filter(img =>
-          img.alt.toLowerCase().includes(filterValue.toLowerCase())
+          img.alt.toLowerCase().includes(searchTerm) || // Filter by alt (name)
+          img.filename.toLowerCase().includes(searchTerm) // Filter by filename
         );
       }
       this.updatePagedImages();

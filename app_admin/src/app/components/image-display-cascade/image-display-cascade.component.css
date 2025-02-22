@@ -1,3 +1,8 @@
+.sort-filter-container {
+  display: flex; 
+  gap: 8px;
+}
+
 .mat-grid-list {
     display: flex;
 }
@@ -14,12 +19,12 @@
 }
 
 .mat-grid-tile.selected {
-    outline: 2px solid #ffa500; /* Orange outline */
+    outline: 2px solid var(--image-selector-accent-color); /* Orange outline */
 }
 
 .selected-icon {
     position: absolute;
     bottom: 5px;
     right: 5px;
-    color: #ffa500;
+    color: var(--image-selector-accent-color);
 }

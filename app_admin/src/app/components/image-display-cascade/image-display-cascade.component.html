@@ -3,21 +3,23 @@
     <mat-card-title>{{ title }}</mat-card-title>
   </mat-card-header>
 
-  <mat-card-content>
-    <!-- Sorting Dropdown -->
-    <mat-form-field appearance="fill">
-      <mat-label>Sort by</mat-label>
-      <mat-select (selectionChange)="sortImages($event.value)">
-        <mat-option value="name">Name</mat-option>
-        <mat-option value="date">Date Created</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <mat-card-content class="image-display-cascade-content">
+    <div class="sort-filter-container">
+      <!-- Sorting Dropdown -->
+      <mat-form-field appearance="fill">
+        <mat-label>Sort by</mat-label>
+        <mat-select (selectionChange)="sortImages($event.value)">
+          <mat-option value="name">Name</mat-option>
+          <mat-option value="date">Date Created</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <!-- Filtering Input -->
-    <mat-form-field appearance="fill">
-      <mat-label>Filter images</mat-label>
-      <input matInput (keyup)="filterImages($event)" placeholder="Type to filter..." />
-    </mat-form-field>
+      <!-- Filtering Input -->
+      <mat-form-field appearance="fill">
+        <mat-label>Filter by Filename</mat-label>
+        <input matInput (keyup)="filterImages($event)" placeholder="Type to filter..." />
+      </mat-form-field>
+    </div>
 
     <mat-divider></mat-divider>
 
