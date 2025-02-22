@@ -2,7 +2,7 @@
     <h2>Edit Page</h2>
     <form [formGroup]="pageForm" >
         <div formArrayName="components" class="edit-fec-content-container">
-            <app-edit-page [formGroup]="pageForm" [pageId]="pageId"></app-edit-page>
+            <!-- <app-edit-page [formGroup]="pageForm" [pageId]="pageId"></app-edit-page>  TODO: Will be added when SEO is integrated further.-->
             <div *ngFor="let component of components.controls; let i = index" [formGroupName]="i">
                 <ng-container [ngSwitch]="component.get('kind')?.value">
                     <ng-container *ngIf="component.get('data')">

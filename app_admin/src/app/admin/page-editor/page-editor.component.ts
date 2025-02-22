@@ -11,7 +11,7 @@ import { Page } from '../../interfaces/page';
 
 import { EditTextIntroComponent } from '../edit-text-intro/edit-text-intro.component';
 import { EditRepeaterMenuComponent } from '../edit-repeater-menu/edit-repeater-menu.component';
-import { EditPageComponent } from '../edit-page/edit-page.component';
+// import { EditPageComponent } from '../edit-page/edit-page.component'; // Removed until SEO is added.
 import { EditGalleryHeroVertComponent } from '../edit-gallery-hero-vert/edit-gallery-hero-vert.component';
 import { EditGalleryBannerComponent } from '../edit-gallery-banner/edit-gallery-banner.component';
 import { EditGalleryGridComponent } from '../edit-gallery-grid/edit-gallery-grid.component';
@@ -24,7 +24,7 @@ import { EditGalleryGridComponent } from '../edit-gallery-grid/edit-gallery-grid
     RouterModule, 
     EditTextIntroComponent, 
     EditRepeaterMenuComponent, 
-    EditPageComponent, 
+    //EditPageComponent, TODO: Removed until SEO is added.
     EditGalleryHeroVertComponent, 
     EditGalleryBannerComponent,
     EditGalleryGridComponent
