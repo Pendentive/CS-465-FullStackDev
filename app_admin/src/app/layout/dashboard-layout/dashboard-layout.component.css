@@ -1,22 +1,29 @@
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  padding: 16px;
 }
 
 .navigation-buttons {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 16px;
+  padding: 10px 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add box shadow */
 }
 
 .navigation-buttons button {
   margin-right: 8px;
 }
 
+.navigation-buttons button:first-child {
+  margin-left: 70px; /* Add left margin to the first button */
+}
 
 .navigation-buttons button.active-link {
   /* Active button styles */
   background-color: #ff8c00; 
   color: white;
+}
+
+.content {
+  padding: 32px;
 }

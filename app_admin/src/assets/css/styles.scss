@@ -8,7 +8,7 @@
   
   --primary-color: #FC9B23;                   /* Brand Orange */
   --secondary-color: #000000;                 /* Black */
-  --tertiary-color: #f3f3f3;                  /* Light Orange */  
+  --tertiary-color: rgb(237, 238, 243);                  /* Light Orange */  
   --accent-color: #ce6300;                    /* Darker Orange */
   --background-color: #0f0d13;                /* Dark Background */
 
@@ -115,7 +115,6 @@ html {
 
 
 .page-editor {
-  padding: 16px;
   max-width: 1600px;
   min-width: 500px;
   margin: 0 auto;
@@ -185,7 +184,7 @@ app-image-selector {
   order: 1; /* Ensure it stays on its own line */
 }
 
-/* Seperaation from the mat card header */
+/* Seperation last elements from action bar */
 .edit-fec-actions {
   margin-top: 20px;
 }
