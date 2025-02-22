@@ -1,17 +1,32 @@
+/* Menu repeater card header */
+.menu-card-container mat-card-header.menu-card-header {
+    background-color: var(--primary-color);
+    color: white;
+  
+    height: 3.2em;
+  
+    /* Ensures header with color appears to sit ontop of card */
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    box-shadow: 0px 1px 1.5px -1px rgba(0, 0, 0, .2), 0px 1px 1px 0px rgba(0, 0, 0, .05), 0px 1px 3px 0px rgba(0, 0, 0, .12);
+    transform: scalex(1.001);
+    transform-origin: center;
+}
+
 .menu-cards-wrapper {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .menu-cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .menu-card-container {
-  width: calc(50% - 8px);               /* Two cards per row, minus gap */
-  flex-grow: 1;                         /* Allow cards to grow slightly */
+    width: calc(50% - 8px);               /* Two cards per row, minus gap */
+    flex-grow: 1;                         /* Allow cards to grow slightly */
 }
 
 .menu-card-container mat-card-content {
@@ -20,12 +35,21 @@
     flex-wrap: wrap;                  /* Allow form fields to wrap to the next line */
     justify-content: flex-start;      /* Align items to the start of the container */
     gap: 16px;     
+    margin-top: 8px;                 /* Add space between header and form fields */
+}
+
+/* Style for each form field */
+mat-form-field {
+    flex: 1 1 15px;
+    min-width: 125px;
+    max-width: 200px;
+    height: 75px;
   }
 
 
 /* Media query for smaller screens (one card per row) */
 @media (max-width: 750px) {
-  .menu-card-container {
+    .menu-card-container {
     width: 100%; /* One card per row */
   }
 }
