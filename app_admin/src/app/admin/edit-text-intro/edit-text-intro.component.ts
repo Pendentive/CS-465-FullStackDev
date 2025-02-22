@@ -43,11 +43,9 @@ export class EditTextIntroComponent implements OnInit, OnChanges {
   }
 
   private setComponentTitle(): void {
-    if (this.formGroup && this.formGroup.get('kind')?.value) {
-      this.componentTitle = this.formGroup.get('kind')?.value + ' Component';
-    } else {
-      this.componentTitle = 'Component';
-    }
+    // TODO: Refactor once title is fixed in model
+    // this.componentTitle = this.formGroup.get('title')?.value || 'Edit Text Intro';
+    this.componentTitle = 'Edit Text Intro';
   }
 
   onSubmit(): void {

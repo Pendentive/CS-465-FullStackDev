@@ -53,7 +53,9 @@ export class EditGalleryBannerComponent implements OnInit, OnChanges {
   }
 
   private setComponentTitle(): void {
-    this.componentTitle = this.formGroup.get('title')?.value || 'Edit Gallery Banner';
+    // TODO: Refactor once title is fixed in model
+    // this.componentTitle = this.formGroup.get('title')?.value || 'Edit Gallery Banner';
+    this.componentTitle = 'Edit Gallery Banner';
   }
 
   onSubmit(): void {

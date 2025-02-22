@@ -53,7 +53,9 @@ export class EditGalleryHeroVertComponent implements OnInit, OnChanges {
   }
 
   private setComponentTitle(): void {
-    this.componentTitle = this.formGroup.get('title')?.value || 'Edit Gallery Hero Vert';
+    // TODO: Refactor once title is fixed in model
+    // this.componentTitle = this.formGroup.get('title')?.value || 'Edit Gallery Hero Vert';
+    this.componentTitle = 'Edit Gallery Hero Vert';
   }
 
   onSubmit(): void {

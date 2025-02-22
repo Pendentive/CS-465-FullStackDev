@@ -52,7 +52,9 @@ export class EditGalleryGridComponent implements OnInit, OnChanges {
   }
 
   private setComponentTitle(): void {
-    this.componentTitle = this.formGroup.get('title')?.value || 'Edit Gallery Grid';
+    // TODO: Refactor once title is fixed in model
+    // this.componentTitle = this.formGroup.get('title')?.value || 'Edit Gallery Grid';
+    this.componentTitle = 'Edit Gallery Grid';
   }
 
   onSubmit(): void {

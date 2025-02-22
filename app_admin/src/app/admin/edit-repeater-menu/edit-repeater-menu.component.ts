@@ -52,13 +52,12 @@ export class EditRepeaterMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.setComponentTitle();
-    // Since the parent provides the form data, no need to fetch or process further
-    console.log('Initial RepeaterMenu data:', this.formGroup.value);
   }
 
   private setComponentTitle(): void {
-    this.componentTitle =
-      this.formGroup.get('title')?.value || 'Edit Repeater Menu';
+    // TODO: Refactor once title is fixed in model
+    // this.componentTitle = this.formGroup.get('title')?.value || 'Edit Repeater Menu';
+    this.componentTitle = 'Edit Repeater Menu';
   }
 
   // Called when the user picks images from <app-image-selector>
