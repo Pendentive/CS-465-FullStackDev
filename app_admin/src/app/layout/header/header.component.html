@@ -1,11 +1,14 @@
 <mat-toolbar color="primary">
-  <a routerLink="/admin"><img src="logo.png" alt="Logo" class="logo"></a>
-  <span class="admin-panel">| Admin Dashboard</span>
-  <span class="spacer"></span>
-  <span class="user-info">
-    {{ currentUser.name ? currentUser.name : currentUser.email }}
-  </span>
-  <button mat-button *ngIf="!isLoggedIn()" routerLink="/auth/login">Login</button>
-  <button mat-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+  <div class="title-section">
+    <a routerLink="/admin"><img src="logo.png" alt="Logo" class="logo"></a>
+    <span class="admin-panel">|&nbsp;&nbsp;Admin Dashboard</span>
+  </div>
+  <div class="right-section">
+    <span class="user-info">
+      {{ currentUser.name ? currentUser.name : currentUser.email }}
+    </span>
+    <button mat-stroked-button *ngIf="!isLoggedIn()" routerLink="/auth/login">Login</button>
+    <button mat-stroked-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+  </div>
 </mat-toolbar>
 

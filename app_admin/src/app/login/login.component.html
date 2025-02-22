@@ -1,31 +1,33 @@
-<div class="row">
-    <div class="col-12 col-md-8">
-        <h2>Login</h2>
-        <form (ngSubmit)="onLoginSubmit()">
-            <div role="alert" *ngIf="formError" class="alert alert-danger">
-                {{ formError }}
-            </div>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" 
-                    class="form-control" 
-                    id="email" 
-                    name="email" 
-                    placeholder="Enter email address"
-                    [(ngModel)]="credentials.email">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" 
-                    class="form-control" 
-                    id="password" 
-                    name="password"
-                    placeholder="e.g 12+ alphanumerics" 
-                    [(ngModel)]="credentials.password">
-            </div>
-            <button type="submit" role="button" class="btn btn-primary">
-                Sign In!
-            </button>
-        </form>
+<mat-card class="login-card">
+<mat-card-header>
+    <mat-card-title class="login-title">Login</mat-card-title>
+</mat-card-header>
+<mat-card-content>
+    <form (ngSubmit)="onLoginSubmit()">
+    <div role="alert" *ngIf="formError" class="alert alert-danger">
+        {{ formError }}
     </div>
-</div>
+
+    <mat-form-field>
+        <mat-label>Email Address</mat-label>
+        <input matInput type="email" id="email" name="email" placeholder="Enter email address"
+        [(ngModel)]="credentials.email" required>
+        <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password"
+        placeholder="e.g 12+ alphanumerics" [(ngModel)]="credentials.password" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" role="button" class="login-button">
+        Sign In!
+    </button>
+    </form>
+</mat-card-content>
+</mat-card>
