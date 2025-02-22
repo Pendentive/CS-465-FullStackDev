@@ -30,7 +30,7 @@ import { EditGalleryGridComponent } from '../edit-gallery-grid/edit-gallery-grid
     EditGalleryGridComponent
   ],
   templateUrl: './page-editor.component.html',
-  styleUrls: ['./page-editor.component.css']
+  styleUrls: ['./page-editor.component.css'],
 })
 export class PageEditorComponent implements OnInit, OnDestroy {
   pageForm!: FormGroup;

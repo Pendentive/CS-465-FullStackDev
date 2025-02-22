@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApiService } from '../../services/api.service';
@@ -26,6 +26,7 @@ import { ImageDisplayCascadeComponent } from '../image-display-cascade/image-dis
   ],
   templateUrl: './image-selector.component.html',
   styleUrls: ['./image-selector.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class ImageSelectorComponent implements OnInit {
   @Input() columns: number = 2;                                   // Input for number of columns

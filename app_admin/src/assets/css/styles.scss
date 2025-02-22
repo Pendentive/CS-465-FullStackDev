@@ -18,6 +18,8 @@
   --text-hover-color: #FDCC90;                /* Lighter Orange */
   --button-outline-dark: #702d00;  
 
+
+  --image-selector-accent-color: #FC9B23;     /* Brand Orange */
 }
 
 html, body {
@@ -81,9 +83,44 @@ html {
   --mat-expansion-header-expanded-state-height: 70px
 }
 
+/* Form field styles */
+html {
+  /* default/primary color */
+  --mat-form-field-focus-select-arrow-color: rgba(156, 39, 176, .87);
+  --mat-form-field-disabled-input-text-placeholder-color: rgba(255, 255, 255, .38);
+  --mat-form-field-state-layer-color: rgba(255, 255, 255, .87);
+  --mat-form-field-error-text-color: #f44336;
+  --mat-form-field-select-option-text-color: rgba(0, 0, 0, .87);
+  --mat-form-field-select-disabled-option-text-color: rgba(0, 0, 0, .38);
+  --mat-form-field-enabled-select-arrow-color: rgba(255, 255, 255, .54);
+  --mat-form-field-disabled-select-arrow-color: rgba(255, 255, 255, .38);
+  --mat-form-field-hover-state-layer-opacity: .15;
+  --mat-form-field-focus-state-layer-opacity: .28;
+
+/*  --- size ---
+  --mat-form-field-container-height: 56px;
+  --mat-form-field-filled-label-display: block;
+  --mat-form-field-container-vertical-padding: 16px;
+  --mat-form-field-filled-with-label-container-padding-top: 24px;
+  --mat-form-field-filled-with-label-container-padding-bottom: 8px
+  */
+}
+.mat-mdc-form-field.mat-accent {
+  /* accent color */
+  --mat-form-field-focus-select-arrow-color: rgba(105, 240, 174, .87)
+}
+
+.mat-mdc-form-field.mat-warn {
+  /* warn color */
+  --mat-form-field-focus-select-arrow-color: rgba(244, 67, 54, .87)
+}
+
 
 .page-editor {
   padding: 16px;
+  max-width: 1600px;
+  min-width: 500px;
+  margin: 0 auto;
 }
 
 
@@ -107,7 +144,7 @@ mat-card-header.edit-fec-header {
   /* Ensures header with color appears to sit ontop of card */
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
-  box-shadow: 0px 1px 1.5px -1px rgba(0, 0, 0, .2), 0px 1px 1px 0px rgba(0, 0, 0, .05), 0px 1px 3px 0px rgba(0, 0, 0, .12);
+  box-shadow: 0px 0px 1.5px -1px rgba(0, 0, 0, .2), 0px 2px 1px 0px rgba(0, 0, 0, .05), 0px 4px 3px 0px rgba(0, 0, 0, .15);
   transform: scalex(1.001);
   transform-origin: center;
 }
@@ -115,9 +152,41 @@ mat-card-header.edit-fec-header {
 /* Default card content */
 mat-card-content {
     display: flex !important;
-    flex-direction: column;
-    margin-top: 20px;
+    flex-direction: row; /* Display form fields in a row */
+    flex-wrap: wrap; /* Allow form fields to wrap to the next line */
+    justify-content: flex-start; /* Align items to the start of the container */
+    gap: 16px; /* Add some spacing between form fields */
+    margin-top: 20px; /* Add some space between the header and content */
 }
+
+/* Style for each form field */
+mat-form-field:not(.description-box) {
+  flex: 1 1 200px; /* Allows horizontal growth */
+  min-width: 200px;
+  max-width: 300px;
+  height: 75px; /* Setting a fixed height */
+}
+
+/* Control the width of the description box container */
+mat-form-field.description-field {
+  flex: 1 1 500px; /* Allows horizontal growth */
+  height: auto;
+  min-width: 400px;
+  max-width: 800px; /* Caps max width */
+}
+
+/* Minimum height for the description box */
+mat-form-field textarea.description-box {
+  min-height: 8em;
+  height: auto; /* Add this line */
+}
+
+/* Image selector style */
+app-image-selector {
+  width: 100%; /* Full width */
+  order: 1; /* Ensure it stays on its own line */
+}
+
 
 /* Last form field in the content */
 .edit-fec-content mat-form-field:last-of-type {
@@ -129,10 +198,6 @@ mat-card-content {
   margin-top: 20px;
 }
 
-/* Minimum height for the description box */
-textarea.description-box {
-  min-height: 8em;
-}
 
 /* ------------------- Menu Card Styles ------------------- */
 /* Menu repeater card header */

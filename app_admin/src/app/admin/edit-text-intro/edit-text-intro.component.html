@@ -1,6 +1,6 @@
 <mat-card class="edit-fec-container">
   <mat-card-header class="edit-fec-header">
-    <mat-card-title>Edit Text Intro</mat-card-title>    <!-- TODO: Replace with FEC title once model is updated.  -->
+    <mat-card-title>{{ componentTitle }}</mat-card-title>
   </mat-card-header>
   
   <mat-card-content class="edit-fec-content" [formGroup]="formGroup">
@@ -8,7 +8,7 @@
       <mat-label>Title</mat-label>
       <input matInput formControlName="title" />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="description-field">
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description" class="description-box"></textarea>
     </mat-form-field>
