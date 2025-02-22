@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="edit-fec-container">
   <mat-card-header class="edit-fec-header">
     <mat-card-title>{{ componentTitle }}</mat-card-title>
   </mat-card-header>
@@ -12,7 +12,7 @@
       <textarea matInput formControlName="description" class="description-box"></textarea>
     </mat-form-field>
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions class="edit-fec-actions">
     <button mat-raised-button color="primary" type="button" (click)="onSubmit()">
       <mat-icon>save</mat-icon> Update
     </button>

@@ -1,5 +1,24 @@
 @use '@angular/material' as mat;
+@include mat.core();
 //@use 'orange-gradient' as my-theme; // Import custom theme
+
+:root {
+  --base-font-family: 'MontserratVariable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+  --header-font-family: 'AvenirLTPro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+  
+  --primary-color: #FC9B23;                   /* Brand Orange */
+  --secondary-color: #000000;                 /* Black */
+  --tertiary-color: #f3f3f3;                  /* Light Orange */  
+  --accent-color: #ce6300;                    /* Darker Orange */
+  --background-color: #0f0d13;                /* Dark Background */
+
+  --text-color: var(--primary-color);           /* Default text color */        
+  --body-text-color: #ffffff;                 /* White */
+  --heading-text-color: var(--primary-color);          
+  --text-hover-color: #FDCC90;                /* Lighter Orange */
+  --button-outline-dark: #702d00;  
+
+}
 
 html, body {
   height: 100%;
@@ -11,40 +30,129 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-/* Your other global styles */
 
-mat-card-header.edit-fec-header {
-    margin-bottom: 16px;
+/* Card styles */
+html {
+  /* border-radius */
+  --mdc-elevated-card-container-shape: 8px;
+  --mdc-outlined-card-container-shape: 8px;
+
+  /* width */
+  --mdc-outlined-card-outline-width: 2px
+
+  /* colors */
+  --mdc-elevated-card-container-color: #424242;
+  --mdc-elevated-card-container-elevation: 0px 3px 1.5px -1px rgba(0, 0, 0, .2), 0px 1px 1px 0px rgba(0, 0, 0, .14), 0px 1px 3px 0px rgba(0, 0, 0, .12);
+  --mdc-outlined-card-container-color: #424242;
+  --mdc-outlined-card-outline-color: rgba(255, 255, 255, .12);
+  --mdc-outlined-card-container-elevation: 0px 0px 0px 0px rgba(0, 0, 0, .2), 0px 0px 0px 0px rgba(0, 0, 0, .14), 0px 0px 0px 0px rgba(0, 0, 0, .12);
+  --mat-card-subtitle-text-color: rgba(255, 255, 255, .7) 
+
+  /* typography */
+  --mat-card-title-text-font: Roboto, sans-serif;
+  --mat-card-title-text-line-height: 32px;
+  --mat-card-title-text-size: 20px;
+  --mat-card-title-text-tracking: .0125em;
+  --mat-card-title-text-weight: 500;
+  --mat-card-subtitle-text-font: Roboto, sans-serif;
+  --mat-card-subtitle-text-line-height: 22px;
+  --mat-card-subtitle-text-size: 14px;
+  --mat-card-subtitle-text-tracking: .0071428571em;
+  --mat-card-subtitle-text-weight: 500
 }
-  
-mat-card-content.edit-fec-content
-{ 
+
+
+/* Expansion panels styles */
+html {
+  /* border radius */
+
+  /* color */
+  --mat-expansion-container-background-color: white;
+  --mat-expansion-container-text-color: white;
+  --mat-expansion-actions-divider-color: rgba(255, 255, 255, .12);
+  --mat-expansion-header-hover-state-layer-color: rgba(255, 255, 255, .04);
+  --mat-expansion-header-focus-state-layer-color: rgba(255, 255, 255, .04);
+  --mat-expansion-header-text-color: var(--secondary-color);
+  --mat-expansion-header-description-color: rgba(0, 0, 0, 0.781);;
+  --mat-expansion-header-indicator-color: rgba(255, 255, 255, .7)
+
+  /* height */
+  --mat-expansion-header-collapsed-state-height: 58px;
+  --mat-expansion-header-expanded-state-height: 70px
+}
+
+
+.page-editor {
+  padding: 16px;
+}
+
+
+/* ----------------- FEC component layout ---------------- */
+/* FEC flex layout */
+[formArrayName="components"] {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Adjust the gap value as needed
+}
+
+
+/* ------------------- FEC Card Styles ------------------- */
+/* FEC card header */
+mat-card-header.edit-fec-header {
+  background-color: var(--accent-color);
+  color: white;
+
+  height: 3.2em;
+
+  /* Ensures header with color appears to sit ontop of card */
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  box-shadow: 0px 1px 1.5px -1px rgba(0, 0, 0, .2), 0px 1px 1px 0px rgba(0, 0, 0, .05), 0px 1px 3px 0px rgba(0, 0, 0, .12);
+  transform: scalex(1.001);
+  transform-origin: center;
+}
+
+/* Default card content */
+mat-card-content {
     display: flex !important;
     flex-direction: column;
-    
+    margin-top: 20px;
 }
 
+/* Last form field in the content */
+.edit-fec-content mat-form-field:last-of-type {
+  margin-bottom: -5px;
+}
+
+/* Seperaation from the header */
+.edit-fec-actions {
+  margin-top: 20px;
+}
+
+/* Minimum height for the description box */
 textarea.description-box {
-    min-height: 8em;
+  min-height: 8em;
 }
 
-/* Style Angular Material input */
-.mat-input-element {
-    font-size: 16px; /* Redundent for now but later will be set be global*/
+/* ------------------- Menu Card Styles ------------------- */
+/* Menu repeater card header */
+.menu-card-container mat-card-header {
+  background-color: var(--primary-color);
+  color: white;
+
+  height: 3.2em;
+
+  /* Ensures header with color appears to sit ontop of card */
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  box-shadow: 0px 1px 1.5px -1px rgba(0, 0, 0, .2), 0px 1px 1px 0px rgba(0, 0, 0, .05), 0px 1px 3px 0px rgba(0, 0, 0, .12);
+  transform: scalex(1.001);
+  transform-origin: center;
 }
 
-/* Change the filled button container color */
-.mat-mdc-button.mat-primary {
-  --mdc-protected-container-color: #ff8c00; /* Example: Orange color */
-}
-
-/* Change the outlined button outline color */
-.mat-mdc-outlined-button.mat-primary {
-  --mdc-outlined-outline-color: #ff8c00; /* Example: Orange color */
-  --mdc-outlined-label-text-color: #ff8c00; /* Example: Orange color */
-}
-
-/* Change the text button label color */
-.mat-mdc-text-button.mat-primary {
-  --mdc-text-label-text-color: #ff8c00; /* Example: Orange color */
+/* Repeater menu card flex layout */
+[formArrayName="menuCards"] {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Adjust the gap value as needed
 }

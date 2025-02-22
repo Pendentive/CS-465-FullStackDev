@@ -8,12 +8,11 @@
       <mat-label>Title</mat-label>
       <input matInput formControlName="title" />
     </mat-form-field>
-
     <!-- Image Selector -->
     <app-image-selector [(currentImages)]="currentImages" [columns]="3"></app-image-selector>
   </mat-card-content>
 
-  <mat-card-actions>
+  <mat-card-actions class="edit-fec-actions">
     <button mat-raised-button color="primary" type="button" (click)="onSubmit()">
       <mat-icon>save</mat-icon> Update
     </button>
