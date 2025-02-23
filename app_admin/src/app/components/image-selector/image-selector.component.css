@@ -1,0 +1,20 @@
+.image-selector-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none; 
+}
+
+.image-selector-toolbar div {
+  display: flex;          /* Ensure buttons are in a row */
+  align-items: center;    /* Vertically align buttons */
+}
+
+.image-selector-toolbar button {
+  margin-left: 8px;         /* Add some spacing between buttons */
+  font-size: 0.55em;        /* Reduce font/button size */
+}
+
+.image-selector {
+  margin-bottom: 40px;
+}

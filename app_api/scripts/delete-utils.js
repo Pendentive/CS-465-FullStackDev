@@ -1,11 +1,11 @@
 const Image = require('../models/image');
-const GalleryHeroVert = require('../models/gallery-hero-vert');
-const TypeIntro = require('../models/type-intro');
-const RepeaterMenu = require('../models/repeater-menu');
-const GalleryBanner = require('../models/gallery-banner');
-const GalleryGrid = require('../models/gallery-grid');
+const GalleryHeroVert = require('../models/page-components/gallery-hero-vert');
+const TypeIntro = require('../models/page-components/type-intro');
+const RepeaterMenu = require('../models/page-components/repeater-menu');
+const GalleryBanner = require('../models/page-components/gallery-banner');
+const GalleryGrid = require('../models/page-components/gallery-grid');
 const Page = require('../models/page');
-const BaseModel = require('../models/base');
+const BaseModel = require('../models/page-components/base');
 
 const clearData = async (categories) => {
     console.log('Categories to clear:', categories); // Add logging

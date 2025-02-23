@@ -57,10 +57,15 @@
               }
             ],
             "styles": [
+              "src/assets/css/styles.scss",
               "@angular/material/prebuilt-themes/azure-blue.css",
-              "src/assets/css/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                 "src/assets/css/"
+              ]
+            }
           },
           "configurations": {
             "production": {

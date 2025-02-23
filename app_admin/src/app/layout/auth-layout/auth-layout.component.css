@@ -1,0 +1,11 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--primary-color);
+    min-height: 100vh;  
+}
+
+.auth-layout {
+    padding-top: 10vh;
+}

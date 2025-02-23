@@ -1,57 +1,44 @@
-const express = require('express'); // Express app
-const router = express.Router();    // Router logic
+const express = require('express');
+const router = express.Router();
+const jwt = require('jsonwebtoken');
 
-const jwt = require('jsonwebtoken'); // Enable JSON Web Tokens
-
-// Method to autheticate out JWT
+// Method to authenticate out JWT
 function authenticateJWT(req, res, next) {
-    // console.log('In Middleware');
-
     const authHeader = req.headers['authorization'];
-    // console.log('Auth Header: ' + authHeader);
 
-    if(authHeader == null) {
-
+    if (!authHeader) {
         console.log('Auth Header required but not present.');
         return res.sendStatus(401);
     }
 
     let headers = authHeader.split(' ');
-    if(headers.length < 1) {
-
+    if (headers.length < 1) {
         console.log('Not enough tokens in Auth Header: ' + headers.length);
         return res.sendStatus(501);
     }
 
     const token = authHeader.split(' ')[1];
-    // console.log('Token: ' + token);
 
-    if(token == null) {
-
+    if (!token) {
         console.log('Null Bearer Token');
         return res.sendStatus(401);
     }
 
-    // console.log(process.env.JWT_SECRET);
-    // console.log(jwt.decode(token));
-    const verified = jwt.verify(token, process.env.JWT_SECRET, (err, verified) => {
-        if(err) {
-            return res.sendStatus(401).json('Token Validation Error.');
+    jwt.verify(token, process.env.JWT_SECRET, (err, verified) => {
+        if (err) {
+            console.log('Token Validation Error:', err.message);
+            return res.status(401).json({ message: 'Token Validation Error.' });
         }
-        req.auth = verified; // Set the auth parameter to the decoded
+        req.user = verified; // Set the user object to the request
+        next(); // Continue or will hang forever
     });
-    next(); // Continue or will hang forever
 }
 
 // Import controllers for routing
 const authController = require('../controllers/authentication');
 const imagesController = require('../controllers/images');
-const galleryGridController = require('../controllers/gallery-grid');
-const galleryHeroVertController = require('../controllers/gallery-hero-vert');
-const typeIntroController = require('../controllers/type-intro');
-const galleryBannerController = require('../controllers/gallery-banner');
-const repeaterMenuController = require('../controllers/repeater-menu');
 const pageController = require('../controllers/page');
+const componentController = require('../controllers/component');
 
 // POST method route login
 router
@@ -63,6 +50,11 @@ router
     .route('/register')
     .post(authController.register);
 
+// POST method route for service token
+router
+    .route('/service-token')
+    .post(authController.getServiceToken);
+
 // Define routes for images endpoint
 router
     .route('/images')
@@ -72,52 +64,6 @@ router
     .route('/images/:id')
     .get(imagesController.getImageById);
 
-// Define routes for gallery-grid endpoint
-router
-    .route('/gallery-grid')
-    .get(galleryGridController.getAllGalleryGrid);
-
-router
-    .route('/gallery-grid/:id')
-    .get(galleryGridController.getGalleryGridById);
-
-// Define routes for gallery-hero-vert endpoint
-router
-    .route('/gallery-hero-vert')
-    .get(galleryHeroVertController.getAllGalleryHeroVert);
-
-router
-    .route('/gallery-hero-vert/:id')
-    .get(galleryHeroVertController.getGalleryHeroVertById);
-
-// Define routes for type-intro endpoint
-router
-    .route('/type-intro')
-    .get(typeIntroController.getAllTypeIntro);
-
-router
-    .route('/type-intro/:id')
-    .get(typeIntroController.getTypeIntroById)
-    .put(authenticateJWT, typeIntroController.updateTypeIntro);
-
-// Define routes for gallery-banner endpoint
-router
-    .route('/gallery-banner')
-    .get(galleryBannerController.getAllGalleryBanner);
-
-router
-    .route('/gallery-banner/:id')
-    .get(galleryBannerController.getGalleryBannerById);
-
-// Define routes for repeater-menu endpoint
-router
-    .route('/repeater-menu')
-    .get(repeaterMenuController.getAllRepeaterMenu);
-
-router
-    .route('/repeater-menu/:id')
-    .get(repeaterMenuController.getRepeaterMenuById);
-
 // Define routes for page endpoint
 router
     .route('/pages')
@@ -125,19 +71,23 @@ router
     .post(authenticateJWT, pageController.createPage);
 
 router
-    .route('/pages/:id')
-    .get(pageController.getPageById)
-    .put(authenticateJWT, pageController.updatePage)
-    .delete(authenticateJWT, pageController.deletePage);
+    .route('/pages/identifier/:identifier')
+    .get(authenticateJWT, pageController.getPageByIdentifier)
+    .put(authenticateJWT, pageController.updatePageByIdentifier);
 
 router
-    .route('/pages/identifier/:identifier')
-    .get(pageController.getPageByIdentifier)
-    .put(authenticateJWT, pageController.updatePageByIdentifier);
+    .route('/pages/:id')
+    .get(pageController.getPageById)
+    .put(authenticateJWT, pageController.updatePageById)
+    .delete(authenticateJWT, pageController.deletePage);
 
 // Define routes for updating a specific component
 router
-    .route('/components/:componentType/:componentId')
-    .put(authenticateJWT, pageController.updateComponent);
+    .route('/components/:componentType/:id')
+    .get(componentController.getComponentById) 
+    .put(authenticateJWT, componentController.updateComponent);
+
+router.route('/components/:componentType')
+    .get(componentController.getAllComponents); 
 
 module.exports = router;

@@ -1,15 +1,24 @@
 <div class="gallery-grid">
-    {{#each images}}
-    <div class="gallery-item">
-        <img src="{{this.path}}" 
-             alt="{{this.alt}}"
-             loading="lazy">
-        <div class="overlay">
-            <h3>{{this.title}}</h3>
-            {{#if this.description}}
-                <p>{{this.description}}</p>
-            {{/if}}
-        </div>
-    </div>
-    {{/each}}
+    {{{cascadingImages images columns=2}}}
 </div>
+
+<script> 
+// Fade in images as user scrolls in viewport.
+// TODO: Factor out into a shared script. 
+document.addEventListener("DOMContentLoaded", function () {
+    const galleryItems = document.querySelectorAll(".gallery-item");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target); // Stops observing once it has appeared
+            }
+        });
+    }, { threshold: 0.2 });
+
+    galleryItems.forEach((item) => {
+        observer.observe(item);
+    });
+});
+</script>

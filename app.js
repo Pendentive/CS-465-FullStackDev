@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var exphbs = require('express-handlebars');
 var passport = require('passport');
+var galleryHelpers = require('./app_server/helpers/gallery-helpers');
 
 // Define routers
 var indexRouter = require('./app_server/routes/index');
@@ -28,18 +29,31 @@ app.engine(
     defaultLayout: 'layout-portfolio', // Specify the default layout
     layoutsDir: path.join(__dirname, 'app_server', 'views', 'layouts'),
     partialsDir: path.join(__dirname, 'app_server', 'views', 'partials'),
+    helpers: {
+      cascadingImages: galleryHelpers.cascadingImages,
+    },
   })
 );
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 
+// Middleware: Font caching
+const staticConfig = {
+  setHeaders: (res, filepath, stat) => {
+    if (filepath.endsWith('.ttf') || filepath.endsWith('.otf')) {
+      const contentType = filepath.endsWith('.ttf') ? 'font/ttf' : 'font/otf';
+      res.set('Content-Type', contentType);
+      res.set('Cache-Control', 'public, max-age=31536000');
+    }
+  }
+};
 
 // Middleware setup
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), staticConfig));
 app.use(passport.initialize());
 
 // Enable CORS

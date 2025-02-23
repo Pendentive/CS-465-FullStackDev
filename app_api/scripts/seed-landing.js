@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const { seedImages } = require('./seed-utils');
-const GalleryHeroVert = require('../models/gallery-hero-vert');
-const TypeIntro = require('../models/type-intro');
-const RepeaterMenu = require('../models/repeater-menu');
-const GalleryBanner = require('../models/gallery-banner');
+const GalleryHeroVert = require('../models/page-components/gallery-hero-vert');
+const TypeIntro = require('../models/page-components/type-intro');
+const RepeaterMenu = require('../models/page-components/repeater-menu');
+const GalleryBanner = require('../models/page-components/gallery-banner');
 const Page = require('../models/page');
 const path = require('path');
 const fs = require('fs');

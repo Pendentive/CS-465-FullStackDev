@@ -1,0 +1,47 @@
+<div class="image-display-container">
+  <mat-card-header>
+    <mat-card-title>{{ title }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="image-display-cascade-content">
+    <div class="sort-filter-container">
+      <!-- Sorting Dropdown -->
+      <mat-form-field appearance="fill">
+        <mat-label>Sort by</mat-label>
+        <mat-select (selectionChange)="sortImages($event.value)">
+          <mat-option value="name">Name</mat-option>
+          <mat-option value="date">Date Created</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Filtering Input -->
+      <mat-form-field appearance="fill">
+        <mat-label>Filter by Filename</mat-label>
+        <input matInput (keyup)="filterImages($event)" placeholder="Type to filter..." />
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Image Grid Display -->
+    <mat-grid-list [cols]="columns">
+      <mat-grid-tile *ngFor="let image of pagedImages" [class.selected]="isSelected(image)">
+        <img 
+          [src]="imageUrlService.constructImageUrl(image.path)" 
+          [alt]="image.alt"
+          (click)="onImageClick(image)"
+        />
+        <mat-icon *ngIf="isSelected(image)" class="selected-icon">check_circle</mat-icon>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <!-- Pagination -->
+      <mat-paginator 
+      [length]="filteredImages.length" 
+      [pageSize]="pageSize" 
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[3, 12, 36, 48]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </mat-card-content>
+</div>

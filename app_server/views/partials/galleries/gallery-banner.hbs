@@ -3,7 +3,7 @@
     <div class="gallery-banner-container">
         {{#each images}}
         <div class="gallery-banner-item" style="width: {{../photoEdgeLength}}px; height: {{../photoEdgeLength}}px;">
-            <img src="{{this.path}}" alt="{{this.alt}}" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="{{this.path}}" alt="{{this.alt}}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         {{/each}}
     </div>

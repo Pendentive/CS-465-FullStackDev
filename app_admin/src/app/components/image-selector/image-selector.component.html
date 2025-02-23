@@ -1,0 +1,45 @@
+
+<mat-toolbar class="image-selector-toolbar">
+  <span>Select Images</span>
+  <div>
+    <button mat-stroked-button (click)="accordion.openAll()">Expand All</button>
+    <button mat-stroked-button (click)="accordion.closeAll()">Collapse All</button>
+  </div>
+</mat-toolbar>
+<mat-accordion class="image-selector" multi="true">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Remove Current Images</mat-panel-title>
+      <mat-panel-description>Select images to remove.</mat-panel-description>
+    </mat-expansion-panel-header>
+    <image-display-cascade
+      [images]="currentImages"
+      [columns]="columns"
+      [selectedImageIds]="selectedImageIds"
+      (imageClick)="toggleSelection($event)"
+    ></image-display-cascade>
+    <mat-action-row>
+      <button mat-flat-button color="warn" (click)="removeSelectedImages()">
+        <mat-icon>delete</mat-icon> Remove Images
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Add New Images</mat-panel-title>
+      <mat-panel-description>Select images to add.</mat-panel-description>
+    </mat-expansion-panel-header>
+    <image-display-cascade
+      [images]="selectableImages"
+      [columns]="columns"
+      [selectedImageIds]="selectedImageIds"
+      (imageClick)="toggleSelection($event)"
+    ></image-display-cascade>
+    <mat-action-row>
+      <button mat-flat-button color="primary" (click)="addSelectedImages()">
+        <mat-icon>add</mat-icon> Add Images
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

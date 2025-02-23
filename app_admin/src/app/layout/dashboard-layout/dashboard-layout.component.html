@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="dashboard-container">
+  <div class="navigation-buttons">
+    <button mat-raised-button routerLink="/admin/pages/page-landing" *ngIf="isAdmin()"
+      [ngClass]="{'active-link': isActive('/admin/pages/page-landing')}">page-landing</button>
+    <button mat-raised-button routerLink="/admin/pages/page-portfolio-personal"
+      *ngIf="isAdmin() || isEditor()"
+      [ngClass]="{'active-link': isActive('/admin/pages/page-portfolio-personal')}">page-portfolio-personal</button>
+  </div>
+
+  <div class="no-page-selected" *ngIf="isActive('/admin')">
+    Please select a web page to edit from the bar above.
+  </div>
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

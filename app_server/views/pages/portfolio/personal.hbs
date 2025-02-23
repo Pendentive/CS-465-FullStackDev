@@ -1,12 +1,12 @@
-<div id="portfolio-background">
+<div id="portfolio-background" class="body-background">
 
     {{!-- Gallery hero vert partial --}}
-    {{#if galleryHeroVert}}
+    {{#if components.GalleryHeroVert}}
     {{> galleries/gallery-hero-vert 
-        images=galleryHeroVert.images 
-        padding=galleryHeroVert.padding 
-        width=galleryHeroVert.width 
-        height=galleryHeroVert.height}}
+        images=components.GalleryHeroVert.images 
+        padding=components.GalleryHeroVert.padding 
+        width=components.GalleryHeroVert.width 
+        height=components.GalleryHeroVert.height}}
     {{/if}}
     
     <div id="portfolio-page">
@@ -16,18 +16,18 @@
             <div class="portfolio-page">
     
                 {{!-- Type intro partial --}}
-                {{#if typeIntro}}
+                {{#if components.TypeIntro}}
                 {{> sections/type-intro 
-                    title=typeIntro.title 
-                    description=typeIntro.description 
-                    leftPadding=typeIntro.leftPadding 
-                    width=typeIntro.width 
-                    height=typeIntro.height}}
+                    title=components.TypeIntro.title 
+                    description=components.TypeIntro.description 
+                    leftPadding=components.TypeIntro.leftPadding 
+                    width=components.TypeIntro.width 
+                    height=components.TypeIntro.height}}
                 {{/if}}
 
                 {{!-- Gallery grid partial --}}
-                {{#if galleryGrid}}
-                {{> galleries/gallery-grid images=galleryGrid.images}}
+                {{#if components.GalleryGrid}}
+                {{> galleries/gallery-grid images=components.GalleryGrid.images}}
                 {{/if}}
                 
             </div>
@@ -38,11 +38,11 @@
     {{!-- Vertical separator --}}
     <div class="vertical-separator"></div>
 
-    {{#if galleryBanner}}
+    {{#if components.GalleryBanner}}
     {{> galleries/gallery-banner 
-        images=galleryBanner.images 
-        photoEdgeLength=galleryBanner.photoEdgeLength 
-        barHeight=galleryBanner.barHeight}}
+        images=components.GalleryBanner.images 
+        photoEdgeLength=components.GalleryBanner.photoEdgeLength 
+        barHeight=components.GalleryBanner.barHeight}}
     {{/if}}
       
 </div>

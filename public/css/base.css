@@ -1,0 +1,79 @@
+@import url('fonts.css');
+
+:root {
+    --base-font-family: 'MontserratVariable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    --header-font-family: 'AvenirLTPro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    
+    --primary-color: #FC9B23;                   /* Brand Orange */
+    --secondary-color: #000000;                 /* Black */
+    --accent-color: #A86717;                    /* Darker Orange */
+    --background-color: #0f0d13;                /* Dark Background */
+
+    --text-color: var(--primary-color);           /* Default text color */        
+    --body-text-color: #ffffff;                 /* White */
+    --heading-text-color: var(--primary-color);          
+    --text-hover-color: #FDCC90;                /* Lighter Orange */
+
+    --base-font-family: 'MontserratVariable', sans-serif;
+    --base-font-size: 14px;
+
+    --header-height: 96px;
+    --header-font-family: 'AvenirLTPro', sans-serif;
+
+    --heading-text-transform: uppercase;
+    --button-text-transform: uppercase;
+    --body-text-transform: none;
+
+    --page-max-width: 1200px;
+    --footer-width: 960px;
+}
+
+html, body {
+    background: var(--background-color);
+    margin: 0;
+    min-height: 100%;
+    min-width: 100%;
+/* margin-left: 0;	/* Remove default margin */
+
+    font-family: var(--base-font-family);
+    font-size: var(--base-font-size);
+    text-transform: var(--body-text-transform);
+    color: var(--text-color); 
+    
+    overflow-x: auto; /* Remove margin indirectly */
+}
+
+
+#background {
+    width: 100%;
+}
+
+#page {
+    width: 960px;
+}
+
+/* TODO: Needs factored out */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--text-hover-color);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.1s ease-in-out;
+}
+li a:hover {
+    color: var(--text-hover-color);
+}
+li.selected a {
+    color: var(--accent-color);
+}

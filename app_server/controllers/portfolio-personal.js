@@ -11,13 +11,13 @@ const portfolioPersonal = async function(req, res, next) {
             return res.status(404).render('pages/common/error', { message: 'Page not found', error: { status: 404 } });
         }
 
-        const components = pageService.processPageComponents(page);
+        const components = await pageService.processPageComponents(page);
 
         res.render('pages/portfolio/personal', {
             layout: 'layout-portfolio',
             title: page.title,
             description: page.description,
-            ...components
+            components: components // Pass components as a nested object
         });
     } catch (err) {
         console.error('Portfolio Personal Page Error:', err);

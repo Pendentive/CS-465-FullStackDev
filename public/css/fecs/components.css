@@ -1,0 +1,146 @@
+/* ------------------------------ GALLERY GRID ------------------------------ */
+.gallery-flex-grid {
+    display: flex;
+    gap: 10px; /* Space between columns */
+    width: 100%;
+    margin: 0 auto;
+}
+
+.gallery-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Vertical gaps */
+    flex: 1;
+}
+
+/* Initially hide images with opacity 0 */
+.gallery-item {
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 0.4s ease-out, transform 0.3s ease-out;
+}
+
+/* When image is in the viewport, it fades in */
+.gallery-item.visible {
+    opacity: 1;
+    transform: translateY(0); /* Image moves to final position */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .gallery-flex-grid {
+        flex-direction: column;
+        max-width: 600px;
+        min-width: 300px;
+    }
+}
+
+/* ------------------------------ TYPE INTRO ------------------------------ */
+.type-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    margin: 20px auto;
+    width: 100%;
+}
+
+.type-intro-left {
+    flex: 1;
+    text-align: left;
+    padding: 20px;
+}
+
+.type-intro-left h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #ff8c00;
+}
+
+.type-intro-right {
+    flex: 1;
+    text-align: left;
+    padding: 20px;
+}
+
+.type-intro-right p {
+    margin: 0;
+    word-wrap: break-word;
+    color: white;
+}
+
+/* ------------------------------ GALLERY HERO VERT ------------------------------ */
+.gallery-hero-vert {
+    display: flex;
+    overflow-x: clip;
+    justify-content: center;  /* Center the inner container horizontally */
+}
+
+.gallery-hero-vert-container {
+    display: flex;
+}
+
+.gallery-hero-vert-item {
+    flex: 0 0 auto;
+}
+
+/* ------------------------------ GALLERY BANNER ------------------------------ */
+.gallery-banner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: clip;
+    align-items: center; /* May cause performance issues */
+}
+
+.gallery-banner-bar {
+    width: 100%;
+    background-color: #ff8c00; /* Orange bar color */
+}
+
+.gallery-banner-container {
+    display: flex;
+}
+
+.gallery-banner-item {
+    flex: 0 0 auto; /* Ensure content fits within container */
+}
+
+/* ------------------------------ REPEATER MENU ----------------------------- */
+.repeater-menu {
+    display: flex;
+    width: 100%;
+    justify-content: center; /* Center horizontally */
+}
+
+/* ------------------------------ MENU CARD ----------------------------- */
+.menu-card {
+    flex-direction: column;
+    text-align: center;
+    background-color: transparent;
+}
+
+.menu-card-title h3 {
+    color: #ff8c00;
+}
+
+.menu-card-button .btn {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: var(--background-color);
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.menu-card-button .btn:hover {
+    color: var(--background-color);
+    background-color: var(--primary-color);
+}

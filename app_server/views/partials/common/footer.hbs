@@ -1,43 +1,56 @@
 <footer class="site-footer">
   <div class="footer-container">
-    <!-- Left side: logo + tagline -->
-    <div class="footer-left">
-      <div class="footer-logo">
-    	<a href="/"><img src="images/site/logo.png" alt="LOGO" height="50" width="50"></a>
+    <!-- Left Section: Logo and Site Text -->
+    <div id="footer-left" class="footer-section">
+      <div class="logo-content">
+        <div class="logo-icon">
+          <img src="images/site/logo.png" alt="Studio Custer Logo">
+        </div>
+        <div class="footer-site-title">Studio Custer</div>
+        <div class="footer-tagline">We Capture your <br> Defining Moments</div>
       </div>
-      <p class="footer-site-title">STUDIO CUSTER</p>
-      <p class="footer-tagline">WE CAPTURE YOUR DEFINING MOMENTS.</p>
     </div>
 
-    <!-- Middle: navigation links -->
-    <div class="footer-nav">
-      <ul>
-        <li><a href="#">PERSONAL PHOTOGRAPHY</a></li>
-        <li><a href="#">COMMERCIAL PHOTOGRAPHY</a></li>
-        <li><a href="#">FULL SERVICE PHOTOGRAPHY</a></li>
-        <li><a href="#">ABOUT US</a></li>
-        <li><a href="#">CONTACT US</a></li>
-      </ul>
+    <div class="footer-divider"></div>
+
+    <!-- Navigation Links -->
+    <div id="footer-nav" class="footer-section">
+      <div class="nav-content">
+        <ul>
+          <li><a href="#home">Personal Photography</a></li>
+          <li><a href="#about">Commercial Photography</a></li>
+          <li><a href="#services">Full Service Photography</a></li>
+          <li><a href="#contact">About Us</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Right side: call-to-action + contact -->
-    <div class="footer-right">
-      <button class="book-now-btn">BOOK NOW</button>
-      <div class="contact-info">
-        <a href="mailto:studiocuster@gmail.com">STUDIOCUSTER@GMAIL.COM</a>
-        <p>785.261.1568 &nbsp;&ndash;&nbsp; HAYS, KS 67601</p>
-        <div class="social-icons">
-          <a href="#">FB</a> 
-		  <a href="#">IG</a>
+    <div class="footer-divider"></div>
+
+    <!-- Right Section: Book Now, Contact Info & Social Icons -->
+    <div id="footer-right" class="footer-section">
+      <div class="right-content">
+        <button class="book-now-btn">Book Now</button>
+
+        <a id="footer-email" class="contact-info" href="mailto:studiocuster@gmail.com">studiocuster@gmail.com</a>
+        <a id="footer-phone-loc" class="contact-info" href="tel:+1234567890">(785) 261-1568</a> <span>HAYS, KS 67601</span>
+       
+        <div class="social-icons" id="connect">
+          <a href="#" class="instagram" title="Instagram"></a>
+          <a href="#" class="facebook" title="Facebook"></a>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Footer Bottom Section -->
   <div class="footer-bottom">
     <p>
-      <a href="#">© 2021 STUDIO CUSTER</a> | <a href="#">Privacy Policy</a> | <a href="#">Copyright Policy</a> 
-      | Website design by CUSTER CREATIVE
+        &copy; 2021 Studio Custer &nbsp; | &nbsp;
+        <a href="/privacy-policy">Privacy Policy</a> &nbsp; | &nbsp;
+        <a href="/copyright-policy">Copyright Policy</a> &nbsp; | &nbsp;
+        Website design by CUSTER CREATIVE
     </p>
   </div>
 </footer>

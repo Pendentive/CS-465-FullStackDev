@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'; // Import environment
+
 import { Page } from '../interfaces/page';
 import { GalleryHeroVert } from '../interfaces/gallery-hero-vert';
 import { TypeIntro } from '../interfaces/type-intro';
@@ -8,90 +10,68 @@ import { GalleryGrid } from '../interfaces/gallery-grid';
 import { GalleryBanner } from '../interfaces/gallery-banner';
 import { RepeaterMenu } from '../interfaces/repeater-menu';
 import { Image } from '../interfaces/image';
-import { User } from '../interfaces/user';
-import { AuthResponse } from '../interfaces/authresponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiBaseUrl; // Use environment variable
 
   constructor(private http: HttpClient) { }
 
-  // Authentication methods
-  login(user: User, passwd: string): Observable<AuthResponse> {
-    return this.handleAuthAPICall('login', user, passwd);
+  // Template request methods
+  get<T>(endpoint: string): Observable<T> {
+    return this.http.get<T>(`${this.apiUrl}/${endpoint}`);
   }
 
-  register(user: User, passwd: string): Observable<AuthResponse> {
-    return this.handleAuthAPICall('register', user, passwd);
+  post<T>(endpoint: string, data: any): Observable<T> {
+    return this.http.post<T>(`${this.apiUrl}/${endpoint}`, data);
   }
 
-  private handleAuthAPICall(endpoint: string, user: User, passwd: string): Observable<AuthResponse> {
-    const formData = {
-      name: user.name,
-      email: user.email,
-      password: passwd
-    };
-    return this.http.post<AuthResponse>(`${this.apiUrl}/${endpoint}`, formData);
+  put<T>(endpoint: string, data: any): Observable<T> {
+    return this.http.put<T>(`${this.apiUrl}/${endpoint}`, data);
   }
 
-  // Data fetching methods
-  getGalleryHeroVerts(): Observable<GalleryHeroVert[]> {
-    return this.http.get<GalleryHeroVert[]>(`${this.apiUrl}/gallery-hero-vert`);
+  delete<T>(endpoint: string): Observable<T> {
+    return this.http.delete<T>(`${this.apiUrl}/${endpoint}`);
   }
 
-  getTypeIntros(): Observable<TypeIntro[]> {
-    return this.http.get<TypeIntro[]>(`${this.apiUrl}/type-intro`);
-  }
-
-  getGalleryGrids(): Observable<GalleryGrid[]> {
-    return this.http.get<GalleryGrid[]>(`${this.apiUrl}/gallery-grid`);
-  }
-
-  getGalleryBanners(): Observable<GalleryBanner[]> {
-    return this.http.get<GalleryBanner[]>(`${this.apiUrl}/gallery-banner`);
-  }
-
-  getRepeaterMenus(): Observable<RepeaterMenu[]> {
-    return this.http.get<RepeaterMenu[]>(`${this.apiUrl}/repeater-menu`);
-  }
-
+  // Image methods 
   getImages(): Observable<Image[]> {
-    return this.http.get<Image[]>(`${this.apiUrl}/images`);
+    return this.get<Image[]>('images');
   }
 
-  // Page fetching methods
+  // Page methods
   getPages(): Observable<Page[]> {
-    return this.http.get<Page[]>(`${this.apiUrl}/pages`);
+    return this.get<Page[]>('pages');
   }
 
   getPage(id: string): Observable<Page> {
-    return this.http.get<Page>(`${this.apiUrl}/pages/${id}`);
+    return this.get<Page>(`pages/${id}`);
   }
 
   getPageByIdentifier(identifier: string): Observable<Page> {
-    return this.http.get<Page>(`${this.apiUrl}/pages/identifier/${identifier}`);
+    return this.get<Page>(`pages/identifier/${identifier}`);
+  }
+  
+  updatePage(id: string, page: Page): Observable<Page> {
+    return this.put<Page>(`pages/${id}`, page);
+  }
+  
+  updatePageByIdentifier(identifier: string, page: Page): Observable<Page> {
+    return this.put<Page>(`pages/identifier/${identifier}`, page);
   }
 
   createPage(page: Page): Observable<Page> {
-    return this.http.post<Page>(`${this.apiUrl}/pages`, page);
-  }
-
-  updatePage(id: string, page: Page): Observable<Page> {
-    return this.http.put<Page>(`${this.apiUrl}/pages/${id}`, page);
-  }
-
-  updatePageByIdentifier(identifier: string, page: Page): Observable<Page> {
-    return this.http.put<Page>(`${this.apiUrl}/pages/identifier/${identifier}`, page);
-  }
-
-  updateComponent(componentType: string, componentId: string, component: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/components/${componentType}/${componentId}`, component);
+    return this.post<Page>('pages', page);
   }
 
   deletePage(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/pages/${id}`);
+    return this.delete<void>(`pages/${id}`);
+  }
+
+  // Component methods
+  updateComponent(componentType: string, componentId: string, component: any): Observable<any> {
+    return this.put<any>(`components/${componentType}/${componentId}`, component);
   }
 }
