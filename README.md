@@ -1,8 +1,8 @@
 ## Introduction
-The meanPhoto application is a three-tier MEAN stack solution that manages customer-facing pages and a dynamic admin system. It leverages an Express front-end, an API server, and an Angular admin interface to unify content creation and distribution. MongoDB, accessed through Mongoose, stores data in a schema-free manner, easing the integration of new features as the project grows.
+The meanFocus application is a three-tier MEAN stack solution that manages customer-facing pages and a dynamic admin system. It leverages an Express front-end, an API server, and an Angular admin interface to unify content creation and distribution. MongoDB, accessed through Mongoose, stores data in a schema-free manner, easing the integration of new features as the project grows.
 
 ## Architecture
-meanPhoto relies on the MEAN stack (MongoDB, Express, Angular, Node.js). It is divided into three major parts:
+meanFocus relies on the MEAN stack (MongoDB, Express, Angular, Node.js). It is divided into three major parts:
 
 1. Customer-Facing Express Front-End 
    • Built with Express and Express-Handlebars, serving routes and layouts dynamically.  
@@ -53,4 +53,4 @@ meanPhoto relies on the MEAN stack (MongoDB, Express, Angular, Node.js). It is d
 ## Future Plans
 In upcoming versions, "Dynamic pages" will be generated automatically based on a customers chosen FEC array, particular photos, and chose hbs template. As each template will know how to position each chosen FEC, each FEC will now how to display a given content, a user will be able to select what photos they enjoy, which FECs, display them, and what template for the FECs they enjoy most without touching the source code. The Angular admin interface will evolve to have a single, generalized function for editing any FEC, vastly simplifying how new components are added and manipulated. Pages in the top-bar selector will also be populated dynamically based on user role, removing the need for manual button creation. Additional search tools will let you find and modify FECs by image usage or component type, making large-scale updates (e.g., removing photos for legal reasons or batch-updating multiple galleries) more efficient.
 
-By decoupling page structure from the rendered layout, meanPhoto aims to enable non-technical users to craft unique experiences while retaining a robust architecture for further expansions.
+By decoupling page structure from the rendered layout, meanFocus aims to enable non-technical users to craft unique experiences while retaining a robust architecture for further expansions.
