@@ -1,19 +1,56 @@
-# CS-465-FullStackDev
-CS-465 Full Stack Development with MEAN
-
+## Introduction
+The meanPhoto application is a three-tier MEAN stack solution that manages customer-facing pages and a dynamic admin system. It leverages an Express front-end, an API server, and an Angular admin interface to unify content creation and distribution. MongoDB, accessed through Mongoose, stores data in a schema-free manner, easing the integration of new features as the project grows.
 
 ## Architecture
-Trvlr Getaways uses the MEAN stack for its flexibility, maintainability, and robust documentation, ensuring extensibility for future development. Express, with Handlebars, manages the customer-facing front-end, offering server-side rendering and dynamic HTML generation. JavaScript and TypeScript are used throughout the project to handle application logic, ensuring consistency and leveraging modern ES6+ features. Angular provides a powerful, component-based framework to develop the Admin front-end, while MongoDB, accessed via Mongoose, serves as the back-end database. 
+meanPhoto relies on the MEAN stack (MongoDB, Express, Angular, Node.js). It is divided into three major parts:
 
-MongoDB was chosen for its schemaless design, which allows dynamic, unstructured data storage, making it ideal for a project that requires adaptability and rapid iteration. Unlike relational databases, MongoDB simplifies scaling and aligns with the fast-paced, object-oriented nature of JavaScript development.
+1. Customer-Facing Express Front-End 
+   • Built with Express and Express-Handlebars, serving routes and layouts dynamically.  
+   • Uses front-end components (FEC) to unify how pages (e.g., landing, personal portfolio) are constructed.  
+   • Renders each page by retrieving a page object from the API, parsing a list of FECs and mapping them to partial templates.
+
+2. API Server (Express)  
+   • Consumes and delivers data through RESTful routes, returning JSON objects containing pages, components, and image references.  
+   • Allows updates for both the Express front-end and Angular admin, providing a shared structure, a page object, that includes FECs, such as text blocks, galleries, and repeaters.  
+
+3. Angular Admin Front-End  
+   • A single-page application (SPA) that loads page objects and dynamically sets up form-based editors.  
+   • The PageEditorComponent reads a page’s array of components and renders individual edit components, such as EditGalleryHeroVertComponent.  
+   • Submissions from these edit components are packaged into JSON and sent back to the API for storage.
+
+## Data Flow
+1. A customer visits the Express site and is routed to a page (e.g., “Landing Page” or “Portfolio Personal”).  
+2. Express fetches the corresponding page object from the API.  
+3. The API returns metadata (FEC arrays, images, and layout configurations), which Express uses to construct a final page with partial templates for each component type.  
+4. Simultaneously, admin users log into the Angular app, select a page through a top-bar navigation, and retrieve the page object from the API.  
+5. Each included FEC is displayed in a dedicated edit component, allowing quick edits (e.g., swapping images or adjusting text).  
+6. Upon saving, the updated data is posted back to the API, which modifies MongoDB.  
+7. The site updates automatically, reflecting changes in the FEC structure or its content.
 
 ## Functionality
-While JSON and JavaScript are foundational to the application, they serve distinct yet complementary roles. JSON, as a lightweight data interchange format, is primarily used to transmit structured data between the front-end and back-end. For example, JSON responses are utilized to provide Angular with dynamic content updates or to populate customer-facing pages. JavaScript, on the other hand, powers the logic and interactivity of both the front-end and back-end, enabling dynamic DOM manipulation, data processing, and API handling. Together, JSON bridges the gap between the Angular front-end and the Express API back-end, enabling seamless communication and integration across the application.
+• FEC (Front-End Components):  
+  Modular objects that function as deployable page elements with unified interfaces, composed of anything from galleries to text blocks. Unique Identifiers let you reuse or swap out components easily across multiple pages.  
 
-The application underwent refactoring to improve consistency and adhere to modern best practices. The customer-facing front-end was transitioned from standard Handlebars to Express-Handlebars, which introduced a more modular and maintainable templating approach. Express-Handlebars supports layout and partial templates, reducing redundancy and enhancing maintainability. Observables were extensively adopted to handle asynchronous operations efficiently, ensuring robust data streams and event-driven behavior. Observables are particularly advantageous in MEAN applications due to their ability to handle complex asynchronous workflows, offer declarative data streams, and support features like retry mechanisms and cancellation, making them superior to traditional callbacks or promises in scenarios requiring extensive event handling.
+• Angular-based Edit System:  
+  Within the PageEditorComponent, each FEC is represented by a form. This approach keeps the component logic centralized and allows for direct, item-by-item updates without confusing abstraction.  
+
+• Page Publishing:  
+  Once edits are saved, the API updates relevant FECs (e.g., GalleryHeroVert, RepeaterMenu). Express site refreshes reflect immediate changes without rebuilding the entire codebase.  
+
+• Security:  
+  Authentication and role checks ensure that unauthorized users cannot access, modify or remove existing data. User rolers also define available editable page access in the angular front-end. Guarded routes ensure data access and manipulation is confined behind authentication. 
 
 ## Testing
-Security considerations were embedded into the project from its inception, requiring thorough testing to ensure both unauthorized access prevention and smooth functionality for authenticated users. Postman was employed to validate API endpoints, testing with and without authorization tokens to verify secure access control. GET requests, which retrieve data from the server, were tested for proper response codes and accurate data retrieval. POST requests, used for creating new records, were validated to ensure input validation and proper database updates. PUT requests, which update existing records, were scrutinized to ensure that only authorized users could perform updates and that data integrity was preserved. DELETE requests, designed to remove data, were tested for appropriate permissions and impact, ensuring critical records couldn’t be removed without proper authorization. This comprehensive testing methodology ensured that the API was both functional and secure.
+• Postman Tests  
+  Ensures that CRUD operations work properly for pages, images, and special component fields such as repeating menus.  
 
-## Reflection
-This course has been instrumental in helping me achieve my professional goals, particularly in bridging my knowledge gap in full-stack development. By completing this project, I not only gained the ability to create web applications from scratch but also learned how to design and implement custom components that align with client or team objectives. Integrating security into an API and creating authenticated endpoints were significant milestones, providing me with confidence in building secure and scalable systems. Additionally, my skills in HTML and JavaScript have greatly improved, and I’ve developed a deeper understanding of TypeScript and Angular. These new capabilities have enhanced my marketability as a developer, equipping me with the tools and knowledge to succeed in a competitive industry.
+• UI Smoke Tests  
+  Verifies that the Angular admin app renders correct forms for each component (gallery, text blocks, etc.), sends data back properly, and that data is both accepeted by the API and updated in the database. 
+
+• Security Checks  
+  Confirm that routes require valid authentication tokens and that editors only modify allowed pages where permitted.
+
+## Future Plans
+In upcoming versions, "Dynamic pages" will be generated automatically based on a customers chosen FEC array, particular photos, and chose hbs template. As each template will know how to position each chosen FEC, each FEC will now how to display a given content, a user will be able to select what photos they enjoy, which FECs, display them, and what template for the FECs they enjoy most without touching the source code. The Angular admin interface will evolve to have a single, generalized function for editing any FEC, vastly simplifying how new components are added and manipulated. Pages in the top-bar selector will also be populated dynamically based on user role, removing the need for manual button creation. Additional search tools will let you find and modify FECs by image usage or component type, making large-scale updates (e.g., removing photos for legal reasons or batch-updating multiple galleries) more efficient.
+
+By decoupling page structure from the rendered layout, meanPhoto aims to enable non-technical users to craft unique experiences while retaining a robust architecture for further expansions.
