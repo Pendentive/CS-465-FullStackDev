@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "delete-data-nonuser" : "node ./app_api/scripts/delete-data-nonuser.js",
+    "delete-data-nonuser": "node ./app_api/scripts/delete-data-nonuser.js",
     "seed-landing": "node ./app_api/scripts/seed-landing.js",
     "seed-port-personal": "node ./app_api/scripts/seed-port-personal.js",
     "generate-interfaces": "node ./app_api/scripts/generate-interfaces.js",
     "getToken": "node ./app_server/scripts/getToken.js"
   },
   "dependencies": {
+    "axios": "^1.7.9",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.4.7",
