@@ -1,3 +1,5 @@
+# meanFocus
+
 ## Introduction
 The meanFocus application is a three-tier MEAN stack solution that manages customer-facing pages and a dynamic admin system. It leverages an Express front-end, an API server, and an Angular admin interface to unify content creation and distribution. MongoDB, accessed through Mongoose, stores data in a schema-free manner, easing the integration of new features as the project grows.
 
